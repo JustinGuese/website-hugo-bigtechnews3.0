@@ -92,7 +92,7 @@ link = "plugins/search/search.js"
 [params]
 favicon = "images/logo-sm.svg"
 logo_text = "Editor"
-logo = "images/logo.svg"
+logo = "images/logo.png"
 logo_height = "26px"
 logo_rotate = true
 # Meta data

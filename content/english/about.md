@@ -7,7 +7,7 @@ layout: 'about'
 
 name: 'BigTechNews'
 email: 'editor@domain.com'
-image: 'images/author.png'
+image: 'images/logo.png'
 summary: 'A Writer to your favorite topic assistants, currently Head of Content at Editor.'
 
 partners:
