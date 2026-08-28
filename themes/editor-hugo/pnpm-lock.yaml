@@ -1,0 +1,44 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      prettier:
+        specifier: ^2.8.7
+        version: 2.8.8
+      prettier-plugin-go-template:
+        specifier: 0.0.13
+        version: 0.0.13(prettier@2.8.8)
+
+packages:
+
+  prettier-plugin-go-template@0.0.13:
+    resolution: {integrity: sha512-gG/xT5kd+kCzoMaTchXvdfBdsunyRCV6G8cgdPGPd2V5JGGKXUG7SjzBKU7jaGh2RTeblcAdBb/E+S/duOAMsA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      prettier: ^2.0.0
+
+  prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  ulid@2.4.0:
+    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+    hasBin: true
+
+snapshots:
+
+  prettier-plugin-go-template@0.0.13(prettier@2.8.8):
+    dependencies:
+      prettier: 2.8.8
+      ulid: 2.4.0
+
+  prettier@2.8.8: {}
+
+  ulid@2.4.0: {}
