@@ -1,0 +1,13 @@
+{{ if site.Params.subscription.enable }}
+{{ with site.Params.subscription }}
+<form class="subscribe-form" data-subscribe-endpoint="{{ .endpoint }}/{{ .site_key }}/{{ .list_key }}" data-msg-pending="{{ i18n `subscribe_pending` }}" data-msg-invalid="{{ i18n `subscribe_invalid` }}" data-msg-error="{{ i18n `subscribe_error` }}" novalidate>
+  <div class="input-group">
+    <input type="email" name="email" class="form-control pl-3" placeholder="{{ i18n `enter_your_email` }}" aria-label="{{ i18n `enter_your_email` }}" required autocomplete="email">
+    <div class="input-group-append">
+      <button type="submit" class="input-group-text pr-3" aria-label="{{ i18n `subscribe_cta` }}"><i class="far fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <p class="subscribe-status small mb-0 mt-2" role="status" aria-live="polite"></p>
+</form>
+{{ end }}
+{{ end }}

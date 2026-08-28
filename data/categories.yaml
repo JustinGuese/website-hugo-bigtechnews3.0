@@ -1,0 +1,21 @@
+# The site's fixed set of beats. Each `name` must match a post's
+# `categories:` frontmatter value exactly (Hugo taxonomy pages are
+# generated from that field); `slug` must match the urlized taxonomy term
+# Hugo derives from it. Adding a beat here does not create it -- publish a
+# post in that category first, then add the matching entry here so it
+# shows up in the homepage strip, the hero RSS row, and (see hugo.toml
+# Languages.en.menu.main) the primary nav.
+- name: AI
+  slug: ai
+- name: Crypto
+  slug: crypto
+- name: DevOps
+  slug: devops
+- name: Fintech
+  slug: fintech
+- name: Founders
+  slug: founders
+- name: IT
+  slug: it
+- name: Tech
+  slug: tech

@@ -1,30 +1,23 @@
 ---
-title: 'About Me'
+title: 'About'
 date: 2020-09-24T11:07:10+06:00
-description: 'this is meta description'
+description: 'How BriefTechNews puts together a daily tech, AI, crypto and fintech digest, and why it looks the way it does.'
 draft: false
 layout: 'about'
 
-name: 'BigTechNews'
-email: 'editor@domain.com'
+name: 'BriefTechNews'
+email: 'hello@brieftechnews.com'
 image: 'images/logo.png'
-summary: 'A Writer to your favorite topic assistants, currently Head of Content at Editor.'
+summary: 'A daily digest of what actually moved in AI, tech, crypto and fintech, assembled and written with AI, and reviewed before it publishes.'
 
 partners:
-  enable: true
-  title: 'My Contents also published <br> on these websites'
-  partner_logos:
-    - 'images/partners/logo-1.png'
-    - 'images/partners/logo-2.png'
-    - 'images/partners/logo-3.png'
-    - 'images/partners/logo-4.png'
-    - 'images/partners/logo-5.png'
-    - 'images/partners/logo-6.png'
-    - 'images/partners/logo-7.png'
-    - 'images/partners/logo-8.png'
-    - 'images/partners/logo-9.png'
+  enable: false
+  title: ''
+  partner_logos: []
 ---
 
-Cume tale recusabo periculis tee. Deleniti perferendis necessitatibus reprehenderit ipsam explicabo. Modi temporibus nemo dolor laudantium aut possimus nostrum. Alias deserunt similique, eum quas molestias ducimus natus accusantium ratione.
+BriefTechNews exists because most days you don't need another newsletter, you need the five things that actually mattered, written like an engineer would explain them to another engineer.
 
-Eaque cum sed corporis, sequi cumque a iure alias perferendis necessitatibus deserunt similique! Quia eaque quo rerum non qui explicabo earum nobis numquam maiores uidem sequi cumque a iure.
+Every post here is assembled and drafted with AI from the day's technology, AI, crypto and fintech news, then reviewed before it goes out. We're not going to pretend a person sat down and typed each one from scratch, that would be a stranger thing to hide than to say plainly. What we do stand behind is the editorial bar: no headline paraphrasing, no filler, and a "why this matters" for every item.
+
+If you want the takeaway without the scroll, that's what this is for.

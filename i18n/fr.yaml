@@ -71,7 +71,37 @@
   translation: Entrer votre Email
 
 - id: subscribe_title
-  translation: Abonnez-vous au meilleur flux d'articles créatifs.
+  translation: Recevez le résumé dans votre boîte mail.
 
 - id: about_me
   translation: À propos de moi
+
+- id: hero_eyebrow
+  translation: Résumé quotidien
+
+- id: hero_tagline
+  translation: IA, tech, crypto et fintech — l'essentiel, en un coup d'œil chaque jour.
+
+- id: subscribe_cta
+  translation: S'abonner
+
+- id: subscribe_pending
+  translation: Presque terminé — vérifiez votre boîte mail pour confirmer.
+
+- id: subscribe_invalid
+  translation: Saisissez une adresse e-mail valide.
+
+- id: subscribe_error
+  translation: Une erreur est survenue. Réessayez dans un instant.
+
+- id: rss_intro
+  translation: Vous préférez RSS ? Abonnez-vous par catégorie
+
+- id: rss_all
+  translation: Tout
+
+- id: privacy
+  translation: Confidentialité
+
+- id: terms
+  translation: Conditions

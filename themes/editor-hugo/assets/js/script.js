@@ -72,6 +72,50 @@
 	});
 
 
+	// subscribe form -- posts to the funnel API's JSON list endpoint, which
+	// always answers with {ok:true} and never redirects, so the page is
+	// updated in place rather than navigated.
+	function subscribeForms() {
+		$('.subscribe-form').each(function () {
+			var $form = $(this);
+			var $status = $form.find('.subscribe-status');
+			var $email = $form.find('input[name="email"]');
+			var endpoint = $form.data('subscribe-endpoint');
+
+			$form.on('submit', function (e) {
+				e.preventDefault();
+				var email = ($email.val() || '').trim();
+				if (!email) {
+					return;
+				}
+				$form.find('button[type="submit"]').prop('disabled', true);
+				$status.removeClass('text-danger').text('');
+
+				fetch(endpoint, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ email: email, source_url: window.location.href })
+				}).then(function (res) {
+					if (res.ok) {
+						$status.text($form.data('msg-pending'));
+						$email.val('').prop('disabled', true);
+						$form.find('button[type="submit"]').prop('disabled', true);
+					} else if (res.status === 422) {
+						$status.addClass('text-danger').text($form.data('msg-invalid'));
+						$form.find('button[type="submit"]').prop('disabled', false);
+					} else {
+						$status.addClass('text-danger').text($form.data('msg-error'));
+						$form.find('button[type="submit"]').prop('disabled', false);
+					}
+				}).catch(function () {
+					$status.addClass('text-danger').text($form.data('msg-error'));
+					$form.find('button[type="submit"]').prop('disabled', false);
+				});
+			});
+		});
+	}
+	subscribeForms();
+
 	//post slider
 	$('.post-slider').slick({
 		slidesToShow: 1,

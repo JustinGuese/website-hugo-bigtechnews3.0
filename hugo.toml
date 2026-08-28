@@ -1,6 +1,6 @@
 ######################## default configuration ####################
 baseURL = "https://justinguese.github.io/website-hugo-bigtechnews3.0/"
-title = "BigTechNews.com"
+title = "BriefTechNews.com"
 theme = "editor-hugo"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 timeZone = "Europe/Berlin"
@@ -91,17 +91,16 @@ link = "plugins/search/search.js"
 #################### default parameters ################################
 [params]
 favicon = "images/logo-sm.svg"
-logo_text = "Editor"
+logo_text = "BriefTechNews"
 logo = "images/logo.png"
 logo_height = "26px"
 logo_rotate = true
 # Meta data
-# description = "This is meta description" # template placeholder, left blank until real copy exists
-# author = "Themefisher" # template placeholder
+description = "Daily engineering-focused digests across AI, tech, crypto and fintech."
 # contact info
 # address = "9567 Turner Trace Apt. BC C3G8A4" # template placeholder, not a real address
 # mobile = "+211234565523" # template placeholder, not a real number
-# email = "hello@editor.com" # template placeholder, not a real address
+email = "hello@brieftechnews.com"
 # contact form action
 contact_form_action = "#" # contact form works with https://formspree.io
 # Search
@@ -152,12 +151,16 @@ icon_font = "Font Awesome 5 Free"
 enable = false
 preloader = "" # use jpg, png, svg or gif format.
 
-# Subscription
+# Subscription -- posts to the shared DataFortress funnel API's email-list
+# endpoint (POST {endpoint}/{site_key}/{list_key}), handled client-side by
+# assets/js/script.js. The site must be registered in that service's
+# sites.yaml (site key "brieftechnews", list key "newsletter") with this
+# site's origins allow-listed, or the browser fetch will be blocked by CORS.
 [params.subscription]
-enable = false # disabled until a real Mailchimp list is set up; the theme's demo list was here
-# mailchimp subsciption
-# mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
-# mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074" # replace this code with yours
+enable = true
+endpoint = "https://ecommerce-api.datafortress.cloud/v1/lists"
+site_key = "brieftechnews"
+list_key = "newsletter"
 
 # cookies
 [params.cookies]
@@ -173,7 +176,7 @@ sidebar = ["about-me", "recent-post", "categories", "tags"]
 ############################# social site ########################
 # All entries below were the theme's generic placeholder links (facebook.com,
 # twitter.com, instagram.com, github.com with no real handle) and are commented
-# out until real BigTechNews social accounts exist.
+# out until real BriefTechNews social accounts exist.
 # [[params.social]]
 # title = "Facebook"
 # icon = "fab fa-facebook" # Fhemify icon : https://themify.me/themify-icons
@@ -226,38 +229,50 @@ weight = 3
 
 [[Languages.en.menu.main]]
 weight = 4
-name = "Pages"
+name = "Categories"
 
   [[Languages.en.menu.main]]
-  parent = "Pages"
+  parent = "Categories"
   weight = 1
-  url = "tags/artwork/"
-  name = "Tag"
-  
+  url = "categories/ai/"
+  name = "AI"
+
   [[Languages.en.menu.main]]
-  parent = "Pages"
+  parent = "Categories"
   weight = 2
-  url = "categories/lifestyle/"
-  name = "Category"
-  
+  url = "categories/crypto/"
+  name = "Crypto"
+
   [[Languages.en.menu.main]]
-  parent = "Pages"
+  parent = "Categories"
   weight = 3
-  url = "elements/"
-  name = "Elements"
-  
+  url = "categories/devops/"
+  name = "DevOps"
+
   [[Languages.en.menu.main]]
-  parent = "Pages"
+  parent = "Categories"
   weight = 4
-  url = "terms/"
-  name = "Terms & Conditions"
-  
+  url = "categories/fintech/"
+  name = "Fintech"
+
   [[Languages.en.menu.main]]
-  parent = "Pages"
+  parent = "Categories"
   weight = 5
-  url = "privacy/"
-  name = "Privacy"
-  
+  url = "categories/founders/"
+  name = "Founders"
+
+  [[Languages.en.menu.main]]
+  parent = "Categories"
+  weight = 6
+  url = "categories/it/"
+  name = "IT"
+
+  [[Languages.en.menu.main]]
+  parent = "Categories"
+  weight = 7
+  url = "categories/tech/"
+  name = "Tech"
+
 [[Languages.en.menu.main]]
 name = "Contact"
 url = "contact/"
@@ -295,40 +310,6 @@ url = "blogs/"
 weight = 3
 
 [[Languages.fr.menu.main]]
-weight = 4
-name = "Pages"
-  
-  [[Languages.fr.menu.main]]
-  parent = "Pages"
-  weight = 1
-  url = "tags/artwork/"
-  name = "Mots clés"
-  
-  [[Languages.fr.menu.main]]
-  parent = "Pages"
-  weight = 2
-  url = "categories/lifestyle/"
-  name = "Catégorie"
-  
-  [[Languages.fr.menu.main]]
-  parent = "Pages"
-  weight = 3
-  url = "elements/"
-  name = "Éléments"
-  
-  [[Languages.fr.menu.main]]
-  parent = "Pages"
-  weight = 4
-  url = "terms/"
-  name = "Termes et Conditions"
-  
-  [[Languages.fr.menu.main]]
-  parent = "Pages"
-  weight = 5
-  url = "privacy/"
-  name = "Vie privée"
-  
-[[Languages.fr.menu.main]]
 name = "Contacter"
 url = "contact/"
-weight = 5
+weight = 4

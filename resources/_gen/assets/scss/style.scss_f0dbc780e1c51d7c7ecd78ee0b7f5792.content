@@ -879,3 +879,47 @@ footer .newsletter-block {
 
 .nextArrow {
   right: -60px; }
+
+.hero-brief {
+  text-align: left; }
+  .hero-brief .subscribe-form .form-control {
+    border: 1px solid rgba(43, 44, 46, 0.15); }
+  .hero-brief .subscribe-form .subscribe-status {
+    min-height: 1.2em; }
+    .hero-brief .subscribe-form .subscribe-status.text-danger {
+      color: #c0392b !important; }
+  .hero-brief .hero-rss {
+    border-top: 1px solid rgba(43, 44, 46, 0.1); }
+  .hero-brief .rss-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    margin: 0 6px 6px 0;
+    border: 1px solid rgba(43, 44, 46, 0.15);
+    border-radius: 30px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #2B2C2E; }
+    .hero-brief .rss-pill i {
+      margin-right: 3px;
+      font-size: 10px; }
+    .hero-brief .rss-pill:hover {
+      border-color: #c98664;
+      color: #c98664;
+      text-decoration: none; }
+
+.category-strip .category-chip {
+  display: inline-block;
+  padding: 7px 18px;
+  margin: 0 8px 8px 0;
+  border-radius: 30px;
+  background: #c98664;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em; }
+  .category-strip .category-chip:hover {
+    background: #2B2C2E;
+    color: #ffffff;
+    text-decoration: none; }

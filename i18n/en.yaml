@@ -71,7 +71,37 @@
   translation: Enter your email
 
 - id: subscribe_title
-  translation: Subscribe to the best creative articles feed.
+  translation: Get the brief in your inbox.
 
 - id: about_me
   translation: About Me
+
+- id: hero_eyebrow
+  translation: Daily brief
+
+- id: hero_tagline
+  translation: AI, tech, crypto and fintech — the stack, in one scan a day.
+
+- id: subscribe_cta
+  translation: Subscribe
+
+- id: subscribe_pending
+  translation: Almost there — check your inbox to confirm.
+
+- id: subscribe_invalid
+  translation: Enter a valid email address.
+
+- id: subscribe_error
+  translation: Something went wrong. Try again in a moment.
+
+- id: rss_intro
+  translation: Prefer RSS? Subscribe by beat
+
+- id: rss_all
+  translation: All
+
+- id: privacy
+  translation: Privacy
+
+- id: terms
+  translation: Terms

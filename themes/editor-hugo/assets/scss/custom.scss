@@ -1,0 +1,68 @@
+// Site-specific overrides layered on top of the editor-hugo theme.
+// Loaded last (see style.scss), so equal-specificity selectors here win.
+
+.hero-brief {
+  text-align: left;
+
+  .subscribe-form {
+    .form-control {
+      border: 1px solid rgba($dark, 0.15);
+    }
+
+    .subscribe-status {
+      min-height: 1.2em;
+
+      &.text-danger {
+        color: #c0392b !important;
+      }
+    }
+  }
+
+  .hero-rss {
+    border-top: 1px solid rgba($dark, 0.1);
+  }
+
+  .rss-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    margin: 0 6px 6px 0;
+    border: 1px solid rgba($dark, 0.15);
+    border-radius: 30px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: $dark;
+
+    i {
+      margin-right: 3px;
+      font-size: 10px;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.category-strip {
+  .category-chip {
+    display: inline-block;
+    padding: 7px 18px;
+    margin: 0 8px 8px 0;
+    border-radius: 30px;
+    background: $primary-color;
+    color: $white;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+
+    &:hover {
+      background: $dark;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}

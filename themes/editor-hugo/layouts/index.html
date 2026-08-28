@@ -1,21 +1,41 @@
 {{ define "main" }}
 
 <div class="col-lg-4 col-xl-3">
-  <div class="author-banner bg-primary-light text-center d-flex flex-column align-items-center justify-content-center">
-    {{ with site.GetPage "/about" }}
-    {{ if .Params.image }}
-    <img loading="lazy" class="mb-4 rounded-circle w-100" style="max-width:280px" src="{{ .Params.image | absURL }}" alt="Author">
-    {{ else if .Params.email }}
-    <img loading="lazy" class="mb-4 rounded-circle w-100" style="max-width:280px" src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=220&pg&d=identicon">
+  <div class="author-banner hero-brief bg-primary-light d-flex flex-column justify-content-center">
+    <p class="text-uppercase small mb-2 text-primary font-weight-600">{{ i18n `hero_eyebrow` }}</p>
+    <h1 class="h3 font-primary mb-3">{{ replace site.Title ".com" "" }}</h1>
+    <p class="mb-4">{{ i18n `hero_tagline` }}</p>
+
+    {{ partial "subscribe-form.html" . }}
+
+    {{ if site.Params.subscription.enable }}
+    <p class="small text-light mt-3 mb-0">{{ len (where site.RegularPages "Type" "in" site.Params.mainSections) }}+ briefs published so far.</p>
     {{ end }}
-    <p class="text-uppercase small mb-2">{{ i18n `my_name_is` }}</p>
-    <h1 class="h3 text-primary font-primary mb-3">{{ .Params.name }}</h1>
-    <div class="mb-0 mx-auto" style="max-width:460px">{{ .Params.summary }} <a href="{{ .Permalink }}" aria-label="About me" class="text-underline d-inline-block">{{ i18n `read_more` }}</a></div>
+
+    {{ with site.Data.categories }}
+    <div class="hero-rss mt-4 pt-4">
+      <p class="text-uppercase small mb-2">{{ i18n `rss_intro` }}</p>
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item"><a class="rss-pill" href="{{ "index.xml" | relLangURL }}"><i class="fas fa-rss"></i> {{ i18n `rss_all` }}</a></li>
+        {{ range . }}
+        <li class="list-inline-item"><a class="rss-pill" href="{{ printf "categories/%s/index.xml" .slug | relLangURL }}"><i class="fas fa-rss"></i> {{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
     {{ end }}
   </div>
 </div>
 <div class="col-lg-8 col-xl-9">
   <div class="section">
+    {{ with site.Data.categories }}
+    <nav class="category-strip mb-4" aria-label="{{ i18n `categories` }}">
+      <ul class="list-inline mb-0">
+        {{ range . }}
+        <li class="list-inline-item"><a class="category-chip" href="{{ printf "categories/%s/" .slug | relLangURL }}">{{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
     <div class="row">
       {{ $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
       {{ range $paginator.Pages }}
@@ -98,35 +118,6 @@
     </div>
 
 
-    {{ if site.Params.subscription.enable }}
-    {{ with site.Params.subscription }}
-    <div class="section pb-0">
-      <div class="row">
-        <div class="col-12">
-          <div class="newsletter-block bg-primary-light font-primary">
-            <div class="row align-items-center">
-              <div class="col-12">
-                <h3 class="mb-0">{{ i18n `subscribe_title` }}</h3>
-              </div>
-              <div class="col-12 mt-4">
-                <form action="{{ .mailchimp_form_action }}" name="{{ .mailchimp_form_name }}" method="post">
-                  <div class="input-group">
-                    <input type="text" class="form-control pl-3" placeholder="{{ i18n `enter_your_email`}}" aria-label="{{ i18n `enter_your_email`}}" required>
-                    <div class="input-group-append">
-                      <button type="submit" class="input-group-text pr-3" aria-label="News-letter"><i class="far fa-paper-plane"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{ end }}
-    {{ end }}
-    
     <div class="mt-4 pt-1">
       {{ partial "footer.html" . }}
     </div>

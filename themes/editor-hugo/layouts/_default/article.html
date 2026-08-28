@@ -19,7 +19,7 @@
       <a class="post-title" href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
     </h3>
 
-    <p class="mb-0">{{ .Plain | truncate 70 }}</p>
+    <p class="mb-0">{{ with .Params.description }}{{ . | truncate 160 }}{{ else }}{{ $.Plain | truncate 70 }}{{ end }}</p>
   </div>
   <div class="card-footer">
     <ul class="card-meta list-inline mb-0">

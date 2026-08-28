@@ -16,27 +16,20 @@
 
       {{ if not .IsHome }}
       {{ if site.Params.subscription.enable }}
-      {{ with site.Params.subscription }}
-      <!-- subscription form -->
-      <form class="newsletter-block mx-auto mb-5" action="{{ .mailchimp_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank">
+      <div class="newsletter-block mx-auto mb-5">
         <h5 class="h4 mb-3 text-center font-primary">{{ i18n `subscribe_title` }}</h5>
-        <div class="input-group">
-          <input type="text" class="form-control bg-transparent pl-3" placeholder="{{ i18n `enter_your_email`}}" aria-label="{{ i18n `enter_your_email`}}" required>
-          <div class="input-group-append">
-            <button type="submit" class="input-group-text pr-3" aria-label="News-letter"><i class="far fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-          <input type="text" name="{{ .mailchimp_form_name }}" tabindex="-1">
-        </div>
-      </form>
-      {{ end }}
+        {{ partial "subscribe-form.html" . }}
+      </div>
       {{ end }}
       {{ end }}
 
       <div class="col-12 text-center">
         <p class="mb-0 font-weight-500">{{site.Params.copyright | markdownify}}</p>
+        <p class="mb-0 small mt-2">
+          <a href="{{ "privacy" | relLangURL }}">{{ i18n `privacy` }}</a>
+          <span class="mx-2">&middot;</span>
+          <a href="{{ "terms" | relLangURL }}">{{ i18n `terms` }}</a>
+        </p>
       </div>
     </div>
   </div>
