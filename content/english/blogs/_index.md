@@ -1,6 +1,6 @@
 ---
-title: Brief Tech News
-description: Daily engineering-focused tech, AI, crypto and fintech digests.
+title: Latest IT News
+description: Daily tech news for people who ship. No hype, no press releases, no bullshit.
 draft: false
 ---
 
