@@ -1,9 +1,9 @@
 ######################## default configuration ####################
-baseURL = "/"
+baseURL = "https://justinguese.github.io/website-hugo-bigtechnews3.0/"
 title = "BigTechNews.com"
 theme = "editor-hugo"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-timeZone = "America/New_York"
+timeZone = "Europe/Berlin"
 # post pagination
 pagination.pagerSize = 6 # see https://gohugo.io/extras/pagination/
 # post excerpt
@@ -16,7 +16,7 @@ hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/K
 ########################### Services #############################
 [services]
 [services.googleAnalytics]
-ID = 'G-MEASUREMENT_ID' # see https://gohugo.io/templates/internal/#configure-google-analytics
+# ID = 'G-MEASUREMENT_ID' # see https://gohugo.io/templates/internal/#configure-google-analytics -- no real GA property yet, fill in when one exists
 
 
 ############################# Build ##############################
@@ -96,12 +96,12 @@ logo = "images/logo.svg"
 logo_height = "26px"
 logo_rotate = true
 # Meta data
-description = "This is meta description"
-author = "Themefisher"
+# description = "This is meta description" # template placeholder, left blank until real copy exists
+# author = "Themefisher" # template placeholder
 # contact info
-address = "9567 Turner Trace Apt. BC C3G8A4"
-mobile = "+211234565523"
-email = "hello@editor.com"
+# address = "9567 Turner Trace Apt. BC C3G8A4" # template placeholder, not a real address
+# mobile = "+211234565523" # template placeholder, not a real number
+# email = "hello@editor.com" # template placeholder, not a real address
 # contact form action
 contact_form_action = "#" # contact form works with https://formspree.io
 # Search
@@ -113,8 +113,8 @@ custom_script= ""
 
 # OpenRemark comments
 [params.open_remark]
-enable = true
-site_key = "cmqnb3wd5000104kww7862ku4" # your site key from the OpenRemark dashboard
+enable = false # disabled until a real site key is set up; the theme's demo key was here
+# site_key = "cmqnb3wd5000104kww7862ku4" # your site key from the OpenRemark dashboard
 embed_url = "https://open-remark.zeon.studio/embed.js"
 
 # site variables
@@ -154,10 +154,10 @@ preloader = "" # use jpg, png, svg or gif format.
 
 # Subscription
 [params.subscription]
-enable = true
+enable = false # disabled until a real Mailchimp list is set up; the theme's demo list was here
 # mailchimp subsciption
-mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
-mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074" # replace this code with yours
+# mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
+# mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074" # replace this code with yours
 
 # cookies
 [params.cookies]
@@ -171,25 +171,28 @@ sidebar = ["about-me", "recent-post", "categories", "tags"]
 # available widget : search,about-me,authors,categories,tags,recent-post,social,promotion,subscription
 
 ############################# social site ########################
-[[params.social]]
-title = "Facebook"
-icon = "fab fa-facebook" # Fhemify icon : https://themify.me/themify-icons
-link = "https://facebook.com"
+# All entries below were the theme's generic placeholder links (facebook.com,
+# twitter.com, instagram.com, github.com with no real handle) and are commented
+# out until real BigTechNews social accounts exist.
+# [[params.social]]
+# title = "Facebook"
+# icon = "fab fa-facebook" # Fhemify icon : https://themify.me/themify-icons
+# link = "https://facebook.com"
 
-[[params.social]]
-title = "Twitter"
-icon = "fab fa-twitter" # Fhemify icon : https://themify.me/themify-icons
-link = "https://twitter.com"
+# [[params.social]]
+# title = "Twitter"
+# icon = "fab fa-twitter" # Fhemify icon : https://themify.me/themify-icons
+# link = "https://twitter.com"
 
-[[params.social]]
-title = "Instagram"
-icon = "fab fa-instagram" # Fontawesome icon pack : https://fontawesome.com/icons/
-link = "https://instagram.com"
+# [[params.social]]
+# title = "Instagram"
+# icon = "fab fa-instagram" # Fontawesome icon pack : https://fontawesome.com/icons/
+# link = "https://instagram.com"
 
-[[params.social]]
-title = "Github"
-icon = "fab fa-github" # Fontawesome icon pack : https://fontawesome.com/icons/
-link = "https://github.com"
+# [[params.social]]
+# title = "Github"
+# icon = "fab fa-github" # Fontawesome icon pack : https://fontawesome.com/icons/
+# link = "https://github.com"
 
 
 ################################### English language #####################################
