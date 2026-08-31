@@ -1,0 +1,107 @@
+- id: search_placeholder
+  translation: Tippen & Enter drücken...
+
+- id: our_instagram
+  translation: Unser Instagram
+
+- id: name
+  translation: Ihr Name
+
+- id: email
+  translation: E-Mail-Adresse
+
+- id: subject
+  translation: Betreff
+
+- id: message
+  translation: Ihre Nachricht
+
+- id: send_message
+  translation: Nachricht senden
+
+- id: search_result_for
+  translation: Suchergebnisse für
+
+- id: you_may_also_like
+  translation: Das könnte Sie auch interessieren
+
+- id: recent_post
+  translation: Neueste Beiträge
+
+- id: written_by
+  translation: Geschrieben von
+
+- id: read_more
+  translation: Weiterlesen
+
+- id: read_article
+  translation: Artikel lesen
+
+- id: showing_posts_from
+  translation: Beiträge aus
+
+- id: home
+  translation: Start
+
+- id: search
+  translation: Suche
+
+- id: categories
+  translation: Kategorien
+
+- id: tags
+  translation: Schlagwörter
+
+- id: tag
+  translation: Schlagwort
+
+- id: category
+  translation: Kategorie
+
+- id: social
+  translation: Social
+
+- id: copyright-text
+  translation: Gestaltet & entwickelt von
+
+- id: my_name_is
+  translation: Mein Name ist
+
+- id: enter_your_email
+  translation: E-Mail-Adresse eingeben
+
+- id: subscribe_title
+  translation: Das Briefing in Ihr Postfach.
+
+- id: about_me
+  translation: Über uns
+
+- id: hero_eyebrow
+  translation: Tägliches Briefing
+
+- id: hero_tagline
+  translation: KI, Tech, Crypto und Fintech — der ganze Stack, einmal am Tag.
+
+- id: subscribe_cta
+  translation: Abonnieren
+
+- id: subscribe_pending
+  translation: Fast geschafft — bestätigen Sie bitte die E-Mail in Ihrem Postfach.
+
+- id: subscribe_invalid
+  translation: Bitte geben Sie eine gültige E-Mail-Adresse ein.
+
+- id: subscribe_error
+  translation: Da ist etwas schiefgelaufen. Bitte versuchen Sie es gleich noch einmal.
+
+- id: rss_intro
+  translation: Lieber RSS? Abonnieren Sie nach Thema
+
+- id: rss_all
+  translation: Alle
+
+- id: privacy
+  translation: Datenschutz
+
+- id: terms
+  translation: AGB

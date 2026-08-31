@@ -8,8 +8,13 @@ timeZone = "Europe/Berlin"
 pagination.pagerSize = 6 # see https://gohugo.io/extras/pagination/
 # post excerpt
 summaryLength = 10 # see https://gohugo.io/content-management/excerpts/
+# English serves at the site root, German at /de/. Set explicitly rather than left to
+# Hugo's "en" default: it was only correct by accident while there was one language, and
+# getting it wrong moves every live English URL under a language prefix.
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 disableLanguages = [
-] # example: ["fr"] for disable french language. see https://gohugo.io/content-management/multilingual/
+] # example: ["de"] for disable german language. see https://gohugo.io/content-management/multilingual/
 hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/Korean Languages in the content. see: https://gohugo.io/getting-started/configuration/#hascjklanguage
 
 
@@ -280,36 +285,74 @@ weight = 5
 
 
 
-################################### French language #####################################
-[Languages.fr]
-contentDir = "content/french"
+################################### German language #####################################
+[Languages.de]
+contentDir = "content/german"
 weight = 2
 # copyright
-copyright = "Droits d'auteur &copy;2021 <br> Conçu et Développé par [Gethugothemes](https://gethugothemes.com/)"
+copyright = "Copyright &copy;2026 BriefTechNews"
 
-[Languages.fr.params]
-label = "Fr"
-locale = "fr-fr"
+[Languages.de.params]
+label = "De"
+locale = "de-de"
 
 
-############# French navigation ##############
-# main menu
-[[Languages.fr.menu.main]]
-name = "Maison"
+############# German navigation ##############
+# Mirrors the English menu. The category URLs are NOT translated: Hugo urlizes the
+# `categories:` front-matter value, and the publisher writes the same English display
+# casing in every language so one /categories/ai/ page serves both.
+[[Languages.de.menu.main]]
+name = "Start"
 url = ""
 weight = 1
 
-[[Languages.fr.menu.main]]
-name = "Quelque"
-url = "about/"
+[[Languages.de.menu.main]]
+name = "Blogs"
+url = "blogs/"
 weight = 2
 
-[[Languages.fr.menu.main]]
-name = "Les Blogs"
-url = "blogs/"
+[[Languages.de.menu.main]]
 weight = 3
+name = "Kategorien"
 
-[[Languages.fr.menu.main]]
-name = "Contacter"
-url = "contact/"
-weight = 4
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 1
+  url = "categories/ai/"
+  name = "AI"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 2
+  url = "categories/crypto/"
+  name = "Crypto"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 3
+  url = "categories/devops/"
+  name = "DevOps"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 4
+  url = "categories/fintech/"
+  name = "Fintech"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 5
+  url = "categories/founders/"
+  name = "Founders"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 6
+  url = "categories/it/"
+  name = "IT"
+
+  [[Languages.de.menu.main]]
+  parent = "Kategorien"
+  weight = 7
+  url = "categories/tech/"
+  name = "Tech"
