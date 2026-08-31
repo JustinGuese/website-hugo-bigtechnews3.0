@@ -161,11 +161,25 @@ preloader = "" # use jpg, png, svg or gif format.
 # assets/js/script.js. The site must be registered in that service's
 # sites.yaml (site key "brieftechnews", list key "newsletter") with this
 # site's origins allow-listed, or the browser fetch will be blocked by CORS.
+#
+# The topic checkboxes are rendered from data/categories.yaml -- the same file
+# the homepage strip and the RSS row read -- so a beat is offered here by being
+# published, not by being listed a third time. Their slugs must match the
+# `topics:` allow-list on this site's list in that service's sites.yaml: a beat
+# missing there submits fine and is dropped server-side.
 [params.subscription]
 enable = true
 endpoint = "https://ecommerce-api.datafortress.cloud/v1/lists"
 site_key = "brieftechnews"
 list_key = "newsletter"
+# Exit-intent dialog. `arm_after` is how many seconds of reading must pass
+# before it may open at all -- a signup prompt that fires before the visitor
+# has read anything asks for a decision they have no basis to make. A dismissal
+# is remembered locally for `dismiss_days`, and a completed signup suppresses it
+# for good.
+exit_intent = true
+exit_intent_arm_after = 12
+exit_intent_dismiss_days = 30
 
 # cookies
 [params.cookies]
@@ -175,7 +189,9 @@ expire_days = 2
 
 ######################## sidebar widgets #########################
 [params.widgets]
-sidebar = ["about-me", "recent-post", "categories", "tags"]
+# "subscription" sits directly under the post it followed, while the reader is
+# still holding the reason to sign up.
+sidebar = ["subscription", "about-me", "recent-post", "categories", "tags"]
 # available widget : search,about-me,authors,categories,tags,recent-post,social,promotion,subscription
 
 ############################# social site ########################

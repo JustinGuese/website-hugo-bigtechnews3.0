@@ -17,8 +17,9 @@
       {{ if not .IsHome }}
       {{ if site.Params.subscription.enable }}
       <div class="newsletter-block mx-auto mb-5">
-        <h5 class="h4 mb-3 text-center font-primary">{{ i18n `subscribe_title` }}</h5>
-        {{ partial "subscribe-form.html" . }}
+        <h5 class="h4 mb-2 text-center font-primary">{{ i18n `subscribe_title` }}</h5>
+        <p class="newsletter-block-body text-center">{{ i18n `subscribe_body` }}</p>
+        {{ partial "subscribe-form.html" (dict "id" "footer" "variant" "default") }}
       </div>
       {{ end }}
       {{ end }}

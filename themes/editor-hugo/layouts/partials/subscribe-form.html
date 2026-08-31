@@ -1,13 +1,91 @@
+{{/*
+  The one newsletter form. Used by the homepage hero, the footer, the sidebar
+  widget and the exit-intent modal. Call it with a dict:
+
+      {{ partial "subscribe-form.html" (dict "id" "sidebar" "variant" "compact") }}
+
+  `id` must be unique per page. It namespaces the checkbox ids that every
+  `<label for>` below points at, and a duplicate would make a click on the
+  sidebar's "Crypto" chip toggle the footer's instead -- the labels bind to the
+  first matching id in the document, not the nearest one.
+
+  `variant` changes density and the shape of the submit control only
+  ("compact" for the narrow hero and sidebar columns, "modal" for the
+  exit-intent dialog, which gets a full-width labelled button because it is the
+  one action on the screen). The consent box is never optional: it is the legal
+  basis for mailing at all.
+
+  `beats` may be set false to drop the topic picker, and the homepage hero is
+  the only caller that does. Its chips would otherwise sit directly above the
+  "Prefer RSS? Subscribe by beat" row, which is the same pill in the same
+  colours doing something completely different -- one is a form control, the
+  other a link to a feed. Everywhere the picker does appear it is the full set,
+  because a form that offers fewer choices in one place than another teaches
+  people to expect the shorter one.
+
+  The beats come from data/categories.yaml, the same file the homepage strip
+  and the RSS row read, so a new beat appears here by being published rather
+  than by being listed again. Their slugs must stay in step with the
+  `topics:` allow-list on this site's list in the funnel API's sites.yaml --
+  a beat missing there is accepted by the browser and dropped on the server.
+*/}}
+{{- $id := .id | default "subscribe" -}}
+{{- $variant := .variant | default "default" -}}
+{{- $beats := site.Data.categories -}}
+{{- if eq .beats false }}{{ $beats = slice }}{{ end -}}
 {{ if site.Params.subscription.enable }}
 {{ with site.Params.subscription }}
-<form class="subscribe-form" data-subscribe-endpoint="{{ .endpoint }}/{{ .site_key }}/{{ .list_key }}" data-msg-pending="{{ i18n `subscribe_pending` }}" data-msg-invalid="{{ i18n `subscribe_invalid` }}" data-msg-error="{{ i18n `subscribe_error` }}" novalidate>
+<form class="subscribe-form subscribe-form--{{ $variant }}"
+  data-subscribe-endpoint="{{ .endpoint }}/{{ .site_key }}/{{ .list_key }}"
+  data-msg-pending="{{ i18n `subscribe_pending` }}"
+  data-msg-invalid="{{ i18n `subscribe_invalid` }}"
+  data-msg-error="{{ i18n `subscribe_error` }}"
+  data-msg-consent="{{ i18n `consent_required` }}" novalidate>
+
+  {{ if eq $variant "modal" }}
+  <input type="email" name="email" id="{{ $id }}-email" class="form-control subscribe-email-block"
+    placeholder="{{ i18n `enter_your_email` }}" aria-label="{{ i18n `enter_your_email` }}" required autocomplete="email">
+  {{ else }}
   <div class="input-group">
-    <input type="email" name="email" class="form-control pl-3" placeholder="{{ i18n `enter_your_email` }}" aria-label="{{ i18n `enter_your_email` }}" required autocomplete="email">
+    <input type="email" name="email" id="{{ $id }}-email" class="form-control pl-3"
+      placeholder="{{ i18n `enter_your_email` }}" aria-label="{{ i18n `enter_your_email` }}" required autocomplete="email">
     <div class="input-group-append">
-      <button type="submit" class="input-group-text pr-3" aria-label="{{ i18n `subscribe_cta` }}"><i class="far fa-paper-plane"></i></button>
+      <button type="submit" class="input-group-text pr-3" aria-label="{{ i18n `subscribe_cta` }}">
+        <i class="far fa-paper-plane"></i>
+      </button>
     </div>
   </div>
-  <p class="subscribe-status small mb-0 mt-2" role="status" aria-live="polite"></p>
+  {{ end }}
+
+  {{ with $beats }}
+  <fieldset class="beat-picker">
+    <legend class="beat-picker-legend">{{ i18n `beats_legend` }}</legend>
+    <div class="beat-chips">
+      {{/* Checked by default, so the shortest path through the form is an
+           address and the consent box. An empty selection and a full one both
+           mean "send everything", and the API stores them identically. */}}
+      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-all" name="topics" value="all" checked>
+      <label class="beat-chip beat-chip--all" for="{{ $id }}-beat-all">{{ i18n `beats_all` }}</label>
+      {{ range . }}
+      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-{{ .slug }}" name="topics" value="{{ .slug }}">
+      <label class="beat-chip" for="{{ $id }}-beat-{{ .slug }}">{{ .name }}</label>
+      {{ end }}
+    </div>
+  </fieldset>
+  {{ end }}
+
+  <div class="consent-check">
+    <input class="consent-input" type="checkbox" id="{{ $id }}-consent" name="consent" value="yes" required>
+    <label class="consent-label" for="{{ $id }}-consent">
+      {{ printf (i18n `consent_label`) (printf `<a href="%s">%s</a>` ("privacy" | relLangURL) (i18n `consent_link`)) | safeHTML }}
+    </label>
+  </div>
+
+  {{ if eq $variant "modal" }}
+  <button type="submit" class="subscribe-submit-block">{{ i18n `subscribe_cta_long` }}</button>
+  {{ end }}
+
+  <p class="subscribe-status small mb-0" role="status" aria-live="polite"></p>
 </form>
 {{ end }}
 {{ end }}

@@ -71,7 +71,7 @@
   translation: Enter your email
 
 - id: subscribe_title
-  translation: Get the brief in your inbox.
+  translation: Five minutes beats four feeds.
 
 - id: about_me
   translation: About Me
@@ -105,3 +105,41 @@
 
 - id: terms
   translation: Terms
+- id: subscribe_body
+  translation: We read the releases, filings and post-mortems every morning and send you the three or four that change what you build. Free, daily, one click to leave.
+
+- id: subscribe_cta_long
+  translation: Send me the brief
+
+- id: subscribe_widget_title
+  translation: Get the brief
+
+- id: subscribe_widget_body
+  translation: Liked this one? The rest of today's stack — AI, crypto, fintech, infra — lands in your inbox tomorrow morning. Five minutes, no hype.
+
+- id: subscribe_modal_title
+  translation: Take the brief with you.
+
+- id: subscribe_modal_body
+  translation: You read one story. There are more filed today and a fresh set tomorrow — get them as one five-minute email instead of remembering to come back.
+
+- id: subscribe_modal_dismiss
+  translation: Not now
+
+- id: subscribe_close
+  translation: Close
+
+- id: beats_legend
+  translation: Which beats?
+
+- id: beats_all
+  translation: Everything
+
+- id: consent_label
+  translation: Email me the brief. I can unsubscribe from any issue in one click — see the %s.
+
+- id: consent_link
+  translation: privacy policy
+
+- id: consent_required
+  translation: Tick the consent box to subscribe.

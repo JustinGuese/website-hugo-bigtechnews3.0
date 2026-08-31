@@ -1,0 +1,32 @@
+{{/*
+  Exit-intent newsletter dialog. Rendered on every page but hidden until
+  assets/js/script.js decides to open it -- see `newsletterModal()` there for
+  the trigger and for the rules that keep it from following someone around
+  (dismissals and completed signups are both remembered locally).
+
+  It is rendered inert rather than injected on demand so that the markup stays
+  in the template, gets the same i18n treatment as everything else, and is
+  visible to anyone auditing what the page collects.
+*/}}
+{{ if and site.Params.subscription.enable site.Params.subscription.exit_intent }}
+<div class="newsletter-modal" id="newsletter-modal" role="dialog" aria-modal="true"
+  aria-labelledby="newsletter-modal-title" aria-describedby="newsletter-modal-body"
+  data-arm-after="{{ site.Params.subscription.exit_intent_arm_after | default 12 }}"
+  data-dismiss-days="{{ site.Params.subscription.exit_intent_dismiss_days | default 30 }}" hidden>
+  <div class="newsletter-modal-backdrop" data-newsletter-dismiss></div>
+  <div class="newsletter-modal-card" role="document">
+    <button type="button" class="newsletter-modal-close" data-newsletter-dismiss
+      aria-label="{{ i18n `subscribe_close` }}">&times;</button>
+
+    <p class="newsletter-modal-eyebrow">{{ i18n `hero_eyebrow` }}</p>
+    <h2 class="newsletter-modal-title" id="newsletter-modal-title">{{ i18n `subscribe_modal_title` }}</h2>
+    <p class="newsletter-modal-body" id="newsletter-modal-body">{{ i18n `subscribe_modal_body` }}</p>
+
+    {{ partial "subscribe-form.html" (dict "id" "modal" "variant" "modal") }}
+
+    <button type="button" class="newsletter-modal-decline" data-newsletter-dismiss>
+      {{ i18n `subscribe_modal_dismiss` }}
+    </button>
+  </div>
+</div>
+{{ end }}

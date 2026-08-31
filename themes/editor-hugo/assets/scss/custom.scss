@@ -4,18 +4,8 @@
 .hero-brief {
   text-align: left;
 
-  .subscribe-form {
-    .form-control {
-      border: 1px solid rgba($dark, 0.15);
-    }
-
-    .subscribe-status {
-      min-height: 1.2em;
-
-      &.text-danger {
-        color: #c0392b !important;
-      }
-    }
+  .subscribe-form .form-control {
+    border: 1px solid rgba($dark, 0.15);
   }
 
   .hero-rss {
@@ -43,6 +33,333 @@
       color: $primary-color;
       text-decoration: none;
     }
+  }
+}
+
+// -- newsletter signup ------------------------------------------------------
+//
+// The topic picker borrows the homepage's chip vocabulary rather than inventing
+// form styling: the site already says "beat" with a pill, so choosing which
+// beats to receive should look like picking from that same strip. An unchosen
+// beat is a hairline outline, a chosen one fills. The real checkbox stays in
+// the tab order and only its painted box is hidden, so the chips are operable
+// from the keyboard exactly like the checkboxes they are.
+
+.subscribe-form {
+  .subscribe-status {
+    min-height: 1.2em;
+    margin-top: 10px;
+
+    &.text-danger {
+      color: #c0392b !important;
+    }
+  }
+}
+
+.beat-picker {
+  border: 0;
+  padding: 0;
+  margin: 18px 0 0;
+  min-width: 0; // fieldsets refuse to shrink below their content otherwise
+}
+
+.beat-picker-legend {
+  float: none; // Bootstrap 4 makes legends full-width blocks
+  width: auto;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $gray;
+  margin-bottom: 8px;
+}
+
+.beat-chips {
+  position: relative; // anchors the absolutely-positioned inputs below
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.beat-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.beat-chip {
+  display: inline-block;
+  margin: 0;
+  padding: 4px 13px;
+  border: 1px solid rgba($dark, 0.18);
+  border-radius: 30px;
+  background: transparent;
+  color: $gray;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: $primary-color;
+    color: $dark;
+  }
+}
+
+.beat-input:checked + .beat-chip {
+  background: $primary-color;
+  border-color: $primary-color;
+  color: $white;
+}
+
+// The keyboard ring has to be drawn on the label, because the input it belongs
+// to is the one thing on screen that is invisible. `:focus-visible` rather than
+// `:focus`: clicking a label focuses its checkbox, so `:focus` would ring every
+// chip a mouse touches.
+.beat-input:focus-visible + .beat-chip {
+  outline: 2px solid $dark;
+  outline-offset: 2px;
+}
+
+.consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.consent-input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  accent-color: $primary-color;
+  cursor: pointer;
+}
+
+.consent-label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: $gray;
+  cursor: pointer;
+
+  a {
+    color: $dark;
+    text-decoration: underline;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+// Narrow columns: the hero and the sidebar widget.
+.subscribe-form--compact {
+  .beat-picker {
+    margin-top: 14px;
+  }
+
+  .beat-chip {
+    padding: 3px 11px;
+    font-size: 11px;
+  }
+
+  .consent-label {
+    font-size: 12px;
+  }
+}
+
+.subscribe-email-block {
+  width: 100%;
+  border: 1px solid rgba($dark, 0.18);
+  border-radius: 3px;
+  padding: 11px 14px;
+  height: auto;
+}
+
+.subscribe-submit-block {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 3px;
+  background: $primary-color;
+  color: $white;
+  font-family: $secondary-font;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: $dark;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+}
+
+.newsletter-block-body {
+  max-width: 480px;
+  margin: 0 auto 22px;
+  color: $gray;
+  font-size: 15px;
+}
+
+footer .newsletter-block {
+  .beat-picker,
+  .consent-check,
+  .subscribe-status {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .beat-chips {
+    justify-content: center;
+  }
+
+  .beat-picker-legend {
+    text-align: center;
+  }
+}
+
+.widget-subscribe {
+  .widget-subscribe-body {
+    font-size: 14px;
+    color: $gray;
+    margin-bottom: 18px;
+  }
+}
+
+// -- exit-intent dialog -----------------------------------------------------
+
+.newsletter-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+
+  // An author `display` beats the UA stylesheet's `[hidden] { display: none }`,
+  // so without this the dialog ships permanently open over every page.
+  &[hidden] {
+    display: none;
+  }
+}
+
+.newsletter-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba($dark, 0.66);
+}
+
+.newsletter-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 40px 38px 32px;
+  background: $white;
+  border-top: 3px solid $primary-color;
+  box-shadow: 0 24px 60px rgba($dark, 0.28);
+  animation: newsletter-modal-in 0.22s ease-out both;
+
+  @include mobile {
+    padding: 32px 22px 26px;
+  }
+}
+
+@keyframes newsletter-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.newsletter-modal-eyebrow {
+  margin-bottom: 6px;
+  color: $primary-color;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.newsletter-modal-title {
+  font-family: $primary-font;
+  font-size: $h4;
+  line-height: 1.25;
+  color: $dark;
+  margin-bottom: 12px;
+}
+
+.newsletter-modal-body {
+  color: $gray;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.newsletter-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: $light;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark;
+  }
+}
+
+.newsletter-modal-decline {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: $light;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark;
+  }
+}
+
+body.newsletter-modal-open {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-modal-card {
+    animation: none;
+  }
+
+  .beat-chip,
+  .subscribe-submit-block {
+    transition: none;
   }
 }
 

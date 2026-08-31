@@ -71,7 +71,7 @@
   translation: E-Mail-Adresse eingeben
 
 - id: subscribe_title
-  translation: Das Briefing in Ihr Postfach.
+  translation: Fünf Minuten schlagen vier Feeds.
 
 - id: about_me
   translation: Über uns
@@ -105,3 +105,42 @@
 
 - id: terms
   translation: AGB
+
+- id: subscribe_body
+  translation: Wir lesen jeden Morgen Releases, Filings und Post-mortems und schicken Ihnen die drei oder vier, die Ihre Arbeit verändern. Kostenlos, täglich, Abmeldung mit einem Klick.
+
+- id: subscribe_cta_long
+  translation: Briefing schicken
+
+- id: subscribe_widget_title
+  translation: Briefing holen
+
+- id: subscribe_widget_body
+  translation: Hat Ihnen das gefallen? Der Rest des Stacks — KI, Crypto, Fintech, Infrastruktur — liegt morgen früh in Ihrem Postfach. Fünf Minuten, kein Hype.
+
+- id: subscribe_modal_title
+  translation: Nehmen Sie das Briefing mit.
+
+- id: subscribe_modal_body
+  translation: Sie haben eine Meldung gelesen. Heute kommen weitere dazu und morgen ein neuer Satz — holen Sie sich alles als eine E-Mail in fünf Minuten, statt ans Wiederkommen zu denken.
+
+- id: subscribe_modal_dismiss
+  translation: Jetzt nicht
+
+- id: subscribe_close
+  translation: Schließen
+
+- id: beats_legend
+  translation: Welche Themen?
+
+- id: beats_all
+  translation: Alles
+
+- id: consent_label
+  translation: Schicken Sie mir das Briefing per E-Mail. Ich kann mich in jeder Ausgabe mit einem Klick abmelden — siehe %s.
+
+- id: consent_link
+  translation: Datenschutzerklärung
+
+- id: consent_required
+  translation: Bitte bestätigen Sie die Einwilligung.

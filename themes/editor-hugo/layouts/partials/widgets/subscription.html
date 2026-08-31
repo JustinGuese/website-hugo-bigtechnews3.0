@@ -1,0 +1,8 @@
+{{ "<!-- subscribe -->" | safeHTML }}
+{{ if site.Params.subscription.enable }}
+<div class="widget widget-subscribe">
+  <span class="widget-title">{{ i18n `subscribe_widget_title` }}</span>
+  <p class="widget-subscribe-body">{{ i18n `subscribe_widget_body` }}</p>
+  {{ partial "subscribe-form.html" (dict "id" "sidebar" "variant" "compact") }}
+</div>
+{{ end }}

@@ -6,7 +6,9 @@
     <h1 class="h3 font-primary mb-3">{{ replace site.Title ".com" "" }}</h1>
     <p class="mb-4">{{ i18n `hero_tagline` }}</p>
 
-    {{ partial "subscribe-form.html" . }}
+    {{/* No beat picker here -- the "Prefer RSS? Subscribe by beat" row below
+         already fills this column with identical-looking pills. */}}
+    {{ partial "subscribe-form.html" (dict "id" "hero" "variant" "compact" "beats" false) }}
 
     {{ if site.Params.subscription.enable }}
     <p class="small text-light mt-3 mb-0">{{ len (where site.RegularPages "Type" "in" site.Params.mainSections) }}+ briefs published so far.</p>

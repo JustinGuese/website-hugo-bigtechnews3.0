@@ -71,7 +71,7 @@
   translation: Entrer votre Email
 
 - id: subscribe_title
-  translation: Recevez le résumé dans votre boîte mail.
+  translation: Cinq minutes valent mieux que quatre fils d'actu.
 
 - id: about_me
   translation: À propos de moi
@@ -105,3 +105,41 @@
 
 - id: terms
   translation: Conditions
+- id: subscribe_body
+  translation: Chaque matin, nous lisons les sorties, les dépôts réglementaires et les post-mortems, et nous vous envoyons les trois ou quatre qui changent ce que vous construisez. Gratuit, quotidien, désabonnement en un clic.
+
+- id: subscribe_cta_long
+  translation: Envoyez-moi le résumé
+
+- id: subscribe_widget_title
+  translation: Recevoir le résumé
+
+- id: subscribe_widget_body
+  translation: Cet article vous a plu ? Le reste de la pile — IA, crypto, fintech, infra — arrive dans votre boîte demain matin. Cinq minutes, sans battage.
+
+- id: subscribe_modal_title
+  translation: Emportez le résumé avec vous.
+
+- id: subscribe_modal_body
+  translation: Vous avez lu un article. D'autres sont publiés aujourd'hui et une nouvelle série arrive demain — recevez-les en un e-mail de cinq minutes plutôt que d'avoir à revenir.
+
+- id: subscribe_modal_dismiss
+  translation: Pas maintenant
+
+- id: subscribe_close
+  translation: Fermer
+
+- id: beats_legend
+  translation: Quelles rubriques ?
+
+- id: beats_all
+  translation: Tout
+
+- id: consent_label
+  translation: Envoyez-moi le résumé par e-mail. Je peux me désabonner en un clic depuis chaque numéro — voir la %s.
+
+- id: consent_link
+  translation: politique de confidentialité
+
+- id: consent_required
+  translation: Cochez la case de consentement pour vous abonner.
