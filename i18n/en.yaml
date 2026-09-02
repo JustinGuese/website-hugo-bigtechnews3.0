@@ -143,3 +143,18 @@
 
 - id: consent_required
   translation: Tick the consent box to subscribe.
+
+- id: consent_banner_title
+  translation: Cookie choice
+
+- id: consent_banner_text
+  translation: We would like to use marketing cookies to measure how well our ads work. Only if you agree — the site works either way. See our %s.
+
+- id: consent_banner_link
+  translation: privacy policy
+
+- id: consent_banner_accept
+  translation: Accept
+
+- id: consent_banner_reject
+  translation: Reject

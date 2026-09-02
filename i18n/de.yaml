@@ -144,3 +144,18 @@
 
 - id: consent_required
   translation: Bitte bestätigen Sie die Einwilligung.
+
+- id: consent_banner_title
+  translation: Cookie-Auswahl
+
+- id: consent_banner_text
+  translation: Wir würden gerne Marketing-Cookies einsetzen, um die Wirkung unserer Werbung zu messen. Nur mit Ihrer Einwilligung — die Seite funktioniert auch ohne. Siehe unsere %s.
+
+- id: consent_banner_link
+  translation: Datenschutzerklärung
+
+- id: consent_banner_accept
+  translation: Einverstanden
+
+- id: consent_banner_reject
+  translation: Ablehnen

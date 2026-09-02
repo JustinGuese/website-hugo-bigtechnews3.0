@@ -183,10 +183,25 @@ exit_intent = true
 exit_intent_arm_after = 12
 exit_intent_dismiss_days = 30
 
-# cookies
+# Meta pixel. Public by design -- it is compiled into every page that loads the
+# pixel, so it is config and not a secret. It is only ever started after the
+# consent banner below is accepted; empty means the site has no pixel at all.
+# The same id is configured server-side in the funnel API's sites.yaml, which
+# reports the newsletter signup through the Conversions API against it.
+[params.meta]
+pixel_id = "995037776892621"
+
+# Marketing-consent banner. Now load-bearing rather than decorative: it is the
+# only thing that starts the pixel, and the answer is sent on to the funnel API
+# so the server-side conversion honours it too.
+#
+# `expire_days` is how long an answer is remembered. Two days was fine for a
+# banner that did nothing; for a real choice it means re-asking someone who
+# already said no, twice a week. Six months is the usual reading of "not
+# excessive" without being indefinite.
 [params.cookies]
-enable = false
-expire_days = 2
+enable = true
+expire_days = 180
 
 
 ######################## sidebar widgets #########################

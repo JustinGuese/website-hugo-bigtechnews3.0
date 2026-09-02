@@ -143,3 +143,18 @@
 
 - id: consent_required
   translation: Cochez la case de consentement pour vous abonner.
+
+- id: consent_banner_title
+  translation: Choix des cookies
+
+- id: consent_banner_text
+  translation: Nous souhaitons utiliser des cookies marketing pour mesurer l'efficacité de nos publicités. Uniquement avec votre accord — le site fonctionne dans tous les cas. Voir notre %s.
+
+- id: consent_banner_link
+  translation: politique de confidentialité
+
+- id: consent_banner_accept
+  translation: Accepter
+
+- id: consent_banner_reject
+  translation: Refuser

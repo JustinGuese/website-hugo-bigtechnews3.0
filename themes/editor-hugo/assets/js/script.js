@@ -97,6 +97,42 @@
 		}
 	}
 
+	// -- conversion plumbing ------------------------------------------------
+	//
+	// A signup is reported to Meta twice: once from here by the pixel, and once
+	// from the funnel API server-side. Both hand over the SAME id, which is the
+	// only thing that makes Meta collapse them into one conversion instead of
+	// counting two. So the id is generated before the request and travels with
+	// it -- never generated per-half.
+	function eventId() {
+		try {
+			if (window.crypto && window.crypto.randomUUID) {
+				return window.crypto.randomUUID();
+			}
+		} catch (err) {
+			/* fall through to the cheap version */
+		}
+		return 'btn-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+	}
+
+	// `_fbp` and `_fbc` are what let Meta match a signup to the browser that
+	// clicked the ad, and they have to be read here and posted in the body: the
+	// request is cross-origin without credentials and the API sets
+	// allow_credentials=False, so the cookies are never sent on their own.
+	// Absent is normal -- the pixel sets them, and the pixel only runs after
+	// the consent banner is accepted.
+	function cookie(name) {
+		var match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+		return match ? match.pop() : '';
+	}
+
+	// The banner's answer, forwarded so the server half honours the same
+	// choice. Blocking the pixel while the API kept reporting the same person
+	// would make the banner decorative.
+	function adsConsent() {
+		return cookie('cookie-consent') === 'accepted' ? 'yes' : '';
+	}
+
 	// The beat chips. "Everything" and a full hand-picked set mean the same
 	// subscription, so the two states are kept mutually exclusive rather than
 	// letting the form offer a distinction the API does not store: ticking a
@@ -161,6 +197,20 @@
 				$submit.prop('disabled', true);
 				$status.removeClass('text-danger').text('');
 
+				// Generated before the request so the pixel below and the
+				// server both report this one action under the same id.
+				var id = eventId();
+				// Read before the request too: whether this visitor has signed
+				// up before decides if the pixel fires, and the success branch
+				// sets that flag itself.
+				var subscribedBefore = recall(STORE_SUBSCRIBED);
+				// A refusal suppresses the ad identifiers at the source, not
+				// just their forwarding. The server would decline to report
+				// them anyway, but it stores what it is sent -- and sending a
+				// marketing cookie from a visitor who declined marketing is
+				// the collection they declined, wherever it stops afterwards.
+				var consented = adsConsent() === 'yes';
+
 				fetch(endpoint, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -168,10 +218,26 @@
 						email: email,
 						topics: topics,
 						consent: $consent.prop('checked') ? 'yes' : '',
-						source_url: window.location.href
+						source_url: window.location.href,
+						event_id: id,
+						fbp: consented ? cookie('_fbp') : '',
+						fbc: consented ? cookie('_fbc') : '',
+						ads_consent: consented ? 'yes' : ''
 					})
 				}).then(function (res) {
 					if (res.ok) {
+						// The API answers identically whether the address was
+						// new, pending or already on the list -- deliberately,
+						// so it is not a membership oracle. The browser
+						// therefore cannot tell a real signup from a resubmit,
+						// and reporting one would send a conversion the server
+						// matched nothing to, under an id nothing shares. This
+						// local flag is the only honest signal available.
+						if (!subscribedBefore && typeof fbq === 'function') {
+							fbq('track', 'Subscribe', {
+								content_name: 'BriefTechNews Daily Digest'
+							}, { eventID: id });
+						}
 						$status.text($form.data('msg-pending'));
 						$email.val('').prop('disabled', true);
 						$submit.prop('disabled', true);

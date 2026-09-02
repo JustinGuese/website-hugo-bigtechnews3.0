@@ -31,23 +31,54 @@
 <!-- cookie -->
 {{ if site.Params.cookies.enable }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
-<div id="js-cookie-box" class="cookie-box cookie-box-hide">
-	This site uses cookies. By continuing to use this website, you agree to their use. <span id="js-cookie-button" class="btn btn-sm btn-outline-primary ml-2">I Accept</span>
+<div id="js-cookie-box" class="cookie-box cookie-box-hide" role="region" aria-label="{{ i18n `consent_banner_title` }}">
+	<span class="cookie-box-text">
+		{{ printf (i18n `consent_banner_text`) (printf `<a href="%s">%s</a>` ("privacy" | relLangURL) (i18n `consent_banner_link`)) | safeHTML }}
+	</span>
+	<span id="js-cookie-reject" class="btn btn-sm btn-outline-light ml-2">{{ i18n `consent_banner_reject` }}</span>
+	<span id="js-cookie-accept" class="btn btn-sm btn-outline-primary ml-2">{{ i18n `consent_banner_accept` }}</span>
 </div>
 <script>
-	(function ($) {
-		const cookieBox = document.getElementById('js-cookie-box');
-		const cookieButton = document.getElementById('js-cookie-button');
-		if (!Cookies.get('cookie-box')) {
-			cookieBox.classList.remove('cookie-box-hide');
-			cookieButton.onclick = function () {
-				Cookies.set('cookie-box', true, {
-					expires: {{ site.Params.cookies.expire_days }}
-				});
-				cookieBox.classList.add('cookie-box-hide');
-			};
+	// Marketing consent, and the only thing that ever starts the Meta pixel.
+	//
+	// The banner this replaced said "by continuing to use this website you
+	// agree" and offered one button. That is implied consent, which is not
+	// consent for marketing cookies -- and it is now the gate on a pixel, so it
+	// needs a real refusal that is as easy to give as agreement.
+	//
+	// The stored value is a tri-state on purpose: "accepted", "rejected", and
+	// absent. Absent means unanswered, so the banner shows again; a rejection is
+	// remembered, so it does not nag someone who already said no. The choice is
+	// also read by the subscribe form, which sends it to the funnel API -- the
+	// server-side conversion honours the same answer, or blocking the pixel
+	// would achieve nothing but hiding the collection from the browser.
+	(function () {
+		const KEY = 'cookie-consent';
+		const box = document.getElementById('js-cookie-box');
+		const accept = document.getElementById('js-cookie-accept');
+		const reject = document.getElementById('js-cookie-reject');
+		const choice = Cookies.get(KEY);
+
+		if (choice === 'accepted' && typeof window.btnLoadPixel === 'function') {
+			window.btnLoadPixel();
 		}
-	})(jQuery);
+
+		if (choice) { return; }
+
+		box.classList.remove('cookie-box-hide');
+		const answer = function (value) {
+			Cookies.set(KEY, value, {
+				expires: {{ site.Params.cookies.expire_days }},
+				sameSite: 'Lax'
+			});
+			box.classList.add('cookie-box-hide');
+			if (value === 'accepted' && typeof window.btnLoadPixel === 'function') {
+				window.btnLoadPixel();
+			}
+		};
+		accept.onclick = function () { answer('accepted'); };
+		reject.onclick = function () { answer('rejected'); };
+	})();
 </script>
 
 <!-- cookie style -->
@@ -63,6 +94,25 @@
   background: rgb(71, 71, 71);
   transition: all .75s cubic-bezier(.19, 1, .22, 1);
   color: #fdfdfd;
+}
+
+/* Wraps rather than overflowing: two buttons plus a sentence does not fit one
+   line on a phone, and this bar sits over the content it would push off. */
+.cookie-box-text {
+  display: inline-block;
+  margin-bottom: .25rem;
+}
+
+.cookie-box a {
+  color: #fdfdfd;
+  text-decoration: underline;
+}
+
+/* Refusing must not be visibly harder than agreeing -- a greyed-out reject
+   next to a bright accept is the dark pattern this banner exists to avoid. */
+.cookie-box .btn {
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .cookie-box-hide {
