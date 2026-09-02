@@ -1,5 +1,7 @@
 ######################## default configuration ####################
-baseURL = "https://justinguese.github.io/website-hugo-bigtechnews3.0/"
+# The live domain. The github.io URL this used to name still resolves, but only
+# via a redirect, and it is no longer where anyone reads the site.
+baseURL = "https://brief-tech-news.com/"
 title = "BriefTechNews.com"
 theme = "editor-hugo"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List

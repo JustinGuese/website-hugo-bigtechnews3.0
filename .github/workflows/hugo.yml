@@ -54,9 +54,15 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
+          # The baseURL is pinned, NOT taken from steps.pages.outputs.base_url.
+          # That output comes back as http://brief-tech-news.com even with
+          # "Enforce HTTPS" on, so every absolute URL Hugo wrote was insecure:
+          # the browser blocked the favicon outright as mixed content, and every
+          # og:image/og:url went out over http to crawlers. Nothing in the build
+          # failed - the pages just quietly rendered without their icon.
           hugo \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://brief-tech-news.com/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
