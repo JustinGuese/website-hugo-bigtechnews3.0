@@ -190,6 +190,11 @@ exit_intent_dismiss_days = 30
 # reports the newsletter signup through the Conversions API against it.
 [params.meta]
 pixel_id = "995037776892621"
+# Business Settings > Brand Safety > Domains. Proves we own the domain, which
+# is what unlocks Aggregated Event Measurement -- without AEM configured, iOS
+# conversions are not attributed at all. Not a secret: it is served in the HTML
+# to anyone who asks, which is the entire point of it.
+domain_verification = "66gjaw2oxbdxz1vl7o0x6g2ez3t6h5"
 
 # Marketing-consent banner. Now load-bearing rather than decorative: it is the
 # only thing that starts the pixel, and the answer is sent on to the funnel API

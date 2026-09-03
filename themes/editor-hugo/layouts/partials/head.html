@@ -9,6 +9,21 @@
 
 <meta name="theme-name" content="editor-hugo" />
 
+{{- /* Meta domain verification. Rendered statically and unconditionally, on
+       every page rather than only the home page: the crawler is told to check
+       the home page, but it also re-checks after any change, and a tag that
+       exists on exactly one URL is one redesign away from disappearing without
+       anyone noticing until attribution stops.
+
+       It is NOT behind the consent banner, and that is correct -- it sets no
+       cookie, reads nothing, and identifies the site rather than the visitor.
+       It also must not move into the pixel loader: verification fails if the
+       tag arrives via JavaScript. Without this, Aggregated Event Measurement
+       cannot be configured and iOS conversions go unattributed. */ -}}
+{{- with site.Params.meta.domain_verification }}
+<meta name="facebook-domain-verification" content="{{ . }}" />
+{{- end }}
+
 <!--Favicon-->
 <link rel="shortcut icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
 <link rel="icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
