@@ -148,7 +148,7 @@
   translation: Choix des cookies
 
 - id: consent_banner_text
-  translation: Nous souhaitons utiliser des cookies marketing pour mesurer l'efficacité de nos publicités. Uniquement avec votre accord — le site fonctionne dans tous les cas. Voir notre %s.
+  translation: Nous utilisons des cookies marketing pour mesurer l'efficacité de nos publicités. Vous pouvez les refuser à tout moment — le site fonctionne dans tous les cas. Voir notre %s.
 
 - id: consent_banner_link
   translation: politique de confidentialité

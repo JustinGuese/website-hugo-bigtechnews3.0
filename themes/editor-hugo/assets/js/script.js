@@ -119,18 +119,26 @@
 	// clicked the ad, and they have to be read here and posted in the body: the
 	// request is cross-origin without credentials and the API sets
 	// allow_credentials=False, so the cookies are never sent on their own.
-	// Absent is normal -- the pixel sets them, and the pixel only runs after
-	// the consent banner is accepted.
+	// Absent is normal -- the pixel sets them, and a visitor who refused has
+	// had them cleared.
 	function cookie(name) {
 		var match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
 		return match ? match.pop() : '';
 	}
 
 	// The banner's answer, forwarded so the server half honours the same
-	// choice. Blocking the pixel while the API kept reporting the same person
-	// would make the banner decorative.
+	// choice. Suppressing the pixel while the API kept reporting the same
+	// person would make the banner decorative.
+	//
+	// This is OPT-OUT: only an explicit "rejected" withholds consent, so an
+	// unanswered banner still reports. That is a deliberate business decision
+	// and it is the one thing here that is legally contentious -- TTDSG s25
+	// wants consent BEFORE a marketing cookie is set, and silence is not
+	// consent. It is written as "not rejected" rather than "accepted" so that
+	// reverting to opt-in is this one expression plus the load condition in
+	// script.html, and nothing else.
 	function adsConsent() {
-		return cookie('cookie-consent') === 'accepted' ? 'yes' : '';
+		return cookie('cookie-consent') === 'rejected' ? '' : 'yes';
 	}
 
 	// The beat chips. "Everything" and a full hand-picked set mean the same

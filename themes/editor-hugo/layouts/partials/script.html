@@ -41,17 +41,29 @@
 <script>
 	// Marketing consent, and the only thing that ever starts the Meta pixel.
 	//
-	// The banner this replaced said "by continuing to use this website you
-	// agree" and offered one button. That is implied consent, which is not
-	// consent for marketing cookies -- and it is now the gate on a pixel, so it
-	// needs a real refusal that is as easy to give as agreement.
+	// This is an OPT-OUT banner: the pixel loads on page load for anyone who
+	// has not refused, and the banner offers a refusal rather than asking
+	// permission. Be clear-eyed about what that means -- TTDSG s25 and the GDPR
+	// want consent BEFORE a marketing cookie is set, silence is not consent,
+	// and this is the configuration German consumer associations actually send
+	// warnings about. It is a deliberate business decision, taken knowing that,
+	// because an opt-in gate left the great majority of visitors unmeasurable.
 	//
-	// The stored value is a tri-state on purpose: "accepted", "rejected", and
-	// absent. Absent means unanswered, so the banner shows again; a rejection is
-	// remembered, so it does not nag someone who already said no. The choice is
-	// also read by the subscribe form, which sends it to the funnel API -- the
-	// server-side conversion honours the same answer, or blocking the pixel
-	// would achieve nothing but hiding the collection from the browser.
+	// Reverting to opt-in is two expressions and nothing else: the load
+	// condition below, and `adsConsent()` in assets/js/script.js. Both are
+	// written as "not rejected" rather than "accepted" so the flip is legible.
+	//
+	// The stored value stays a tri-state -- "accepted", "rejected", absent --
+	// even though loading now treats absent and accepted alike. Absent still
+	// means unanswered, so the banner keeps showing until it is answered; only
+	// "rejected" is a decision the pixel honours. Collapsing it to a boolean
+	// would lose the difference between "said yes" and "never saw it", which is
+	// the distinction any later move back to opt-in turns on.
+	//
+	// The choice is also read by the subscribe form, which sends it to the
+	// funnel API, so the server-side conversion honours the same answer. A
+	// refusal that only suppressed the browser half would hide the collection
+	// from the visitor rather than stop it.
 	(function () {
 		const KEY = 'cookie-consent';
 		const box = document.getElementById('js-cookie-box');
@@ -59,7 +71,7 @@
 		const reject = document.getElementById('js-cookie-reject');
 		const choice = Cookies.get(KEY);
 
-		if (choice === 'accepted' && typeof window.btnLoadPixel === 'function') {
+		if (choice !== 'rejected' && typeof window.btnLoadPixel === 'function') {
 			window.btnLoadPixel();
 		}
 
@@ -72,8 +84,25 @@
 				sameSite: 'Lax'
 			});
 			box.classList.add('cookie-box-hide');
-			if (value === 'accepted' && typeof window.btnLoadPixel === 'function') {
-				window.btnLoadPixel();
+
+			// A refusal arrives AFTER the pixel has already loaded and set
+			// `_fbp`, so declining to start it is no longer enough -- the
+			// withdrawal has to undo what opt-out already did. Three parts,
+			// none of which is redundant: `consent revoke` stops fbq sending
+			// anything further this pageload, the cookies are deleted so the
+			// identifier does not survive into a later visit or get posted by
+			// the subscribe form, and the stored "rejected" keeps the pixel
+			// from loading at all next time.
+			//
+			// Both host forms are removed because js-cookie writes host-only
+			// while the pixel writes to the registrable domain, and a delete
+			// that misses the scope leaves the value readable.
+			if (value === 'rejected') {
+				if (typeof fbq === 'function') { fbq('consent', 'revoke'); }
+				['_fbp', '_fbc'].forEach(function (name) {
+					Cookies.remove(name);
+					Cookies.remove(name, { domain: '.' + location.hostname.replace(/^www\./, '') });
+				});
 			}
 		};
 		accept.onclick = function () { answer('accepted'); };

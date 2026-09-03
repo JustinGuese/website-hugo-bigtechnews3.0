@@ -2,17 +2,18 @@
   Meta pixel, defined but deliberately NOT started.
 
   This partial only declares `window.btnLoadPixel()`. Calling it is the consent
-  banner's job (see script.html) -- the pixel sets `_fbp`, which is a marketing
-  cookie, so loading it on page load would collect before anyone agreed to it
-  and make the banner decorative.
+  banner's job (see script.html), and it stays that way even though the banner
+  now loads on page load for anyone who has not refused: the banner is the one
+  place the stored choice is read, so putting the call here would give the
+  decision a second home and a refusal would have to be honoured twice.
 
   The id is public by design: it is compiled into every page that loads the
   pixel, so it lives in hugo.toml rather than in a secret. Empty means the site
   has no pixel and this partial emits nothing at all, which is what a preview
   build or a fork wants.
 
-  `btnPixelLoaded` guards against a second call: the banner calls this on
-  Accept, and again on the next page load from the stored choice.
+  `btnPixelLoaded` guards against a second call: the banner calls this on page
+  load, and Accept can arrive afterwards on the same page.
 */ -}}
 {{- with site.Params.meta.pixel_id }}
 <script>

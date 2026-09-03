@@ -148,7 +148,7 @@
   translation: Cookie choice
 
 - id: consent_banner_text
-  translation: We would like to use marketing cookies to measure how well our ads work. Only if you agree — the site works either way. See our %s.
+  translation: We use marketing cookies to measure how well our ads work. You can reject them at any time — the site works either way. See our %s.
 
 - id: consent_banner_link
   translation: privacy policy
