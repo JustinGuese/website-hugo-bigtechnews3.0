@@ -1,0 +1,545 @@
+{{- /*
+  The paid-traffic landing page. Reached only by `layout: brief` in a page's
+  front matter; nothing links to it from the site.
+
+  It is a COMPLETE document rather than a `{{ define "main" }}` block, and that
+  is the whole mechanism: Hugo applies `baseof.html` only to a template that
+  defines blocks, so writing the document out here drops the site header
+  without adding a conditional to chrome every other page shares.
+
+  Dropping the header is not a design preference. The nav links Crypto, and the
+  archive it opens onto carries the Markets posts, whose bodies are literal buy
+  and sell decisions. Meta restricts both crypto and investment advertising to
+  pre-approved advertisers AND crawls the destination, so a nav bar is enough
+  to get an otherwise clean ad disapproved -- and repeated disapprovals
+  restrict the ad account, not just the ad.
+
+  `head.html` and `script.html` are still included and both are load-bearing:
+  the first carries the pixel and the domain-verification tag, the second the
+  subscribe handler and the consent banner. A landing page without them looks
+  fine and reports nothing.
+
+  Everything the page claims is read from the site's own content at build time.
+  Nothing here is a hardcoded sample, so the proof cannot go stale and quietly
+  start advertising a newsletter that stopped publishing.
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Params.locale | default `en-US` }}">
+
+<head>
+  {{ partial "head.html" . }}
+  {{ partialCached "style.html" . }}
+
+  {{- /* The beats, and the one hue each. These numbers mirror CATEGORY_HUES in
+         the pipeline's covers.py, which is what draws the ad creative -- so an
+         ad and the page it lands on carry the same colour for the same beat.
+         They are spread ~27 degrees apart on purpose; moving one towards a
+         nicer colour without moving its neighbours makes two beats look alike.
+
+         Crypto is in the map because its posts still exist, and absent from
+         the display list below for the reason the header is absent. */ -}}
+  {{- $hues := dict "founders" 15 "crypto" 41 "devops" 66 "fintech" 118 "tech" 221 "it" 246 "ai" 272 }}
+  {{- $shown := slice "ai" "devops" "it" "tech" "founders" "fintech" }}
+  <style>
+    :root {
+      /* The canvas is the same near-black the covers are drawn on: hue 272 at
+         40% saturation and 7% lightness, which is what covers.palette_for
+         computes. An ad and its landing page share a background rather than
+         nearly sharing one. */
+      --ink: #0e0d13;
+      --surface: #17151f;
+      --paper: #f3f1f6;
+      --muted: #9a94ac;
+      --line: #2a2735;
+      --focus: #f3f1f6;
+      {{- range $slug, $h := $hues }}
+      --beat-{{ $slug }}: hsl({{ $h }}, 85%, 64%);
+      {{- end }}
+    }
+
+    /* Colour on this page means one thing: which beat a line belongs to.
+       Nothing decorative is coloured, which is why the most important button
+       here is plain white. */
+    /* The theme paints html white. Setting only the body leaves a pale strip
+       down the right edge under the scrollbar, and `color-scheme` is what
+       makes the scrollbar itself render dark rather than as a light channel
+       beside a dark page. */
+    html:has(> .lp) {
+      background: var(--ink);
+      color-scheme: dark;
+    }
+
+    .lp {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lp-wrap {
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .lp-mark {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--muted);
+      margin: 0 0 4.5rem;
+    }
+
+    .lp h1 {
+      font-family: "Lora", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(2.1rem, 7vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+      color: var(--paper);
+    }
+
+    .lp-sub {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 32rem;
+      margin: 0 0 2rem;
+    }
+
+    /* Figures are the texture of this product -- "2.2x", "$10", "39% to 96%".
+       Mono is here for numbers inside the writing, never as a label face. */
+    .lp-fig {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.94em;
+      color: var(--paper);
+    }
+
+    .lp-micro {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0.85rem 0 0;
+    }
+
+    /* --- the proof: one real issue, printed in full --------------------- */
+
+    .lp-issue {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.5rem 1.5rem 1.25rem;
+      margin: 3.5rem 0 0;
+    }
+
+    .lp-issue-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: baseline;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* The beat tag is attached to a specific line and says which of seven
+       columns it came from. It is a data label, not an eyebrow over a
+       section, which is why it is lowercase and inline rather than tracked
+       out above a heading. */
+    .lp-beat {
+      color: var(--beat);
+      border-left: 3px solid var(--beat);
+      padding-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    .lp-issue h2 {
+      font-family: "Lora", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.3;
+      margin: 0 0 1rem;
+      color: var(--paper);
+    }
+
+    .lp-issue ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lp-issue li {
+      padding: 0.6rem 0 0.6rem 1.1rem;
+      border-top: 1px solid var(--line);
+      position: relative;
+      color: var(--paper);
+    }
+
+    .lp-issue li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.25rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--beat);
+    }
+
+    /* --- the rest of the day -------------------------------------------- */
+
+    .lp-rest {
+      margin: 2.5rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lp-rest li {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 1rem;
+      padding: 0.7rem 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+    }
+
+    .lp-rest .lp-beat {
+      font-size: 0.8rem;
+    }
+
+    .lp-rest span:last-child {
+      color: var(--paper);
+    }
+
+    /* --- prose ----------------------------------------------------------- */
+
+    .lp-section {
+      margin: 4rem 0 0;
+    }
+
+    .lp-section h2 {
+      font-family: "Lora", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0 0 0.9rem;
+      color: var(--paper);
+    }
+
+    .lp-section p {
+      color: var(--muted);
+      max-width: 36rem;
+    }
+
+    .lp-section p strong {
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    .lp-foot {
+      margin: 4rem 0 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .lp-foot a {
+      color: var(--muted);
+      text-decoration: underline;
+      margin-right: 1rem;
+    }
+
+    .lp-foot a:hover,
+    .lp-foot a:focus {
+      color: var(--paper);
+    }
+
+    /* --- the form, recoloured for a dark page ---------------------------- */
+
+    .lp .subscribe-form .form-control,
+    .lp .subscribe-form .subscribe-email-block {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--paper);
+      border-radius: 8px;
+      height: auto;
+      padding: 0.85rem 1rem;
+      font-size: 1.0625rem;
+      width: 100%;
+    }
+
+    .lp .subscribe-form .form-control::placeholder,
+    .lp .subscribe-form .subscribe-email-block::placeholder {
+      color: var(--muted);
+    }
+
+    .lp .subscribe-form .form-control:focus,
+    .lp .subscribe-form .subscribe-email-block:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-color: transparent;
+    }
+
+    /* White, not a beat colour: colour on this page means a beat, and the
+       most important control should not be mistaken for one. */
+    .lp .subscribe-form .subscribe-submit-block {
+      display: block;
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.85rem 1rem;
+      border: 0;
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 1.0625rem;
+      cursor: pointer;
+    }
+
+    .lp .subscribe-form .subscribe-submit-block:hover {
+      background: #fff;
+    }
+
+    .lp .subscribe-form .subscribe-submit-block:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .lp .subscribe-form .subscribe-submit-block:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .lp .consent-check {
+      margin-top: 0.9rem;
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+    }
+
+    .lp .consent-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .lp .consent-label a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+
+    .lp .beat-picker {
+      margin-top: 1rem;
+      border: 0;
+      padding: 0;
+    }
+
+    .lp .beat-picker-legend {
+      color: var(--muted);
+      font-size: 0.85rem;
+      float: none;
+      width: auto;
+      margin-bottom: 0.5rem;
+    }
+
+    .lp .beat-chip {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .lp .beat-input:checked + .beat-chip {
+      background: var(--paper);
+      border-color: var(--paper);
+      color: var(--ink);
+    }
+
+    .lp .beat-input:focus-visible + .beat-chip {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .lp .subscribe-status {
+      color: var(--muted);
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .lp .subscribe-status.text-danger {
+      color: hsl(15, 85%, 68%) !important;
+    }
+
+    /* The consent bar is shared with the rest of the site, where it sits on
+       white. Its mid-grey reads as a slab of unrelated UI on this canvas, and
+       it is the first thing an ad click sees. Recoloured, not restyled: the
+       markup, the two buttons and their equal weight are untouched, because
+       making a refusal harder to find than an agreement is the dark pattern
+       the banner exists to avoid. */
+    .lp #js-cookie-box {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.875rem;
+      /* The theme centres this bar, which at this width drops Accept onto a
+         line of its own below Reject and reads as a broken layout on the one
+         page where the first impression is bought. A row that wraps as a unit
+         keeps the two answers side by side at every width. */
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem 0.75rem;
+      text-align: left;
+      padding: 0.9rem 1.25rem;
+    }
+
+    .lp #js-cookie-box .cookie-box-text {
+      margin: 0;
+      max-width: 46rem;
+    }
+
+    .lp #js-cookie-box a {
+      color: var(--muted);
+    }
+
+    .lp #js-cookie-box .btn {
+      color: var(--paper);
+      border-color: var(--line);
+      font-size: 0.875rem;
+    }
+
+    .lp #js-cookie-box .btn:hover {
+      border-color: var(--paper);
+    }
+
+    @media (max-width: 480px) {
+      .lp-rest li {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="lp">
+  <main class="lp-wrap">
+    {{- /* Plain text, not a link home. The one job of this page is the form,
+           and the archive it would open onto is the surface the header was
+           removed to avoid. The legally required links are in the footer. */}}
+    <p class="lp-mark">{{ site.Params.logo_text | default site.Title }}</p>
+
+    {{- /* Live, so the page cannot outlive the newsletter. `blogs` is the
+           section `mainSections` names; Crypto and Markets are filtered out
+           for ad-policy reasons rather than editorial ones. */ -}}
+    {{- $safe := where (where site.RegularPages "Section" "blogs") "Params.lang" "en" -}}
+    {{- $safe = $safe | symdiff (where $safe "Params.categories" "intersect" (slice "Crypto" "Markets")) -}}
+    {{- $latest := index (sort $safe "Date" "desc") 0 -}}
+    {{- $count := len $safe -}}
+
+    <h1>Five minutes beats four feeds.</h1>
+
+    <p class="lp-sub">
+      Every weekday we read the releases, filings and post-mortems and send you the
+      handful that change what you build. Free, and one click to leave.
+    </p>
+
+    {{- /* `beats false` on BOTH forms here, unlike everywhere else on the site.
+           Two reasons and the first is not about conversion: the picker is
+           built from data/categories.yaml, so it renders a Crypto chip, and
+           naming crypto is the one thing this page cannot do without risking
+           the ad account. The second is that an address is the only field this
+           page needs -- no selection means every beat, which is the default a
+           new reader wants anyway. */ -}}
+    {{ partial "subscribe-form.html" (dict "id" "lp-hero" "variant" "modal" "beats" false) }}
+
+    <p class="lp-micro">
+      No spam, no partner mail. You confirm the address before anything is sent.
+    </p>
+
+    {{- with $latest }}
+    {{- $slug := lower (index .Params.categories 0) }}
+    {{- $hue := index $hues $slug | default 272 }}
+    <section class="lp-issue" style="--beat: hsl({{ $hue }}, 85%, 64%)" aria-label="A recent issue">
+      <div class="lp-issue-meta">
+        <span class="lp-beat">{{ index .Params.categories 0 }}</span>
+        {{- /* Go's reference date, so the year token is 2006. Writing the
+               current year here renders correctly for exactly one year and
+               then silently prints a date that never arrives. */ -}}
+        <span>{{ .Date.Format "Monday, 2 January 2006" }}</span>
+      </div>
+      <h2>{{ .Title }}</h2>
+
+      {{- /* The TL;DR is written into the body as raw HTML by the publish
+             stage, so it is lifted back out rather than duplicated into front
+             matter -- a second copy is a second thing to drift. If the shape
+             ever changes this yields nothing and the block degrades to the
+             headline above, which is still true and still proof. */ -}}
+      {{- $box := findRE `(?s)<strong>TL;DR</strong><ul[^>]*>.*?</ul>` .RawContent 1 }}
+      {{- with $box }}
+      {{- $items := findRE `(?s)<li>.*?</li>` (index . 0) }}
+      <ul>
+        {{- range first 5 $items }}
+        <li>{{ replaceRE `<[^>]*>` "" . | htmlUnescape }}</li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </section>
+    {{- end }}
+
+    {{- /* One line per beat, most recent first: the point is that every beat
+           actually ran today, which a single issue cannot show. */ -}}
+    <ul class="lp-rest">
+      {{- range $shown }}
+      {{- $slug := . }}
+      {{- $name := "" }}
+      {{- range site.Data.categories }}{{ if eq .slug $slug }}{{ $name = .name }}{{ end }}{{ end }}
+      {{- $posts := where $safe "Params.categories" "intersect" (slice $name) }}
+      {{- with $posts }}
+      {{- $p := index (sort . "Date" "desc") 0 }}
+      {{- if ne $p.Permalink $latest.Permalink }}
+      <li style="--beat: hsl({{ index $hues $slug | default 272 }}, 85%, 64%)">
+        <span class="lp-beat">{{ $name }}</span>
+        <span>{{ $p.Title }}</span>
+      </li>
+      {{- end }}
+      {{- end }}
+      {{- end }}
+    </ul>
+
+    <section class="lp-section">
+      <h2>What you are signing up for</h2>
+      <p>
+        One email each weekday, across <strong>AI, DevOps, IT, Tech, Founders and Fintech</strong>.
+        Each item is a few sentences and a link to the source, so you can stop at the summary
+        or go read the filing yourself.
+      </p>
+      <p>
+        Every issue is assembled and drafted with AI from the day's news, then reviewed before
+        it publishes. We would rather say that plainly than have you find out. What we hold to
+        is the editorial bar: no headline paraphrasing, no filler, and a reason it matters on
+        every item. <span class="lp-fig">{{ $count }}</span> issues published so far.
+      </p>
+    </section>
+
+    <section class="lp-section">
+      <h2>Start tomorrow morning</h2>
+      {{ partial "subscribe-form.html" (dict "id" "lp-foot" "variant" "modal" "beats" false) }}
+    </section>
+
+    <footer class="lp-foot">
+      <a href="{{ `privacy-policy` | relLangURL }}">Privacy</a>
+      <a href="{{ `terms-conditions` | relLangURL }}">Terms</a>
+      <a href="{{ `imprint` | relLangURL }}">Imprint</a>
+    </footer>
+  </main>
+
+  {{ partialCached "script.html" . }}
+</body>
+
+</html>

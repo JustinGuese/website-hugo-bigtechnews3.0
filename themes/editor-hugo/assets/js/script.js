@@ -126,6 +126,31 @@
 		return match ? match.pop() : '';
 	}
 
+	// The Meta click id, from the cookie the pixel writes -- or built from the
+	// `fbclid` on the URL when that cookie is not there yet.
+	//
+	// The fallback exists for paid traffic and nothing else, which is why it
+	// arrived with the first campaign rather than with the pixel. An ad click
+	// lands on `?fbclid=...`; the pixel then writes `_fbc` from it, but that
+	// happens after fbevents.js has loaded over the network. A visitor who
+	// types an address into the hero form before that lands -- or whose pixel
+	// is blocked outright -- posts a conversion Meta cannot attribute to the
+	// ad it just paid for. Nothing errors; the click simply goes unmatched.
+	//
+	// The shape is Meta's documented `version.subdomainIndex.creationTime.
+	// fbclid`. The index is 1 because the pixel writes this cookie at the
+	// registrable domain, which script.html already depends on when it deletes
+	// it. The timestamp is when we first saw the click, which is this pageview
+	// -- the same thing the pixel would have recorded.
+	function clickId() {
+		var existing = cookie('_fbc');
+		if (existing) {
+			return existing;
+		}
+		var match = window.location.search.match(/[?&]fbclid=([^&#]+)/);
+		return match ? 'fb.1.' + Date.now() + '.' + decodeURIComponent(match[1]) : '';
+	}
+
 	// The banner's answer, forwarded so the server half honours the same
 	// choice. Suppressing the pixel while the API kept reporting the same
 	// person would make the banner decorative.
@@ -229,7 +254,7 @@
 						source_url: window.location.href,
 						event_id: id,
 						fbp: consented ? cookie('_fbp') : '',
-						fbc: consented ? cookie('_fbc') : '',
+						fbc: consented ? clickId() : '',
 						ads_consent: consented ? 'yes' : ''
 					})
 				}).then(function (res) {
