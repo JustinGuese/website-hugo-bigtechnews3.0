@@ -33,7 +33,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
 <div id="js-cookie-box" class="cookie-box cookie-box-hide" role="region" aria-label="{{ i18n `consent_banner_title` }}">
 	<span class="cookie-box-text">
-		{{ printf (i18n `consent_banner_text`) (printf `<a href="%s">%s</a>` ("privacy" | relLangURL) (i18n `consent_banner_link`)) | safeHTML }}
+		{{ printf (i18n `consent_banner_text`) (printf `<a href="%s">%s</a>` ("privacy-policy" | relLangURL) (i18n `consent_banner_link`)) | safeHTML }}
 	</span>
 	<span id="js-cookie-reject" class="btn btn-sm btn-outline-light ml-2">{{ i18n `consent_banner_reject` }}</span>
 	<span id="js-cookie-accept" class="btn btn-sm btn-outline-primary ml-2">{{ i18n `consent_banner_accept` }}</span>

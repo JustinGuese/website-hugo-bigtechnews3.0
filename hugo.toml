@@ -321,6 +321,28 @@ name = "Contact"
 url = "contact/"
 weight = 5
 
+[[Languages.en.menu.main]]
+weight = 6
+name = "Legal"
+
+  [[Languages.en.menu.main]]
+  parent = "Legal"
+  weight = 1
+  url = "imprint/"
+  name = "Imprint"
+
+  [[Languages.en.menu.main]]
+  parent = "Legal"
+  weight = 2
+  url = "privacy-policy/"
+  name = "Privacy Policy"
+
+  [[Languages.en.menu.main]]
+  parent = "Legal"
+  weight = 3
+  url = "terms-conditions/"
+  name = "Terms and Conditions"
+
 
 
 ################################### German language #####################################
@@ -394,3 +416,25 @@ name = "Kategorien"
   weight = 7
   url = "categories/tech/"
   name = "Tech"
+
+[[Languages.de.menu.main]]
+weight = 4
+name = "Rechtliches"
+
+  [[Languages.de.menu.main]]
+  parent = "Rechtliches"
+  weight = 1
+  url = "imprint/"
+  name = "Impressum"
+
+  [[Languages.de.menu.main]]
+  parent = "Rechtliches"
+  weight = 2
+  url = "privacy-policy/"
+  name = "Datenschutz"
+
+  [[Languages.de.menu.main]]
+  parent = "Rechtliches"
+  weight = 3
+  url = "terms-conditions/"
+  name = "AGB"

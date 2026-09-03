@@ -98,11 +98,11 @@
 
 <nav class="sidenav-menu flex-column justify-content-between">
   <ul class="w-100 accordion" id="accordionMenu">
-    {{ range site.Menus.main }}
-    {{ if .HasChildren }}
+    {{ range $i, $item := site.Menus.main }}
+    {{ if $item.HasChildren }}
     <li class="nav-item">
-      <a class="nav-link" href="#" type="button" data-toggle="collapse" data-target="#dropdown-menu-02">{{ .Name }}</a>
-      <ul id="dropdown-menu-02" class="collapse list-unstyled" data-parent="#accordionMenu">
+      <a class="nav-link" href="#" type="button" data-toggle="collapse" data-target="#dropdown-menu-{{ $i }}">{{ $item.Name }}</a>
+      <ul id="dropdown-menu-{{ $i }}" class="collapse list-unstyled" data-parent="#accordionMenu">
         {{ range .Children }}
         <li><a href="{{if .Pre}}{{if not $.IsHome}}{{site.BaseURL | relLangURL}}{{end}}{{.Pre}}{{ .URL }}{{else}}{{.URL | relLangURL}}{{end}}">{{ .Name }}</a></li>
         {{ end }}

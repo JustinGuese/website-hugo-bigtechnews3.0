@@ -77,7 +77,7 @@
   <div class="consent-check">
     <input class="consent-input" type="checkbox" id="{{ $id }}-consent" name="consent" value="yes" required>
     <label class="consent-label" for="{{ $id }}-consent">
-      {{ printf (i18n `consent_label`) (printf `<a href="%s">%s</a>` ("privacy" | relLangURL) (i18n `consent_link`)) | safeHTML }}
+      {{ printf (i18n `consent_label`) (printf `<a href="%s">%s</a>` ("privacy-policy" | relLangURL) (i18n `consent_link`)) | safeHTML }}
     </label>
   </div>
 
