@@ -100,6 +100,9 @@
 - id: rss_all
   translation: All
 
+- id: social_intro
+  translation: Also on
+
 - id: privacy
   translation: Privacy
 

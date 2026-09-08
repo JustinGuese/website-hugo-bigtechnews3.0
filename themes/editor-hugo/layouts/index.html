@@ -25,6 +25,19 @@
       </ul>
     </div>
     {{ end }}
+
+    {{ with site.Params.social }}
+    <div class="hero-social mt-3">
+      <p class="text-uppercase small mb-2">{{ i18n `social_intro` }}</p>
+      <ul class="list-inline mb-0">
+        {{ range . }}
+        {{ if ne .title "RSS" }}
+        <li class="list-inline-item"><a class="rss-pill" href="{{ .link }}" title="{{ .title }}"><i class="{{ .icon }}"></i> {{ .title }}</a></li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
   </div>
 </div>
 <div class="col-lg-8 col-xl-9">

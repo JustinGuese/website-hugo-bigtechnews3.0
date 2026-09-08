@@ -886,6 +886,9 @@ footer .newsletter-block {
     border: 1px solid rgba(43, 44, 46, 0.15); }
   .hero-brief .hero-rss {
     border-top: 1px solid rgba(43, 44, 46, 0.1); }
+  .hero-brief .hero-social {
+    border-top: 1px solid rgba(43, 44, 46, 0.1);
+    padding-top: 1rem; }
   .hero-brief .rss-pill {
     display: inline-block;
     padding: 3px 10px;
