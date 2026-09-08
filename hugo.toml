@@ -235,6 +235,11 @@ title = "X"
 icon = "fab fa-twitter" # Fontawesome icon pack : https://fontawesome.com/icons/
 link = "https://x.com/guesonex"
 
+[[params.social]]
+title = "LinkedIn"
+icon = "fab fa-linkedin" # Fontawesome icon pack : https://fontawesome.com/icons/
+link = "https://www.linkedin.com/company/brief-tech-news-com"
+
 # All other entries below were the theme's generic placeholder links (facebook.com,
 # instagram.com, github.com with no real handle) and are commented
 # out until real BriefTechNews social accounts exist.
