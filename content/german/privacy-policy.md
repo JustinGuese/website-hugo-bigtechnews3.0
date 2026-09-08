@@ -63,8 +63,8 @@ Germany
 DE345185498
 HRB 307721
 
-Email: info@Brief-Tech-News.com.com
-Website: https://www.Brief-Tech-News.com.com
+Email: info@brief-tech-news.com
+Website: https://brief-tech-news.com
 
 ## Third-Party AI Services
 

@@ -6,7 +6,7 @@ draft: false
 layout: 'about'
 
 name: 'BriefTechNews'
-email: 'hello@brieftechnews.com'
+email: 'info@brief-tech-news.com'
 image: 'images/logo.png'
 summary: 'A daily digest of what actually moved in AI, tech, crypto and fintech, assembled and written with AI, and reviewed before it publishes.'
 

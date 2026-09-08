@@ -236,6 +236,25 @@
       font-weight: 500;
     }
 
+    /* Quiet on purpose: it is the alternative to the thing this page is for,
+       so it must not read as a second call to action competing with the
+       button directly above it. */
+    .lp-more {
+      margin: 2rem 0 0;
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    .lp-more a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+
+    .lp-more a:hover,
+    .lp-more a:focus {
+      color: var(--paper);
+    }
+
     .lp-foot {
       margin: 4rem 0 0;
       padding-top: 1.5rem;
@@ -531,6 +550,20 @@
       <h2>Start tomorrow morning</h2>
       {{ partial "subscribe-form.html" (dict "id" "lp-foot" "variant" "modal" "beats" false) }}
     </section>
+
+    {{- /* The one way out of this page, and it is placed AFTER both forms on
+           purpose. The header was removed so the only thing above the fold is
+           the offer; a reader who has scrolled past two forms without
+           subscribing is not going to, and sending them to the archive is
+           better than sending them back to the feed they came from.
+
+           It opens in a new tab so this page survives the click. On an ad
+           landing page that is the difference between "read a few, came back,
+           subscribed" and a click that is simply gone. */ -}}
+    <p class="lp-more">
+      Want to see more? <a href="{{ `` | relLangURL }}" target="_blank" rel="noopener">Read the full archive</a> —
+      <span class="lp-fig">{{ $count }}</span> issues, free, no signup needed.
+    </p>
 
     <footer class="lp-foot">
       <a href="{{ `privacy-policy` | relLangURL }}">Privacy</a>

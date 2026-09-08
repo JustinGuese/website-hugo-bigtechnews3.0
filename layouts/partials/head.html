@@ -1,0 +1,62 @@
+<meta charset="utf-8">
+<title>{{ .Title }}</title>
+
+<!-- mobile responsive meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="description" content="{{ with .Params.Description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}">
+{{ with site.Params.author }}
+<meta name="author" content="{{ . }}">{{ end }}
+
+<meta name="theme-name" content="editor-hugo" />
+
+{{- /* max-image-preview:large is what lets Google Discover (and standard search's
+       large-image results) show a full-width preview of the page's image -- without
+       it Google defaults to a small or no thumbnail. Covers are already rendered at
+       1200x630 for exactly this. */ -}}
+<meta name="robots" content="max-image-preview:large">
+
+{{- /* Meta domain verification. Rendered statically and unconditionally, on
+       every page rather than only the home page: the crawler is told to check
+       the home page, but it also re-checks after any change, and a tag that
+       exists on exactly one URL is one redesign away from disappearing without
+       anyone noticing until attribution stops.
+
+       It is NOT behind the consent banner, and that is correct -- it sets no
+       cookie, reads nothing, and identifies the site rather than the visitor.
+       It also must not move into the pixel loader: verification fails if the
+       tag arrives via JavaScript. Without this, Aggregated Event Measurement
+       cannot be configured and iOS conversions go unattributed. */ -}}
+{{- with site.Params.meta.domain_verification }}
+<meta name="facebook-domain-verification" content="{{ . }}" />
+{{- end }}
+
+<!--Favicon-->
+<link rel="shortcut icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+<link rel="icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+
+<!-- multilingual SEO optimizations -->
+{{- /* Google requires hreflang href values to be absolute -- RelPermalink silently
+       produces a tag Google ignores, which is the same as not having one.
+       .AllTranslations already includes the current language version alongside its
+       siblings, which is what Google's hreflang spec wants (every version lists
+       itself too) -- adding a separate self link here would just duplicate it. */ -}}
+{{ if .IsTranslated }}
+{{ range .Page.AllTranslations }}
+<link rel="alternate" title="{{ .Title }}" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+{{ end }}
+{{ end }}
+
+{{- /* RSS discovery. .OutputFormats carries "rss" on the home page, every section
+       and every taxonomy term -- so this alone links a category page's own
+       /categories/ai/index.xml, not just the site-wide feed, with no extra logic. */ -}}
+{{ with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+{{ end }}
+
+{{ with .Params.image }}
+<meta property="og:image" content="{{ . | absURL }}" />
+{{ end }}
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/google_analytics.html" . }}
+{{ partial "meta-pixel.html" . }}
+{{ site.Params.custom_script | safeHTML }}

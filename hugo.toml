@@ -18,6 +18,9 @@ defaultContentLanguageInSubdir = false
 disableLanguages = [
 ] # example: ["de"] for disable german language. see https://gohugo.io/content-management/multilingual/
 hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/Korean Languages in the content. see: https://gohugo.io/getting-started/configuration/#hascjklanguage
+# Hugo does not write robots.txt unless told to -- without this the URL 404s and nothing
+# declares where the sitemap lives, even though /sitemap.xml itself serves fine.
+enableRobotsTXT = true
 
 
 ########################### Services #############################
@@ -107,7 +110,7 @@ description = "Daily engineering-focused digests across AI, tech, crypto and fin
 # contact info
 # address = "9567 Turner Trace Apt. BC C3G8A4" # template placeholder, not a real address
 # mobile = "+211234565523" # template placeholder, not a real number
-email = "hello@brieftechnews.com"
+email = "info@brief-tech-news.com"
 # contact form action
 contact_form_action = "#" # contact form works with https://formspree.io
 # Search
@@ -217,18 +220,28 @@ sidebar = ["subscription", "about-me", "recent-post", "categories", "tags"]
 # available widget : search,about-me,authors,categories,tags,recent-post,social,promotion,subscription
 
 ############################# social site ########################
-# All entries below were the theme's generic placeholder links (facebook.com,
-# twitter.com, instagram.com, github.com with no real handle) and are commented
+[[params.social]]
+title = "RSS"
+icon = "fas fa-rss" # Fontawesome icon pack : https://fontawesome.com/icons/
+link = "https://brief-tech-news.com/index.xml"
+
+[[params.social]]
+title = "Telegram"
+icon = "fab fa-telegram" # Fontawesome icon pack : https://fontawesome.com/icons/
+link = "https://t.me/BriefTechNews"
+
+[[params.social]]
+title = "X"
+icon = "fab fa-twitter" # Fontawesome icon pack : https://fontawesome.com/icons/
+link = "https://x.com/guesonex"
+
+# All other entries below were the theme's generic placeholder links (facebook.com,
+# instagram.com, github.com with no real handle) and are commented
 # out until real BriefTechNews social accounts exist.
 # [[params.social]]
 # title = "Facebook"
 # icon = "fab fa-facebook" # Fhemify icon : https://themify.me/themify-icons
 # link = "https://facebook.com"
-
-# [[params.social]]
-# title = "Twitter"
-# icon = "fab fa-twitter" # Fhemify icon : https://themify.me/themify-icons
-# link = "https://twitter.com"
 
 # [[params.social]]
 # title = "Instagram"

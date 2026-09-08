@@ -4,7 +4,7 @@ description: 'this is meta description'
 draft: false
 ---
 
-Brief-Tech-News.com.com
+brief-tech-news.com
 
 an app / software by
 
@@ -22,4 +22,4 @@ DE345185498
 
 HRB 307721
 
-info@Brief-Tech-News.com.com
+info@brief-tech-news.com

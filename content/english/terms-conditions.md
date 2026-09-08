@@ -29,7 +29,7 @@ Germany
 DE345185498
 HRB 307721
 
-**Owner contact email:** info@Brief-Tech-News.com.com
+**Owner contact email:** info@brief-tech-news.com
 
 **What the User should know at a glance**
 
