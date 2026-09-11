@@ -100,7 +100,7 @@ link = "plugins/search/search.js"
 
 #################### default parameters ################################
 [params]
-favicon = "images/logo-sm.svg"
+favicon = "images/favicon.png"
 logo_text = "BriefTechNews"
 logo = "images/logo.png"
 logo_height = "26px"
