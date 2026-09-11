@@ -228,7 +228,7 @@
 				}).get().join(',');
 
 				$submit.prop('disabled', true);
-				$status.removeClass('text-danger').text('');
+				$status.removeClass('text-danger subscribe-status--success').text('');
 
 				// Generated before the request so the pixel below and the
 				// server both report this one action under the same id.
@@ -271,7 +271,7 @@
 								content_name: 'BriefTechNews Daily Digest'
 							}, { eventID: id });
 						}
-						$status.text($form.data('msg-pending'));
+						$status.addClass('subscribe-status--success').text($form.data('msg-pending'));
 						$email.val('').prop('disabled', true);
 						$submit.prop('disabled', true);
 						$form.find('.beat-input, .consent-input').prop('disabled', true);

@@ -58,6 +58,40 @@
     &.text-danger {
       color: #c0392b !important;
     }
+
+    // Confirmation text alone reads as filler copy next to a form that just
+    // went quiet (inputs disabled, button greyed out) -- wrap it as a visible
+    // block with its own check mark so "it worked, go check your inbox" is
+    // the loudest thing on screen, not the smallest.
+    &.subscribe-status--success {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 11px 14px;
+      border: 1px solid rgba(#1e7e45, 0.3);
+      border-radius: 4px;
+      background: rgba(#1e7e45, 0.1);
+      color: #1e7e45 !important;
+      font-weight: 600;
+      line-height: 1.4;
+
+      &::before {
+        content: '\2713';
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+        border-radius: 50%;
+        background: #1e7e45;
+        color: $white;
+        font-size: 11px;
+        font-weight: 700;
+      }
+    }
   }
 }
 

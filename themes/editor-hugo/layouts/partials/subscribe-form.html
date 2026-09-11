@@ -9,19 +9,20 @@
   sidebar's "Crypto" chip toggle the footer's instead -- the labels bind to the
   first matching id in the document, not the nearest one.
 
-  `variant` changes density and the shape of the submit control only
-  ("compact" for the narrow hero and sidebar columns, "modal" for the
-  exit-intent dialog, which gets a full-width labelled button because it is the
-  one action on the screen). The consent box is never optional: it is the legal
+  `variant` changes density and the shape of the email field only ("compact"
+  for the narrow hero and sidebar columns puts it in an input-group with an
+  inline icon button, "modal" gives the exit-intent dialog a plain full-width
+  field since it's the one field visible in the dialog). Every variant gets
+  the same full-width labelled button below the consent box -- without it the
+  form has no visible end and whatever renders next on the page reads as if
+  it belonged to the form. The consent box is never optional: it is the legal
   basis for mailing at all.
 
-  `beats` may be set false to drop the topic picker, and the homepage hero is
-  the only caller that does. Its chips would otherwise sit directly above the
-  "Prefer RSS? Subscribe by beat" row, which is the same pill in the same
-  colours doing something completely different -- one is a form control, the
-  other a link to a feed. Everywhere the picker does appear it is the full set,
-  because a form that offers fewer choices in one place than another teaches
-  people to expect the shorter one.
+  `beats` may be set false to drop the topic picker. Only the landing page in
+  brief.html does this, and for reasons specific to that page (see the
+  comment there) -- everywhere else the picker is the full set, because a
+  form that offers fewer choices in one place than another teaches people to
+  expect the shorter one.
 
   The beats come from data/categories.yaml, the same file the homepage strip
   and the RSS row read, so a new beat appears here by being published rather
@@ -81,9 +82,11 @@
     </label>
   </div>
 
-  {{ if eq $variant "modal" }}
+  {{/* A button below the consent box, not just the inline paper-plane icon in
+       the input group above -- without it the form has no visible end, and
+       whatever widget happens to render next (About Me, in the sidebar) reads
+       as if its heading were this form's submit control. */}}
   <button type="submit" class="subscribe-submit-block">{{ i18n `subscribe_cta_long` }}</button>
-  {{ end }}
 
   <p class="subscribe-status small mb-0" role="status" aria-live="polite"></p>
 </form>
