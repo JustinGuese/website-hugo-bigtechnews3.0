@@ -1,0 +1,33 @@
+{{- /*
+  Google Ads base tag, defined but deliberately NOT started.
+
+  Mirrors meta-pixel.html: this partial only declares window.btnLoadGoogleAds().
+  Calling it is the consent banner's job (see script.html), and it stays split
+  from its trigger for the same reason the pixel loader is -- the banner is the
+  one place the stored consent choice is read, so a refusal only has to be
+  honoured once.
+
+  conversion_id is public by design: it is compiled into every page that loads
+  the tag, so it lives in hugo.toml rather than a secret. Empty means the site
+  sends no Google Ads conversions and this partial emits nothing.
+
+  `btnGoogleAdsLoaded` guards against a second call, the same as
+  `btnPixelLoaded` -- the banner calls this on page load, and Accept can arrive
+  afterwards on the same page.
+*/ -}}
+{{- with site.Params.google_ads.conversion_id }}
+<script>
+  window.btnLoadGoogleAds = function () {
+    if (window.btnGoogleAdsLoaded) { return; }
+    window.btnGoogleAdsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id={{ . }}';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  };
+</script>
+{{- end }}

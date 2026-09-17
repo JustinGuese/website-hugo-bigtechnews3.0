@@ -199,6 +199,19 @@ pixel_id = "995037776892621"
 # to anyone who asks, which is the entire point of it.
 domain_verification = "66gjaw2oxbdxz1vl7o0x6g2ez3t6h5"
 
+# Google Ads conversion tag. Public by design, like the Meta pixel above -- it
+# is compiled into every page that loads the tag, and only ever started after
+# the consent banner below is accepted (see google-ads.html / script.html).
+# subscribe_conversion_label is the id after the slash in a conversion
+# action's "send_to" (Google Ads > Goals > Conversions > + New conversion
+# action > Website > name it, e.g. "Newsletter Subscribe" > category Sign-up).
+# Empty means no conversion event fires at all -- the same kill switch
+# pixel_id above follows, not a dry-run flag: fill it in once the conversion
+# action exists and it goes live on the next deploy, no code change needed.
+[params.google_ads]
+conversion_id = "AW-18457037102"
+subscribe_conversion_label = ""
+
 # Marketing-consent banner. Now load-bearing rather than decorative: it is the
 # only thing that starts the pixel, and the answer is sent on to the funnel API
 # so the server-side conversion honours it too.

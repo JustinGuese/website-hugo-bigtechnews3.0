@@ -74,6 +74,9 @@
 		if (choice !== 'rejected' && typeof window.btnLoadPixel === 'function') {
 			window.btnLoadPixel();
 		}
+		if (choice !== 'rejected' && typeof window.btnLoadGoogleAds === 'function') {
+			window.btnLoadGoogleAds();
+		}
 
 		if (choice) { return; }
 

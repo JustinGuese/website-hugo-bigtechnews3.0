@@ -271,6 +271,17 @@
 								content_name: 'BriefTechNews Daily Digest'
 							}, { eventID: id });
 						}
+						// Same "first time only" guard as the pixel above, and the
+						// same reason: gtag only exists once the consent banner has
+						// loaded it, so an untyped check would just silently no-op --
+						// this also requires the conversion label, which stays empty
+						// (see hugo.toml) until the conversion action exists in the
+						// Google Ads UI.
+						var adsId = $form.data('google-ads-id');
+						var adsLabel = $form.data('google-ads-label');
+						if (!subscribedBefore && typeof gtag === 'function' && adsId && adsLabel) {
+							gtag('event', 'conversion', { send_to: adsId + '/' + adsLabel });
+						}
 						$status.addClass('subscribe-status--success').text($form.data('msg-pending'));
 						$email.val('').prop('disabled', true);
 						$submit.prop('disabled', true);

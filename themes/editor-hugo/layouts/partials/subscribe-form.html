@@ -38,6 +38,8 @@
 {{ with site.Params.subscription }}
 <form class="subscribe-form subscribe-form--{{ $variant }}"
   data-subscribe-endpoint="{{ .endpoint }}/{{ .site_key }}/{{ .list_key }}"
+  data-google-ads-id="{{ site.Params.google_ads.conversion_id }}"
+  data-google-ads-label="{{ site.Params.google_ads.subscribe_conversion_label }}"
   data-msg-pending="{{ i18n `subscribe_pending` }}"
   data-msg-invalid="{{ i18n `subscribe_invalid` }}"
   data-msg-error="{{ i18n `subscribe_error` }}"
