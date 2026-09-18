@@ -1,0 +1,50 @@
+{{/*
+  One beat's landing page: /categories/<slug>/.
+
+  The newsletter's "Also out today" and "Forwarded to you?" links point here,
+  so this is the page a reader sees when deciding whether a beat is worth a
+  second email a day. It leads with what the beat is and a form with that beat
+  already ticked, and the post cards below it are the example issues -- the
+  thing a sign-up page otherwise has to describe.
+
+  A category that is not a subscribable beat (markets) has no entry in
+  data/categories.yaml and falls back to the plain card grid it always had:
+  offering a form for a beat the funnel's allow-list would drop is a sign-up
+  that silently subscribes to nothing.
+*/}}
+{{ define "main" }}
+{{ $slug := .Data.Term | urlize }}
+{{ $beat := false }}
+{{ range where site.Data.categories "slug" $slug }}{{ $beat = . }}{{ end }}
+
+{{ with $beat }}
+{{ $blurb := .blurb }}
+{{ if and (eq site.Language.Lang "de") .blurb_de }}{{ $blurb = .blurb_de }}{{ end }}
+<section class="col-12 beat-landing">
+  <div class="beat-landing-inner my-4 py-4">
+    <p class="beat-landing-eyebrow">{{ i18n "beat_landing_eyebrow" }}</p>
+    <h1 class="beat-landing-title">{{ printf (i18n "beat_landing_title") .name }}</h1>
+    <p class="beat-landing-blurb">{{ $blurb }}</p>
+    <p class="beat-landing-cadence small">{{ i18n "beat_landing_cadence" }}</p>
+    <div class="beat-landing-form">
+      {{ partial "subscribe-form.html" (dict "id" "beat" "variant" "compact" "topic" .slug) }}
+    </div>
+  </div>
+</section>
+<section class="col-12">
+  <h2 class="h5 beat-landing-examples">{{ printf (i18n "beat_landing_examples") .name }}</h2>
+</section>
+{{ else }}
+{{ partial "page-header.html" . }}
+{{ end }}
+
+<div class="col-12">
+  <div class="row">
+    {{ range .Data.Pages }}
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      {{ .Render "article" }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

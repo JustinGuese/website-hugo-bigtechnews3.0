@@ -33,17 +33,22 @@
 {{- $id := .id | default "subscribe" -}}
 {{- $variant := .variant | default "default" -}}
 {{- $beats := site.Data.categories -}}
+{{- /* `topic` pre-ticks one beat instead of "Everything" -- the beat landing
+       pages (layouts/categories/term.html) pass their own slug. */ -}}
+{{- $topic := .topic | default "" -}}
 {{- if eq .beats false }}{{ $beats = slice }}{{ end -}}
 {{ if site.Params.subscription.enable }}
 {{ with site.Params.subscription }}
 <form class="subscribe-form subscribe-form--{{ $variant }}"
   data-subscribe-endpoint="{{ .endpoint }}/{{ .site_key }}/{{ .list_key }}"
+  data-sender="{{ .sender }}"
   data-google-ads-id="{{ site.Params.google_ads.conversion_id }}"
   data-google-ads-label="{{ site.Params.google_ads.subscribe_conversion_label }}"
   data-msg-pending="{{ i18n `subscribe_pending` }}"
   data-msg-invalid="{{ i18n `subscribe_invalid` }}"
   data-msg-error="{{ i18n `subscribe_error` }}"
-  data-msg-consent="{{ i18n `consent_required` }}" novalidate>
+  data-msg-consent="{{ i18n `consent_required` }}"
+  data-msg-typo="{{ i18n `subscribe_typo_hint` }}" novalidate>
 
   {{ if eq $variant "modal" }}
   <input type="email" name="email" id="{{ $id }}-email" class="form-control subscribe-email-block"
@@ -60,6 +65,10 @@
   </div>
   {{ end }}
 
+  {{/* Hidden until script.js's typo check fires. Never blocks submission --
+       it is a suggestion the visitor can click, not a validator. */}}
+  <p class="subscribe-typo-hint small" hidden></p>
+
   {{ with $beats }}
   <fieldset class="beat-picker">
     <legend class="beat-picker-legend">{{ i18n `beats_legend` }}</legend>
@@ -67,10 +76,10 @@
       {{/* Checked by default, so the shortest path through the form is an
            address and the consent box. An empty selection and a full one both
            mean "send everything", and the API stores them identically. */}}
-      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-all" name="topics" value="all" checked>
+      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-all" name="topics" value="all"{{ if not $topic }} checked{{ end }}>
       <label class="beat-chip beat-chip--all" for="{{ $id }}-beat-all">{{ i18n `beats_all` }}</label>
       {{ range . }}
-      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-{{ .slug }}" name="topics" value="{{ .slug }}">
+      <input class="beat-input" type="checkbox" id="{{ $id }}-beat-{{ .slug }}" name="topics" value="{{ .slug }}"{{ if eq .slug $topic }} checked{{ end }}>
       <label class="beat-chip" for="{{ $id }}-beat-{{ .slug }}">{{ .name }}</label>
       {{ end }}
     </div>
@@ -91,6 +100,26 @@
   <button type="submit" class="subscribe-submit-block">{{ i18n `subscribe_cta_long` }}</button>
 
   <p class="subscribe-status small mb-0" role="status" aria-live="polite"></p>
+
+  {{/* Hidden until a successful submit. script.js fills in the email span,
+       shows/points the inbox button at the provider it can recognise from the
+       typed domain (Gmail/Outlook/Yahoo/GMX/web.de -- see openInboxUrl()),
+       and adds "is-done" to the form to hide the fields above via CSS rather
+       than disabling+greying them in place, which read as "broken" more than
+       "done". The edit link removes that class and hands focus back to the
+       email field with whatever was typed still in it -- the field is never
+       cleared on success, only visually hidden. */}}
+  <div class="subscribe-done" hidden>
+    <p class="subscribe-done-headline">{{ i18n `subscribe_done_headline` }}</p>
+    <p class="subscribe-done-body">
+      {{ printf (i18n `subscribe_done_body`) `<strong class="subscribe-done-email"></strong>` | safeHTML }}
+    </p>
+    <p class="subscribe-done-spam small">{{ i18n `subscribe_done_spam` }}</p>
+    <a class="subscribe-done-open" href="#" target="_blank" rel="noopener" hidden>
+      {{ i18n `subscribe_done_open` }}
+    </a>
+    <button type="button" class="subscribe-done-edit">{{ i18n `subscribe_done_edit` }}</button>
+  </div>
 </form>
 {{ end }}
 {{ end }}

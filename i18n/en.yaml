@@ -94,6 +94,24 @@
 - id: subscribe_error
   translation: Something went wrong. Try again in a moment.
 
+- id: subscribe_done_headline
+  translation: One last step.
+
+- id: subscribe_done_body
+  translation: We sent a confirmation link to %s. You won't get anything until you click it.
+
+- id: subscribe_done_spam
+  translation: Not there within a minute? Check Spam or Promotions and search for Brief Tech News.
+
+- id: subscribe_done_open
+  translation: Open my inbox
+
+- id: subscribe_done_edit
+  translation: Wrong address? Change it
+
+- id: subscribe_typo_hint
+  translation: Did you mean %s?
+
 - id: rss_intro
   translation: Prefer RSS? Subscribe by beat
 
@@ -161,3 +179,15 @@
 
 - id: consent_banner_reject
   translation: Reject
+
+- id: beat_landing_eyebrow
+  translation: The BriefTechNews beats
+
+- id: beat_landing_title
+  translation: The %s brief
+
+- id: beat_landing_cadence
+  translation: One short email each weekday. Free, and you can drop it from any issue in one click.
+
+- id: beat_landing_examples
+  translation: Recent %s briefs

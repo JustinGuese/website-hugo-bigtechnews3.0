@@ -193,6 +193,120 @@
 	}
 	beatPickers();
 
+	// Links from the newsletter land here carrying their intent in the query:
+	// `?topic=devops` pre-ticks that beat (the "+ Add"/"Forwarded to you?"
+	// links name one), `?subscribe=1` brings the first form into view and
+	// focuses it. A topic the picker does not offer is ignored rather than
+	// guessed at -- the chips are the allow-list the API also enforces.
+	function prefillFromQuery() {
+		var params = new URLSearchParams(window.location.search);
+		var topic = (params.get('topic') || '').toLowerCase();
+		if (topic) {
+			$('.subscribe-form').each(function () {
+				var $beat = $(this).find('.beat-input[value="' + topic.replace(/[^a-z0-9-]/g, '') + '"]');
+				if ($beat.length) {
+					$(this).find('.beat-input').prop('checked', false);
+					$beat.prop('checked', true);
+				}
+			});
+		}
+		if (params.get('subscribe') === '1') {
+			var $email = $('.subscribe-form input[name="email"]').filter(':visible').first();
+			if ($email.length) {
+				$email[0].scrollIntoView({ block: 'center' });
+				$email.trigger('focus');
+			}
+		}
+	}
+	prefillFromQuery();
+
+	// First-touch UTM tags, kept for the session so a reader who arrives from a
+	// forwarded issue and signs up two pages later is still counted as one.
+	// The funnel lifts these into their own columns (attribution.TRACKING_FIELDS),
+	// which is what makes `utm_source=forward` signups countable at all.
+	var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+	var STORE_UTM = 'btn-utm';
+	function utmTags() {
+		var params = new URLSearchParams(window.location.search);
+		var fresh = {};
+		UTM_KEYS.forEach(function (key) {
+			if (params.get(key)) { fresh[key] = params.get(key).slice(0, 200); }
+		});
+		try {
+			if (Object.keys(fresh).length) {
+				sessionStorage.setItem(STORE_UTM, JSON.stringify(fresh));
+				return fresh;
+			}
+			return JSON.parse(sessionStorage.getItem(STORE_UTM) || '{}');
+		} catch (e) {
+			return fresh;
+		}
+	}
+	utmTags();
+
+	// Recognised inbox providers only -- anything else gets no button rather
+	// than a guessed webmail URL that might not even exist for that domain.
+	// Gmail's is a pre-filled search so the confirmation surfaces even if it
+	// landed in Promotions, which a bare inbox link would not do.
+	var INBOX_URLS = {
+		'gmail.com': 'https://mail.google.com/mail/u/0/#search/from%3Ainfo%40brief-tech-news.com+in%3Aanywhere',
+		'googlemail.com': 'https://mail.google.com/mail/u/0/#search/from%3Ainfo%40brief-tech-news.com+in%3Aanywhere',
+		'outlook.com': 'https://outlook.live.com/mail/0/inbox',
+		'hotmail.com': 'https://outlook.live.com/mail/0/inbox',
+		'live.com': 'https://outlook.live.com/mail/0/inbox',
+		'yahoo.com': 'https://mail.yahoo.com/',
+		'yahoo.de': 'https://mail.yahoo.com/',
+		'gmx.de': 'https://www.gmx.net/mail/',
+		'gmx.net': 'https://www.gmx.net/mail/',
+		'web.de': 'https://web.de/mail/'
+	};
+
+	function openInboxUrl(email) {
+		var domain = (email.split('@')[1] || '').trim().toLowerCase();
+		return INBOX_URLS[domain] || null;
+	}
+
+	// Domains a typo check is worth running against. Short on purpose: this
+	// is a suggestion, never a block, and a longer list starts matching
+	// genuinely different providers as "close" to the wrong one.
+	var KNOWN_DOMAINS = [
+		'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com',
+		'yahoo.com', 'icloud.com', 'gmx.de', 'web.de', 't-online.de'
+	];
+
+	// Iterative Levenshtein distance. Domain labels only -- short enough that
+	// the O(m*n) table is nothing to worry about.
+	function editDistance(a, b) {
+		var m = a.length, n = b.length, i, j;
+		var d = [];
+		for (i = 0; i <= m; i++) { d[i] = [i]; }
+		for (j = 0; j <= n; j++) { d[0][j] = j; }
+		for (i = 1; i <= m; i++) {
+			for (j = 1; j <= n; j++) {
+				var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+				d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+			}
+		}
+		return d[m][n];
+	}
+
+	// A close-but-not-exact match against KNOWN_DOMAINS, or null. Distance <=
+	// 2 catches "gmial.com"/"gmail.co" without flagging domains that are
+	// genuinely different -- tighter and it misses real typos, looser and
+	// "gmx.de" starts suggesting "gmail.com".
+	function suggestDomain(email) {
+		var at = email.indexOf('@');
+		if (at < 0) { return null; }
+		var domain = email.slice(at + 1).trim().toLowerCase();
+		if (!domain || KNOWN_DOMAINS.indexOf(domain) !== -1) { return null; }
+		var best = null, bestDist = 3;
+		for (var i = 0; i < KNOWN_DOMAINS.length; i++) {
+			var dist = editDistance(domain, KNOWN_DOMAINS[i]);
+			if (dist > 0 && dist < bestDist) { bestDist = dist; best = KNOWN_DOMAINS[i]; }
+		}
+		return best ? email.slice(0, at + 1) + best : null;
+	}
+
 	// subscribe form -- posts to the funnel API's JSON list endpoint, which
 	// always answers with {ok:true} and never redirects, so the page is
 	// updated in place rather than navigated. `topics` goes over as one
@@ -205,7 +319,45 @@
 			var $email = $form.find('input[name="email"]');
 			var $consent = $form.find('.consent-input');
 			var $submit = $form.find('button[type="submit"]');
+			var $typoHint = $form.find('.subscribe-typo-hint');
+			var $done = $form.find('.subscribe-done');
 			var endpoint = $form.data('subscribe-endpoint');
+
+			// A suggestion, never a gate: it shows on blur (not every
+			// keystroke, which would flicker mid-type) and a click on it
+			// fills in the corrected address without submitting anything.
+			$email.on('blur', function () {
+				var suggestion = suggestDomain(($email.val() || '').trim());
+				if (!suggestion) {
+					$typoHint.attr('hidden', true).empty();
+					return;
+				}
+				var template = $form.data('msg-typo') || '';
+				var $link = $('<button type="button" class="subscribe-typo-fix"></button>').text(suggestion);
+				$typoHint.empty().removeAttr('hidden');
+				// The template is "Did you mean %s?" -- split on the one
+				// placeholder so the suggestion can be a real clickable
+				// element rather than text the visitor has to retype.
+				var parts = template.split('%s');
+				$typoHint.append(document.createTextNode(parts[0] || ''));
+				$typoHint.append($link);
+				$typoHint.append(document.createTextNode(parts[1] || ''));
+				$link.on('click', function () {
+					$email.val(suggestion);
+					$typoHint.attr('hidden', true).empty();
+					$email.trigger('focus');
+				});
+			});
+
+			// "Wrong address? Change it" -- the field was never cleared on
+			// success (see the success branch below), so restoring it is
+			// just undoing the CSS state, not rebuilding the form.
+			$done.find('.subscribe-done-edit').on('click', function () {
+				$form.removeClass('is-done');
+				$form.find('.beat-input, .consent-input').prop('disabled', false);
+				$submit.prop('disabled', false);
+				$email.prop('disabled', false).trigger('focus');
+			});
 
 			$form.on('submit', function (e) {
 				e.preventDefault();
@@ -247,7 +399,7 @@
 				fetch(endpoint, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({
+					body: JSON.stringify($.extend({}, utmTags(), {
 						email: email,
 						topics: topics,
 						consent: $consent.prop('checked') ? 'yes' : '',
@@ -256,7 +408,7 @@
 						fbp: consented ? cookie('_fbp') : '',
 						fbc: consented ? clickId() : '',
 						ads_consent: consented ? 'yes' : ''
-					})
+					}))
 				}).then(function (res) {
 					if (res.ok) {
 						// The API answers identically whether the address was
@@ -282,10 +434,27 @@
 						if (!subscribedBefore && typeof gtag === 'function' && adsId && adsLabel) {
 							gtag('event', 'conversion', { send_to: adsId + '/' + adsLabel });
 						}
+						// The status line stays (screen readers already announce
+						// it via aria-live) but the done panel is the visible
+						// surface now: it names the actual address typed and
+						// says what has to happen next, rather than one line
+						// easy to read as "you're finished".
 						$status.addClass('subscribe-status--success').text($form.data('msg-pending'));
-						$email.val('').prop('disabled', true);
+						$done.find('.subscribe-done-email').text(email);
+						var inboxUrl = openInboxUrl(email);
+						var $open = $done.find('.subscribe-done-open');
+						if (inboxUrl) {
+							$open.attr('href', inboxUrl).removeAttr('hidden');
+						} else {
+							$open.attr('hidden', true);
+						}
+						$typoHint.attr('hidden', true).empty();
+						// The field is deliberately NOT cleared -- "Wrong
+						// address? Change it" restores exactly what was typed.
+						$email.prop('disabled', true);
 						$submit.prop('disabled', true);
 						$form.find('.beat-input, .consent-input').prop('disabled', true);
+						$form.addClass('is-done');
 						remember(STORE_SUBSCRIBED, '1');
 					} else if (res.status === 422) {
 						$status.addClass('text-danger').text($form.data('msg-invalid'));

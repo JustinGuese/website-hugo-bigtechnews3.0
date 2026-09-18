@@ -95,6 +95,123 @@
   }
 }
 
+// Typo suggestion on the email field. A hint, never a gate -- see
+// suggestDomain() in script.js -- so it reads as a small aside rather than a
+// validation error: no red, no icon, just an underlined clickable domain.
+.subscribe-typo-hint {
+  margin: 6px 0 0;
+  color: $gray;
+  font-size: 12px;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.subscribe-typo-fix {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $primary-color;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+// The post-signup panel. `.subscribe-form.is-done` hides the fields above it
+// (input, beat picker, consent, submit) rather than leaving them visible and
+// disabled -- a form that has gone quiet reads as broken, a form that has
+// been replaced by "here's what to do next" reads as finished.
+.subscribe-form.is-done {
+  .input-group,
+  .subscribe-email-block,
+  .beat-picker,
+  .consent-check,
+  .subscribe-submit-block,
+  .subscribe-typo-hint {
+    display: none;
+  }
+}
+
+.subscribe-done {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba($primary-color, 0.3);
+  border-radius: 4px;
+  background: rgba($primary-color, 0.07);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.subscribe-done-headline {
+  margin: 0 0 4px;
+  color: $dark;
+  font-family: $secondary-font;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.subscribe-done-body {
+  margin: 0;
+  color: $gray;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.subscribe-done-email {
+  color: $dark;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.subscribe-done-spam {
+  margin: 8px 0 0;
+  color: $gray;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.subscribe-done-open {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: 3px;
+  background: $primary-color;
+  color: $white;
+  font-family: $secondary-font;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+
+  &:hover {
+    background: $dark;
+    color: $white;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.subscribe-done-edit {
+  display: block;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $gray;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark;
+  }
+}
+
 .beat-picker {
   border: 0;
   padding: 0;
@@ -421,4 +538,45 @@ body.newsletter-modal-open {
       text-decoration: none;
     }
   }
+}
+
+// One beat's landing page (layouts/categories/term.html) -- where the
+// newsletter's "Also out today" and "Forwarded to you?" links land. Quiet on
+// purpose: the eyebrow + display title is the site's own section-header
+// language, and the form is the only filled element on the screen.
+.beat-landing-inner {
+  max-width: 640px;
+  border-bottom: 1px solid rgba($dark, 0.1);
+}
+
+.beat-landing-eyebrow {
+  margin-bottom: 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $primary-color;
+}
+
+.beat-landing-title {
+  margin-bottom: 0.75rem;
+  font-family: $secondary-font;
+}
+
+.beat-landing-blurb {
+  font-size: 1.1rem;
+  color: $dark;
+}
+
+.beat-landing-cadence {
+  color: $gray;
+}
+
+.beat-landing-form {
+  margin-top: 1.25rem;
+}
+
+.beat-landing-examples {
+  margin: 0.5rem 0 1.5rem;
+  color: $gray;
 }

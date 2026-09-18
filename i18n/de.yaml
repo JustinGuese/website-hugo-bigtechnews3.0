@@ -94,6 +94,24 @@
 - id: subscribe_error
   translation: Da ist etwas schiefgelaufen. Bitte versuchen Sie es gleich noch einmal.
 
+- id: subscribe_done_headline
+  translation: Fast geschafft.
+
+- id: subscribe_done_body
+  translation: Wir haben einen Bestätigungslink an %s gesendet. Sie erhalten nichts, bis Sie ihn anklicken.
+
+- id: subscribe_done_spam
+  translation: Nach einer Minute nichts da? Prüfen Sie Spam oder Werbung und suchen Sie nach Brief Tech News.
+
+- id: subscribe_done_open
+  translation: Postfach öffnen
+
+- id: subscribe_done_edit
+  translation: Falsche Adresse? Ändern
+
+- id: subscribe_typo_hint
+  translation: Meinten Sie %s?
+
 - id: rss_intro
   translation: Lieber RSS? Abonnieren Sie nach Thema
 
@@ -162,3 +180,15 @@
 
 - id: consent_banner_reject
   translation: Ablehnen
+
+- id: beat_landing_eyebrow
+  translation: Die BriefTechNews-Themen
+
+- id: beat_landing_title
+  translation: Der %s-Brief
+
+- id: beat_landing_cadence
+  translation: Eine kurze E-Mail pro Werktag. Kostenlos, und mit einem Klick in jeder Ausgabe abbestellbar.
+
+- id: beat_landing_examples
+  translation: Aktuelle %s-Briefs

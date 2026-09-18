@@ -394,6 +394,54 @@
       color: hsl(15, 85%, 68%) !important;
     }
 
+    /* The typo hint and the post-signup panel, recoloured for this canvas the
+       same way the consent bar below is: markup and behaviour untouched,
+       only the palette swapped from the site's light tokens to this page's
+       dark ones. */
+    .lp .subscribe-typo-hint {
+      color: var(--muted);
+    }
+
+    .lp .subscribe-typo-fix {
+      color: var(--paper);
+    }
+
+    .lp .subscribe-done {
+      border-color: rgba(243, 241, 246, 0.22);
+      background: var(--surface);
+    }
+
+    .lp .subscribe-done-headline {
+      color: var(--paper);
+    }
+
+    .lp .subscribe-done-body,
+    .lp .subscribe-done-spam {
+      color: var(--muted);
+    }
+
+    .lp .subscribe-done-email {
+      color: var(--paper);
+    }
+
+    .lp .subscribe-done-open {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .lp .subscribe-done-open:hover {
+      background: var(--focus);
+      color: var(--ink);
+    }
+
+    .lp .subscribe-done-edit {
+      color: var(--muted);
+    }
+
+    .lp .subscribe-done-edit:hover {
+      color: var(--paper);
+    }
+
     /* The consent bar is shared with the rest of the site, where it sits on
        white. Its mid-grey reads as a slab of unrelated UI on this canvas, and
        it is the first thing an ad click sees. Recoloured, not restyled: the

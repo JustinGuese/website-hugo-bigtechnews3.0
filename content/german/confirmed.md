@@ -1,9 +1,9 @@
 ---
-title: "You're subscribed"
-description: 'Your email is confirmed.'
+title: "Sie sind angemeldet"
+description: 'Ihre E-Mail-Adresse ist bestätigt.'
 draft: false
 ---
 
-You're on the list. The next brief lands in your inbox on the next publish.
+Sie sind auf der Liste. Der nächste Brief landet bei der nächsten Ausgabe in Ihrem Postfach.
 
-In the meantime, [browse today's stories](/blogs/) or [pick a beat by RSS](/).
+In der Zwischenzeit: [heutige Artikel durchstöbern](/blogs/) oder [ein Thema per RSS abonnieren](/).

@@ -177,6 +177,11 @@ enable = true
 endpoint = "https://ecommerce-api.datafortress.cloud/v1/lists"
 site_key = "brieftechnews"
 list_key = "newsletter"
+# The confirmation mail's From address, per funnel/sites.yaml's brieftechnews
+# smtp block. Used only to build the "open my inbox, pre-searched" link on the
+# post-signup panel -- never sent anywhere, so it is safe to keep in the
+# committed config rather than a secret.
+sender = "info@brief-tech-news.com"
 # Exit-intent dialog. `arm_after` is how many seconds of reading must pass
 # before it may open at all -- a signup prompt that fires before the visitor
 # has read anything asks for a decision they have no basis to make. A dismissal

@@ -5,17 +5,36 @@
 # post in that category first, then add the matching entry here so it
 # shows up in the homepage strip, the hero RSS row, and (see hugo.toml
 # Languages.en.menu.main) the primary nav.
+#
+# `blurb` is the one-line pitch on the beat's landing page
+# (layouts/categories/term.html). The newsletter's "Also out today" block
+# carries the same English lines in gmailtonews newsletter.BEAT_BLURBS --
+# change both, or the email and the page it links to describe a beat twice.
 - name: AI
   slug: ai
+  blurb: "Models, agents and research: what shipped, what it costs, what actually works."
+  blurb_de: "Modelle, Agenten und Forschung: was erschienen ist, was es kostet, was wirklich funktioniert."
 - name: Crypto
   slug: crypto
+  blurb: "Protocols, markets and regulation, minus the hype."
+  blurb_de: "Protokolle, Märkte und Regulierung, ohne den Hype."
 - name: DevOps
   slug: devops
+  blurb: "Cloud, infrastructure, CI/CD and the tools that keep production up."
+  blurb_de: "Cloud, Infrastruktur, CI/CD und die Werkzeuge, die Produktion am Laufen halten."
 - name: Fintech
   slug: fintech
+  blurb: "Payments, banking and the companies rebuilding how money moves."
+  blurb_de: "Zahlungen, Banking und die Firmen, die neu bauen, wie Geld sich bewegt."
 - name: Founders
   slug: founders
+  blurb: "Fundraising, growth and hard-won lessons from people building companies."
+  blurb_de: "Finanzierung, Wachstum und Lektionen von Menschen, die Firmen aufbauen."
 - name: IT
   slug: it
+  blurb: "Enterprise IT, security and the systems every company runs on."
+  blurb_de: "Unternehmens-IT, Sicherheit und die Systeme, auf denen jede Firma läuft."
 - name: Tech
   slug: tech
+  blurb: "The day's biggest stories across Big Tech, startups and science."
+  blurb_de: "Die wichtigsten Geschichten des Tages aus Big Tech, Startups und Wissenschaft."

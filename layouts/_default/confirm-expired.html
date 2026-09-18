@@ -1,0 +1,20 @@
+{{/*
+  Where an expired double-opt-in link lands (funnel API's
+  `confirm_expired_redirect`, see sites.yaml). A plain page plus the ordinary
+  subscribe form: the reader is NOT on the list, and the honest way back in is
+  a fresh signup -- a resubmit of the same address mints a new token rather
+  than trying to resurrect the dead one.
+*/}}
+{{ define "main" }}
+<div class="col-lg-12">
+  <div class="row">{{ partial "page-header.html" . }}</div>
+  <div class="content">
+    {{ .Content }}
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      {{ partial "subscribe-form.html" (dict "id" "confirm-expired") }}
+    </div>
+  </div>
+</div>
+{{ end }}
