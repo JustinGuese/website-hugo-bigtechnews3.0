@@ -1311,3 +1311,43 @@ body.newsletter-modal-open {
 .beat-landing-examples {
   margin: 0.5rem 0 1.5rem;
   color: #66676d; }
+
+.confirmed-beats-note {
+  max-width: 640px;
+  color: #66676d; }
+
+.confirmed-beat {
+  display: block;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(43, 44, 46, 0.12);
+  border-radius: 4px;
+  color: #2B2C2E;
+  transition: border-color 0.15s ease; }
+  .confirmed-beat:hover, .confirmed-beat:focus-visible {
+    border-color: #c98664;
+    text-decoration: none;
+    color: #2B2C2E; }
+
+.confirmed-beat-name {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600; }
+
+.confirmed-beat-blurb {
+  display: block;
+  font-size: 0.9rem;
+  color: #66676d; }
+
+.confirmed-share {
+  max-width: 640px; }
+
+.confirmed-share-row {
+  display: flex;
+  gap: 0.5rem; }
+  .confirmed-share-row .form-control {
+    flex: 1 1 auto;
+    min-width: 0; }
+  .confirmed-share-row .btn {
+    flex: 0 0 auto; }

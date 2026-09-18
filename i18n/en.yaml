@@ -191,3 +191,30 @@
 
 - id: beat_landing_examples
   translation: Recent %s briefs
+
+- id: confirmed_beats_eyebrow
+  translation: "All the beats"
+
+- id: confirmed_beats_note
+  translation: "Each one is its own short email. Have a look at recent issues; you can add any of them later in one tap from the bottom of every brief."
+
+- id: confirmed_share_eyebrow
+  translation: "Know someone who would like this?"
+
+- id: confirmed_share_text
+  translation: "Send them this link. It is free for them too."
+
+- id: confirmed_share_copy
+  translation: "Copy link"
+
+- id: confirmed_share_copied
+  translation: "Copied"
+
+- id: confirmed_share_mail
+  translation: "Or send it by email"
+
+- id: confirmed_share_subject
+  translation: "A short daily tech brief you might like"
+
+- id: confirmed_share_body
+  translation: "I just signed up for BriefTechNews, a short daily email on tech news. Thought you might like it too:"

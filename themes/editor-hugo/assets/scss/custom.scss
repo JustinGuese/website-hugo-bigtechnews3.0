@@ -580,3 +580,59 @@ body.newsletter-modal-open {
   margin: 0.5rem 0 1.5rem;
   color: $gray;
 }
+
+// The "you're subscribed" page (layouts/_default/confirmed.html): the other
+// beats as quiet cards, then one share row. Same eyebrow language as the beat
+// landing pages, so the two read as one family.
+.confirmed-beats-note {
+  max-width: 640px;
+  color: $gray;
+}
+
+.confirmed-beat {
+  display: block;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba($dark, 0.12);
+  border-radius: 4px;
+  color: $dark;
+  transition: border-color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $primary-color;
+    text-decoration: none;
+    color: $dark;
+  }
+}
+
+.confirmed-beat-name {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: $secondary-font;
+  font-weight: 600;
+}
+
+.confirmed-beat-blurb {
+  display: block;
+  font-size: 0.9rem;
+  color: $gray;
+}
+
+.confirmed-share {
+  max-width: 640px;
+}
+
+.confirmed-share-row {
+  display: flex;
+  gap: 0.5rem;
+
+  .form-control {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .btn {
+    flex: 0 0 auto;
+  }
+}

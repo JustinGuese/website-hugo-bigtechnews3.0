@@ -1,0 +1,55 @@
+{{/*
+  Where a completed double opt-in lands (funnel API's `confirm_redirect`, see
+  sites.yaml). The one moment a reader has just said yes to us, so it offers the
+  two next steps and nothing else: the other beats (each linking to its landing
+  page, whose recent posts are the examples) and a link to pass on.
+
+  No one-tap "add this beat" here, deliberately: the redirect carries no reader
+  token, and putting one in this URL would hand a credential to every script on
+  the page, the Meta pixel included. Every issue's footer carries that one-tap
+  link instead, and the copy below says so.
+*/}}
+{{ define "main" }}
+{{ $de := eq site.Language.Lang "de" }}
+{{ $share := printf "%s?subscribe=1&utm_source=share&utm_medium=confirmed" site.Home.Permalink }}
+<div class="col-lg-12">
+  <div class="row">{{ partial "page-header.html" . }}</div>
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  <section class="confirmed-beats my-4">
+    <p class="beat-landing-eyebrow">{{ i18n "confirmed_beats_eyebrow" }}</p>
+    <p class="confirmed-beats-note">{{ i18n "confirmed_beats_note" }}</p>
+    <div class="row">
+      {{ range site.Data.categories }}
+      {{ $blurb := .blurb }}
+      {{ if and $de .blurb_de }}{{ $blurb = .blurb_de }}{{ end }}
+      <div class="col-md-6 col-lg-4 mb-3">
+        <a class="confirmed-beat" href="{{ printf "categories/%s/" .slug | relLangURL }}">
+          <span class="confirmed-beat-name">{{ .name }}</span>
+          <span class="confirmed-beat-blurb">{{ $blurb }}</span>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="confirmed-share my-4">
+    <p class="beat-landing-eyebrow">{{ i18n "confirmed_share_eyebrow" }}</p>
+    <p>{{ i18n "confirmed_share_text" }}</p>
+    <div class="confirmed-share-row">
+      <input class="form-control" type="text" readonly value="{{ $share }}" aria-label="{{ i18n "confirmed_share_eyebrow" }}" id="confirmed-share-url">
+      <button class="btn btn-primary" type="button" data-copy="#confirmed-share-url" data-copied="{{ i18n "confirmed_share_copied" }}">{{ i18n "confirmed_share_copy" }}</button>
+    </div>
+    <p class="small mt-2">
+      {{/* urlquery writes a space as "+", which mail clients show literally in a
+           mailto: (RFC 6068 wants %20). A real "+" is already %2B by then, so
+           swapping afterwards is safe. */}}
+      {{ $subject := replace (i18n "confirmed_share_subject" | urlquery) "+" "%20" }}
+      {{ $body := replace (printf "%s %s" (i18n "confirmed_share_body") $share | urlquery) "+" "%20" }}
+      <a href="mailto:?subject={{ $subject | safeURL }}&amp;body={{ $body | safeURL }}">{{ i18n "confirmed_share_mail" }}</a>
+    </p>
+  </section>
+</div>
+{{ end }}

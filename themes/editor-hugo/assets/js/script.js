@@ -220,6 +220,26 @@
 	}
 	prefillFromQuery();
 
+	// `data-copy="#selector"` buttons copy that field's value (the share link on
+	// the "you're subscribed" page). Falls back to selecting the text, so a
+	// browser without the Clipboard API still leaves one Ctrl+C to go.
+	$('[data-copy]').on('click', function () {
+		var $btn = $(this);
+		var field = document.querySelector($btn.data('copy'));
+		if (!field) return;
+		var done = function () {
+			var label = $btn.text();
+			$btn.text($btn.data('copied') || label);
+			setTimeout(function () { $btn.text(label); }, 2000);
+		};
+		field.select();
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard.writeText(field.value).then(done, function () {});
+		} else {
+			try { if (document.execCommand('copy')) done(); } catch (e) {}
+		}
+	});
+
 	// First-touch UTM tags, kept for the session so a reader who arrives from a
 	// forwarded issue and signs up two pages later is still counted as one.
 	// The funnel lifts these into their own columns (attribution.TRACKING_FIELDS),

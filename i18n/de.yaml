@@ -192,3 +192,30 @@
 
 - id: beat_landing_examples
   translation: Aktuelle %s-Briefs
+
+- id: confirmed_beats_eyebrow
+  translation: "Alle Themen"
+
+- id: confirmed_beats_note
+  translation: "Jedes ist eine eigene kurze E-Mail. Schauen Sie sich aktuelle Ausgaben an; hinzufügen können Sie jedes Thema später mit einem Klick am Ende jedes Briefs."
+
+- id: confirmed_share_eyebrow
+  translation: "Kennen Sie jemanden, dem das gefallen würde?"
+
+- id: confirmed_share_text
+  translation: "Leiten Sie diesen Link weiter. Er ist auch für andere kostenlos."
+
+- id: confirmed_share_copy
+  translation: "Link kopieren"
+
+- id: confirmed_share_copied
+  translation: "Kopiert"
+
+- id: confirmed_share_mail
+  translation: "Oder per E-Mail senden"
+
+- id: confirmed_share_subject
+  translation: "Ein kurzer täglicher Tech-Brief, der dir gefallen könnte"
+
+- id: confirmed_share_body
+  translation: "Ich habe mich gerade für BriefTechNews angemeldet, eine kurze tägliche E-Mail zu Tech-News. Könnte dir auch gefallen:"
