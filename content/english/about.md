@@ -8,7 +8,7 @@ layout: 'about'
 name: 'BriefTechNews'
 email: 'info@brief-tech-news.com'
 image: 'images/logo.png'
-summary: 'A daily digest of what actually moved in AI, tech, crypto and fintech, assembled and written with AI, and reviewed before it publishes.'
+summary: 'A daily digest of what actually moved in AI, tech, crypto and fintech, assembled and written with AI, with every item linked to its source.'
 
 partners:
   enable: false
@@ -18,6 +18,6 @@ partners:
 
 BriefTechNews exists because most days you don't need another newsletter, you need the five things that actually mattered, written like an engineer would explain them to another engineer.
 
-Every post here is assembled and drafted with AI from the day's technology, AI, crypto and fintech news, then reviewed before it goes out. We're not going to pretend a person sat down and typed each one from scratch, that would be a stranger thing to hide than to say plainly. What we do stand behind is the editorial bar: no headline paraphrasing, no filler, and a "why this matters" for every item.
+Every post here is assembled and drafted by software from the day's technology, AI, crypto and fintech news. We're not going to pretend a person sat down and typed each one from scratch, that would be a stranger thing to hide than to say plainly. What we do stand behind is the editorial bar: no headline paraphrasing, no filler, a "why this matters" for every item, and a link to the source so you can check it.
 
 If you want the takeaway without the scroll, that's what this is for.

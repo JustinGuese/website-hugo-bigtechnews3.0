@@ -9,7 +9,13 @@
     {{ partial "subscribe-form.html" (dict "id" "hero" "variant" "compact") }}
 
     {{ if site.Params.subscription.enable }}
-    <p class="small text-light mt-3 mb-0">{{ len (where site.RegularPages "Type" "in" site.Params.mainSections) }}+ briefs published so far.</p>
+    <p class="small mt-3 mb-1">{{ i18n `hero_promise` }}</p>
+    {{- /* The date of the newest post rather than a count: a count only ever
+           goes up, so it keeps looking healthy after publishing has stopped.
+           A date that stops moving is visible to everyone, us included. */}}
+    {{ with index (sort (where site.RegularPages "Type" "in" site.Params.mainSections) "Date" "desc") 0 }}
+    <p class="small text-light mb-0">{{ printf (i18n `hero_last_issue`) (.Date | time.Format "2 January 2006") }}</p>
+    {{ end }}
     {{ end }}
 
     {{ with site.Data.categories }}

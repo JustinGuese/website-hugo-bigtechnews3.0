@@ -77,10 +77,10 @@
   translation: À propos de moi
 
 - id: hero_eyebrow
-  translation: Résumé quotidien
+  translation: Résumé quotidien gratuit pour ingénieurs
 
 - id: hero_tagline
-  translation: IA, tech, crypto et fintech — l'essentiel, en un coup d'œil chaque jour.
+  translation: Les cinq minutes d'actu IA, DevOps et tech qui changent ce que vous construisez. Choisissez vos rubriques, ignorez le reste.
 
 - id: subscribe_cta
   translation: S'abonner
@@ -115,13 +115,13 @@
   translation: Recevoir le résumé
 
 - id: subscribe_widget_body
-  translation: Cet article vous a plu ? Le reste de la pile — IA, crypto, fintech, infra — arrive dans votre boîte demain matin. Cinq minutes, sans battage.
+  translation: Cet article vous a plu ? Choisissez les rubriques qui vous intéressent et ne recevez que celles-là, cinq minutes chaque matin. Gratuit, sans battage, désabonnement en un clic.
 
 - id: subscribe_modal_title
-  translation: Emportez le résumé avec vous.
+  translation: Seulement les rubriques que vous choisissez.
 
 - id: subscribe_modal_body
-  translation: Vous avez lu un article. D'autres sont publiés aujourd'hui et une nouvelle série arrive demain — recevez-les en un e-mail de cinq minutes plutôt que d'avoir à revenir.
+  translation: Vous avez lu un article. Recevez les plus utiles en un seul e-mail de cinq minutes, uniquement pour vos rubriques. Gratuit, désabonnement en un clic.
 
 - id: subscribe_modal_dismiss
   translation: Pas maintenant
@@ -197,3 +197,12 @@
 
 - id: confirmed_share_body
   translation: "Je viens de m'abonner à BriefTechNews, un court e-mail quotidien sur l'actualité tech. Ça pourrait te plaire :"
+
+- id: hero_promise
+  translation: Gratuit · rubriques au choix · désabonnement en un clic · aucune vente de données
+
+- id: hero_last_issue
+  translation: "Dernier numéro : %s"
+
+- id: beats_hint
+  translation: Seulement IA et DevOps ? Cochez uniquement celles-ci, vous ne recevrez pas le reste.

@@ -72,6 +72,7 @@
   {{ with $beats }}
   <fieldset class="beat-picker">
     <legend class="beat-picker-legend">{{ i18n `beats_legend` }}</legend>
+    <p class="small text-light mb-2">{{ i18n `beats_hint` }}</p>
     <div class="beat-chips">
       {{/* Checked by default, so the shortest path through the form is an
            address and the consent box. An empty selection and a full one both

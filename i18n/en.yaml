@@ -77,10 +77,10 @@
   translation: About Me
 
 - id: hero_eyebrow
-  translation: Daily brief
+  translation: Free daily engineering brief
 
 - id: hero_tagline
-  translation: AI, tech, crypto and fintech — the stack, in one scan a day.
+  translation: The five minutes of AI, DevOps and tech news that change what you build. Pick your beats, skip the rest.
 
 - id: subscribe_cta
   translation: Subscribe
@@ -136,13 +136,13 @@
   translation: Get the brief
 
 - id: subscribe_widget_body
-  translation: Liked this one? The rest of today's stack — AI, crypto, fintech, infra — lands in your inbox tomorrow morning. Five minutes, no hype.
+  translation: Liked this one? Pick the beats you care about and get just those, five minutes a morning. Free, no hype, one click to leave.
 
 - id: subscribe_modal_title
-  translation: Take the brief with you.
+  translation: Only the beats you pick.
 
 - id: subscribe_modal_body
-  translation: You read one story. There are more filed today and a fresh set tomorrow — get them as one five-minute email instead of remembering to come back.
+  translation: You read one story. Get the ones that matter as a single five-minute email, only for the beats you choose. Free, and one click to leave.
 
 - id: subscribe_modal_dismiss
   translation: Not now
@@ -218,3 +218,12 @@
 
 - id: confirmed_share_body
   translation: "I just signed up for BriefTechNews, a short daily email on tech news. Thought you might like it too:"
+
+- id: hero_promise
+  translation: Free · pick your beats · one-click unsubscribe · we never sell your data
+
+- id: hero_last_issue
+  translation: "Latest issue: %s"
+
+- id: beats_hint
+  translation: Only want AI and DevOps? Tick just those and you will not get the rest.

@@ -77,10 +77,10 @@
   translation: Über uns
 
 - id: hero_eyebrow
-  translation: Tägliches Briefing
+  translation: Kostenloses tägliches Engineering-Briefing
 
 - id: hero_tagline
-  translation: KI, Tech, Crypto und Fintech — der ganze Stack, einmal am Tag.
+  translation: Die fünf Minuten KI-, DevOps- und Tech-News, die verändern, was Sie bauen. Themen wählen, den Rest überspringen.
 
 - id: subscribe_cta
   translation: Abonnieren
@@ -137,13 +137,13 @@
   translation: Briefing holen
 
 - id: subscribe_widget_body
-  translation: Hat Ihnen das gefallen? Der Rest des Stacks — KI, Crypto, Fintech, Infrastruktur — liegt morgen früh in Ihrem Postfach. Fünf Minuten, kein Hype.
+  translation: Hat Ihnen das gefallen? Wählen Sie die Themen, die Sie interessieren, und erhalten Sie nur diese, fünf Minuten am Morgen. Kostenlos, kein Hype, Abmeldung mit einem Klick.
 
 - id: subscribe_modal_title
-  translation: Nehmen Sie das Briefing mit.
+  translation: Nur die Themen, die Sie wählen.
 
 - id: subscribe_modal_body
-  translation: Sie haben eine Meldung gelesen. Heute kommen weitere dazu und morgen ein neuer Satz — holen Sie sich alles als eine E-Mail in fünf Minuten, statt ans Wiederkommen zu denken.
+  translation: Sie haben eine Meldung gelesen. Holen Sie sich die wichtigen als eine E-Mail in fünf Minuten, nur zu Ihren Themen. Kostenlos, Abmeldung mit einem Klick.
 
 - id: subscribe_modal_dismiss
   translation: Jetzt nicht
@@ -219,3 +219,12 @@
 
 - id: confirmed_share_body
   translation: "Ich habe mich gerade für BriefTechNews angemeldet, eine kurze tägliche E-Mail zu Tech-News. Könnte dir auch gefallen:"
+
+- id: hero_promise
+  translation: Kostenlos · Themen frei wählbar · Abmeldung mit einem Klick · kein Datenverkauf
+
+- id: hero_last_issue
+  translation: "Letzte Ausgabe: %s"
+
+- id: beats_hint
+  translation: Nur KI und DevOps? Haken Sie nur diese an, den Rest bekommen Sie nicht.

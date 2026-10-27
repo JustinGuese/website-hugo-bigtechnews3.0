@@ -526,7 +526,8 @@
     {{ partial "subscribe-form.html" (dict "id" "lp-hero" "variant" "modal" "beats" false) }}
 
     <p class="lp-micro">
-      No spam, no partner mail. You confirm the address before anything is sent.
+      Free. Pick your beats or take them all. No spam, no partner mail, we never sell your
+      data. You confirm the address before anything is sent.
     </p>
 
     {{- with $latest }}
@@ -587,10 +588,17 @@
         or go read the filing yourself.
       </p>
       <p>
-        Every issue is assembled and drafted with AI from the day's news, then reviewed before
-        it publishes. We would rather say that plainly than have you find out. What we hold to
-        is the editorial bar: no headline paraphrasing, no filler, and a reason it matters on
-        every item. <span class="lp-fig">{{ $count }}</span> issues published so far.
+        Every issue is assembled and drafted by software from the day's news. We would rather
+        say that plainly than have you find out. What we hold to is the editorial bar: no
+        headline paraphrasing, no filler, a reason it matters on every item, and a link to the
+        source so you can check it. <span class="lp-fig">{{ $count }}</span> issues published so far.
+      </p>
+    </section>
+    <section class="lp-section">
+      <h2>Why it is free</h2>
+      <p>
+        There is no paywall and no premium tier. We do not sell your address or your reading
+        habits. Leave from any email in one click, and only the beats you picked ever reach you.
       </p>
     </section>
 
