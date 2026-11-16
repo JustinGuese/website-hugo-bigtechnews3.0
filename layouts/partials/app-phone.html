@@ -1,0 +1,30 @@
+<div class="phone" data-phone>
+  <div class="phone-notch" aria-hidden="true"></div>
+  <img class="phone-screen is-active active"
+       data-index="0"
+       src="{{ "images/app/screen-briefing.webp" | relURL }}"
+       width="540"
+       height="1171"
+       alt="{{ i18n "app_feat_swipe_t" }}"
+       loading="eager"
+       decoding="async">
+  <img class="phone-screen"
+       data-index="1"
+       src="{{ "images/app/screen-chat.webp" | relURL }}"
+       width="540"
+       height="1171"
+       alt="{{ i18n "app_feat_ai_t" }}"
+       loading="lazy"
+       decoding="async">
+  <img class="phone-screen"
+       data-index="2"
+       src="{{ "images/app/screen-readlater.webp" | relURL }}"
+       width="540"
+       height="1171"
+       alt="{{ i18n "app_feat_save_t" }}"
+       loading="lazy"
+       decoding="async">
+  <span class="phone-chip phone-chip--ai" data-beat="ai" aria-hidden="true">AI</span>
+  <span class="phone-chip phone-chip--devops" data-beat="devops" aria-hidden="true">DevOps</span>
+  <span class="phone-chip phone-chip--tech" data-beat="tech" aria-hidden="true">Tech</span>
+</div>

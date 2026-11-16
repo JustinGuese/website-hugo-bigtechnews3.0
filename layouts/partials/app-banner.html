@@ -1,0 +1,28 @@
+{{ $app := site.Params.app }}
+{{ $iosUrl := $app.ios_url | default "https://apps.apple.com/app/id6827598786" }}
+{{ $rawAndroid := $app.android_url | default "https://play.google.com/store/apps/details?id=com.brieftechnews.app" }}
+{{ $sep := cond (in $rawAndroid "?") "&" "?" }}
+{{ $androidUrl := printf "%s%sreferrer=utm_source%%3Dweb%%26utm_medium%%3Dbanner" $rawAndroid $sep }}
+{{ $dismissDays := $app.banner_dismiss_days | default 14 }}
+{{ $appName := $app.name | default "BriefTechNews" }}
+
+<aside class="app-banner" data-app-banner
+  data-ios-url="{{ $iosUrl }}"
+  data-android-url="{{ $androidUrl }}"
+  data-dismiss-days="{{ $dismissDays }}"
+  data-ios-label="{{ i18n "app_ios_label" }}"
+  data-android-label="{{ i18n "app_android_label" }}"
+  hidden>
+  <div class="app-banner-inner">
+    <button type="button" class="app-banner-close" aria-label="{{ i18n "app_banner_close" }}">&times;</button>
+    <img class="app-banner-icon" src="{{ "images/app/app-icon.png" | relURL }}" alt="{{ $appName }}" width="44" height="44" loading="eager">
+    <div class="app-banner-text">
+      <span class="app-banner-title">{{ i18n "app_banner_title" }}</span>
+      <span class="app-banner-sub">{{ i18n "app_banner_sub" }}</span>
+    </div>
+    <div class="app-banner-actions">
+      <a class="app-banner-cta store-badge store-badge--banner" data-app-banner-cta href="{{ $iosUrl }}" target="_blank" rel="noopener">{{ i18n "app_banner_cta" }}</a>
+      <a class="app-banner-cta store-badge store-badge--banner app-banner-cta--alt" data-app-banner-alt href="{{ $androidUrl }}" target="_blank" rel="noopener" hidden>{{ i18n "app_android_label" }}</a>
+    </div>
+  </div>
+</aside>
