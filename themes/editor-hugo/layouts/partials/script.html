@@ -1,12 +1,10 @@
 <!-- font family -->
 <script src="https://cdn.jsdelivr.net/gh/theprojectsomething/webfontloader@feature/google-fonts-v2/webfontloader.js"></script>
-{{$pf:= site.Params.variables.primary_font}}
-{{$sf:= site.Params.variables.secondary_font}}
 <script>
   WebFont.load({
     google: {
       api: 'https://fonts.googleapis.com/css2',
-      families: ['{{$pf}}{{if not $sf}}&display=swap{{end}}'{{with $sf}},'{{.}}&display=swap'{{end}}],
+      families: ['Bricolage Grotesque:wght@600;800', 'Instrument Sans:wght@400;500;600', 'Geist Mono:wght@400;500&display=swap'],
       version: 2
     },
     active: () => {
