@@ -228,3 +228,66 @@
 
 - id: beats_hint
   translation: Nur KI und DevOps? Haken Sie nur diese an, den Rest bekommen Sie nicht.
+
+- id: app_eyebrow
+  translation: BriefTechNews für iOS & Android
+
+- id: hero_h1
+  translation: Die KI- & Tech-News des Tages swipen
+
+- id: hero_sub
+  translation: Das fünfminütige Engineering-Briefing auf Ihrem Smartphone. Kostenlos, ohne Account und mit einem KI-Analysten direkt an den Originalquellen.
+
+- id: hero_trust
+  translation: Kostenlos · Kein Account nötig · ~5 Minuten · Quellentreue KI
+
+- id: app_ios_label
+  translation: App Store
+
+- id: app_android_label
+  translation: Google Play
+
+- id: app_ios_top
+  translation: Laden im
+
+- id: app_android_top
+  translation: JETZT BEI
+
+- id: app_banner_title
+  translation: BriefTechNews App
+
+- id: app_banner_sub
+  translation: Die KI- & Tech-News des Tages in ~5 Minuten swipen
+
+- id: app_banner_cta
+  translation: App holen
+
+- id: app_banner_close
+  translation: Schließen
+
+- id: app_section_title
+  translation: Tech-News neu gedacht für Engineers
+
+- id: app_feat_swipe_t
+  translation: In fünf Minuten durch den Tag
+
+- id: app_feat_swipe_d
+  translation: Überfliegen Sie kuratierte KI- und Engineering-Meldungen in ~5 Minuten. Kein endloser Feed, kein Hype — nur was zählt.
+
+- id: app_feat_ai_t
+  translation: KI-Analyst mit Quellentreue
+
+- id: app_feat_ai_d
+  translation: Vertiefen Sie jedes Thema mit einem KI-Analysten, der streng an den tatsächlichen Originalartikeln ansetzt.
+
+- id: app_feat_save_t
+  translation: Für später merken
+
+- id: app_feat_save_d
+  translation: Speichern Sie wichtige Meldungen, Architektur-Analysen und Releases, um sie später offline nachzuschlagen.
+
+- id: email_panel_title
+  translation: Lieber per E-Mail im Postfach?
+
+- id: email_panel_sub
+  translation: Erhalten Sie dasselbe fünfminütige Engineering-Briefing jeden Werktagmorgen per E-Mail. Wählen Sie Ihre Themen, überspringen Sie den Rest.
