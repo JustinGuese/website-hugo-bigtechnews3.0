@@ -178,7 +178,9 @@ html.has-app-banner {
   }
 }
 
-// App Banner (Mobile only <=767px, hidden on desktop)
+// App Banner (mobile only <=767px). Markup: .app-banner > .app-banner-inner
+// > [close, icon, text{title,sub}, actions{cta, cta--alt}]. Fixed 60px; JS
+// publishes the measured height as --app-banner-h so header/page shift down.
 .app-banner,
 [data-app-banner] {
   display: none;
@@ -189,50 +191,62 @@ html.has-app-banner {
 }
 
 @media (max-width: 767.98px) {
-  html.has-app-banner .app-banner,
-  html.has-app-banner [data-app-banner] {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  html.has-app-banner .app-banner:not([hidden]) {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    height: var(--app-banner-h, 56px);
+    height: 60px;
     z-index: 1050;
-    padding: 8px 12px;
     background: var(--surface);
     border-bottom: 1px solid var(--line);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    gap: 8px;
     box-sizing: border-box;
-
-    &[hidden] {
-      display: none !important;
-    }
   }
 
-  .app-banner-left {
+  .app-banner-inner {
     display: flex;
     align-items: center;
     gap: 8px;
-    min-width: 0;
-    flex: 1 1 auto;
+    height: 100%;
+    padding: 0 10px 0 2px;
+  }
+
+  .app-banner-close {
+    order: 0;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 44px;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--ink);
+    }
   }
 
   .app-banner-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    flex-shrink: 0;
+    order: 1;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    border-radius: 9px;
     object-fit: cover;
   }
 
-  .app-banner-info {
+  .app-banner-text {
+    order: 2;
+    flex: 1 1 auto;
     min-width: 0;
     display: flex;
     flex-direction: column;
+    line-height: 1.25;
   }
 
   .app-banner-title {
@@ -240,7 +254,6 @@ html.has-app-banner {
     font-size: 13px;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -249,59 +262,44 @@ html.has-app-banner {
   .app-banner-sub {
     font-size: 11px;
     color: var(--muted);
-    line-height: 1.2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .app-banner-cta {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 14px;
-    min-height: 32px;
-    border-radius: 20px;
-    background: var(--accent);
-    color: var(--accent-ink) !important;
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 700;
-    text-decoration: none !important;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease;
-
-    &:hover,
-    &:focus-visible {
-      transform: translateY(-1px);
-      background: oklch(0.82 0.18 70);
-      color: var(--accent-ink) !important;
-    }
+  .app-banner-actions {
+    order: 3;
+    flex: 0 0 auto;
+    display: flex;
+    gap: 6px;
   }
 
-  .app-banner-close {
-    flex-shrink: 0;
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 22px;
-    line-height: 1;
-    padding: 4px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
+  // Overrides the generic .store-badge chrome: the banner CTA is a compact pill.
+  .app-banner .app-banner-cta.store-badge {
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 22px;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: none;
+    color: var(--accent-ink) !important;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
     justify-content: center;
-    transition: color 0.15s ease;
 
-    &:hover,
-    &:focus-visible {
-      color: var(--ink);
+    &[hidden] {
+      display: none !important;
+    }
+
+    &.app-banner-cta--alt {
+      background: transparent;
+      color: var(--ink) !important;
     }
   }
 }
+
 
 // Store Badges (.store-badge, .store-badge--ios, .store-badge--android)
 .store-badge {
@@ -1637,5 +1635,113 @@ footer,
   .app-banner-cta {
     transform: none !important;
     transition: none !important;
+  }
+}
+
+// -- Integration pass: hero rhythm, prominent store badges, equal-height cards --
+.hero-app {
+  @media (min-width: 992px) {
+    padding: 56px 0 64px 56px;
+    min-height: 560px;
+
+    .hero-app-copy {
+      max-width: 660px;
+    }
+  }
+
+  h1,
+  .hero-h1,
+  .hero-app-title {
+    font-size: clamp(2.6rem, 6vw, 4.6rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .store-badge {
+    min-height: 64px;
+    padding: 10px 26px 10px 20px;
+    border-radius: 14px;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px -8px oklch(0.78 0.17 70 / 0.5);
+
+    &,
+    .store-badge-title {
+      color: var(--accent-ink) !important;
+    }
+
+    .store-badge-sub {
+      color: oklch(0.3 0.06 70);
+      font-size: 11px;
+    }
+
+    .store-badge-title {
+      font-size: 20px;
+    }
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: oklch(0.84 0.15 80);
+      color: var(--accent-ink) !important;
+    }
+  }
+
+  // Second store reads as a sibling, not a competitor: outlined.
+  .store-badge--android {
+    background: transparent;
+    box-shadow: none;
+    border-color: var(--accent);
+
+    &,
+    .store-badge-title {
+      color: var(--ink) !important;
+    }
+
+    .store-badge-sub {
+      color: var(--muted);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: oklch(0.26 0.03 260);
+      color: var(--ink) !important;
+    }
+  }
+}
+
+.page-content .row > [class*='col-xl-4'] {
+  display: flex;
+
+  > * {
+    width: 100%;
+  }
+
+  .card,
+  article {
+    height: calc(100% - 30px);
+  }
+}
+
+// Header controls inherited black from the light theme: invisible on the dark bar.
+header.sidenav {
+  .search-toggle,
+  select,
+  .social-links a {
+    color: var(--ink) !important;
+    background-color: transparent !important;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--accent) !important;
+    }
+  }
+
+  select option {
+    background: var(--surface);
+    color: var(--ink);
   }
 }
