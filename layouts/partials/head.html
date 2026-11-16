@@ -1,5 +1,13 @@
 <meta charset="utf-8">
-<title>{{ .Title }}</title>
+{{- if .IsHome -}}
+<title>{{ site.Title }} | Daily Tech & AI Engineering Digest</title>
+{{- else if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+<title>{{ .Title }} News & Engineering Digests | {{ site.Title }}</title>
+{{- else -}}
+<title>{{ .Title }} | {{ site.Title }}</title>
+{{- end -}}
+
+<link rel="canonical" href="{{ .Permalink }}">
 
 <!-- mobile responsive meta -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -9,11 +17,14 @@
 
 <meta name="theme-name" content="editor-hugo" />
 
-{{- /* max-image-preview:large is what lets Google Discover (and standard search's
-       large-image results) show a full-width preview of the page's image -- without
-       it Google defaults to a small or no thumbnail. Covers are already rendered at
-       1200x630 for exactly this. */ -}}
+{{- /* Robots meta tag. Pages can specify .Params.robots (e.g. "noindex, follow" for
+       search and confirmation pages). By default, max-image-preview:large lets Google
+       Discover show full-width preview images. */ -}}
+{{ with .Params.robots }}
+<meta name="robots" content="{{ . }}">
+{{ else }}
 <meta name="robots" content="max-image-preview:large">
+{{ end }}
 
 {{- /* Meta domain verification. Rendered statically and unconditionally, on
        every page rather than only the home page: the crawler is told to check
@@ -41,8 +52,17 @@
        siblings, which is what Google's hreflang spec wants (every version lists
        itself too) -- adding a separate self link here would just duplicate it. */ -}}
 {{ if .IsTranslated }}
+{{ $enURL := "" }}
 {{ range .Page.AllTranslations }}
 <link rel="alternate" title="{{ .Title }}" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+{{- if eq .Language.Lang "en" }}{{ $enURL = .Permalink }}{{ end }}
+{{ end }}
+{{ with $enURL }}
+<link rel="alternate" hreflang="x-default" href="{{ . }}">
+{{ else }}
+{{- with index .Page.AllTranslations 0 }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end }}
 {{ end }}
 {{ end }}
 
@@ -53,10 +73,14 @@
 <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
 {{ end }}
 
+{{ if not .Params.images }}
 {{ with .Params.image }}
 <meta property="og:image" content="{{ . | absURL }}" />
 {{ end }}
+{{ end }}
 {{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ partial "schema.html" . }}
 {{ template "_internal/google_analytics.html" . }}
 {{ partial "meta-pixel.html" . }}
 {{ partial "google-ads.html" . }}

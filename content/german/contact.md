@@ -1,6 +1,7 @@
 ---
-title: "Say Hello"
+title: "Kontakt"
 layout: "contact"
 draft: false
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscisectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor.
+
+Haben Sie Hinweise, Feedback oder Fragen an unsere Redaktion? Schreiben Sie uns direkt an info@brief-tech-news.com oder nutzen Sie das Kontaktformular.
