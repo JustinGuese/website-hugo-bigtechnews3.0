@@ -120,6 +120,13 @@ mainSections = ["blogs"]
 # custom script on header
 custom_script= ""
 
+# Mobile App
+[params.app]
+name = "BriefTechNews"
+ios_url = "https://apps.apple.com/app/id6827598786"
+android_url = "https://play.google.com/store/apps/details?id=com.brieftechnews.app"
+banner_dismiss_days = 14
+
 # OpenRemark comments
 [params.open_remark]
 enable = false # disabled until a real site key is set up; the theme's demo key was here
@@ -129,11 +136,11 @@ embed_url = "https://open-remark.zeon.studio/embed.js"
 # site variables
 [params.variables]
 # color variables
-primary_color = "#c98664"
-secondary_color = "#c98665"
+primary_color = "#f59e0b"
+secondary_color = "#d97706"
 white = "#ffffff"
 black = "#000000"
-dark = "#2B2C2E"
+dark = "#0b0f17"
 gray = "#66676d"
 light = "#a8aab2"
 
@@ -152,8 +159,8 @@ h6 = "16px"
 # font variable
 # Give your font name from google font. add font weight using ":wght@" and separate by ";"
 # example: "Work Sans:wght@400;600;700"
-primary_font = "Lora:wght@500;600"
-secondary_font = "Work Sans:wght@400;500;600"
+primary_font = "Bricolage Grotesque:wght@600;800"
+secondary_font = "Instrument Sans:wght@400;500;600"
 icon_font = "Font Awesome 5 Free"
 
 # Preloader

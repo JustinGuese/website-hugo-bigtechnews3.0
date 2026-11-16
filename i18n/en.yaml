@@ -227,3 +227,66 @@
 
 - id: beats_hint
   translation: Only want AI and DevOps? Tick just those and you will not get the rest.
+
+- id: app_eyebrow
+  translation: BriefTechNews for iOS & Android
+
+- id: hero_h1
+  translation: Swipe today's AI & tech news
+
+- id: hero_sub
+  translation: The five-minute engineering digest on your phone. Free, no account needed, with an AI analyst grounded in real articles.
+
+- id: hero_trust
+  translation: Free · No account needed · ~5 minutes · Grounded AI
+
+- id: app_ios_label
+  translation: App Store
+
+- id: app_android_label
+  translation: Google Play
+
+- id: app_ios_top
+  translation: Download on the
+
+- id: app_android_top
+  translation: GET IT ON
+
+- id: app_banner_title
+  translation: BriefTechNews App
+
+- id: app_banner_sub
+  translation: Swipe today's AI & tech news in ~5 minutes
+
+- id: app_banner_cta
+  translation: Get App
+
+- id: app_banner_close
+  translation: Close
+
+- id: app_section_title
+  translation: Tech news redesigned for engineers
+
+- id: app_feat_swipe_t
+  translation: Swipe through the day
+
+- id: app_feat_swipe_d
+  translation: Skim curated AI and engineering headlines in ~5 minutes. No endless feeds, no hype — just what changes what you build.
+
+- id: app_feat_ai_t
+  translation: Grounded AI analyst
+
+- id: app_feat_ai_d
+  translation: Ask questions and explore context with an AI analyst strictly grounded in the real source articles.
+
+- id: app_feat_save_t
+  translation: Save for later
+
+- id: app_feat_save_d
+  translation: Bookmark key stories, architecture teardowns, and releases to read offline or reference later.
+
+- id: email_panel_title
+  translation: Prefer the daily brief by email?
+
+- id: email_panel_sub
+  translation: Get the same five-minute engineering digest delivered to your inbox weekday mornings. Pick your beats, skip the rest.
