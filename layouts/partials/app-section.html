@@ -1,0 +1,79 @@
+<section class="app-section" id="app">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        {{ with i18n "app_eyebrow" }}
+        <p class="app-section-eyebrow text-uppercase font-weight-600 mb-2">{{ . }}</p>
+        {{ end }}
+        <h2 class="app-section-title mb-4">{{ i18n "app_section_title" }}</h2>
+      </div>
+    </div>
+
+    <div class="row app-section-columns">
+      <!-- Feature 1: Swipe -->
+      <div class="col-md-4 app-section-col">
+        <div class="app-feature-card" data-feature="swipe">
+          <div class="app-feature-visual">
+            <img class="img-fluid app-feature-screen"
+                 src="{{ "images/app/screen-briefing.webp" | relURL }}"
+                 width="540"
+                 height="1171"
+                 alt="{{ i18n "app_feat_swipe_t" }}"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+          <div class="app-feature-content">
+            <h3 class="app-feature-title">{{ i18n "app_feat_swipe_t" }}</h3>
+            <p class="app-feature-desc">{{ i18n "app_feat_swipe_d" }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: AI analyst -->
+      <div class="col-md-4 app-section-col">
+        <div class="app-feature-card" data-feature="ai">
+          <div class="app-feature-visual">
+            <img class="img-fluid app-feature-screen"
+                 src="{{ "images/app/screen-chat.webp" | relURL }}"
+                 width="540"
+                 height="1171"
+                 alt="{{ i18n "app_feat_ai_t" }}"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+          <div class="app-feature-content">
+            <h3 class="app-feature-title">{{ i18n "app_feat_ai_t" }}</h3>
+            <p class="app-feature-desc">{{ i18n "app_feat_ai_d" }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Save for later -->
+      <div class="col-md-4 app-section-col">
+        <div class="app-feature-card" data-feature="save">
+          <div class="app-feature-visual">
+            <img class="img-fluid app-feature-screen"
+                 src="{{ "images/app/screen-readlater.webp" | relURL }}"
+                 width="540"
+                 height="1171"
+                 alt="{{ i18n "app_feat_save_t" }}"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+          <div class="app-feature-content">
+            <h3 class="app-feature-title">{{ i18n "app_feat_save_t" }}</h3>
+            <p class="app-feature-desc">{{ i18n "app_feat_save_d" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center text-center mt-5">
+      <div class="col-12 app-section-badges">
+        {{ if templates.Exists "partials/app-badges.html" }}
+          {{ partial "app-badges.html" (dict "placement" "section" "size" "md") }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
