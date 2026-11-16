@@ -45,6 +45,8 @@ TLDR is one of the most popular email newsletters in the software space, reachin
   * *Email-only workflow:* No native mobile app experience designed for swipeable triage or offline reading.
 * **Who It’s Best For:** Generalist engineers and enthusiasts who want a quick email scan of mainstream headlines and don't mind managing multiple newsletter subscriptions.
 
+👉 **Deep dive:** Read our full architectural head-to-head in [TLDR vs. BriefTechNews: Which 5-Minute Daily Digest Fits Your Stack?](/blogs/tldr-vs-brieftechnews/).
+
 ---
 
 ### 2. daily.dev Digest & Feed
@@ -71,6 +73,8 @@ Part of the Morning Brew media network, Tech Brew covers the intersection of tec
   * *Zero engineering depth:* You will not find Kubernetes failure modes, database indexing benchmarks, zero-day CVE technical teardowns, or LLM context window architectural analysis here. It is written for business professionals, not people writing code or running infrastructure.
   * *Sponsor saturation:* The publication is heavily monetized with prominent native advertising throughout each issue.
 * **Who It’s Best For:** Sales leaders, recruiters, marketers, and tech executives who want casual business commentary without getting into the technical weeds.
+
+👉 **Deep dive:** Read our full breakdown in [Morning Brew Tech (Tech Brew) vs. BriefTechNews](/blogs/tech-brew-vs-brieftechnews/).
 
 ---
 
@@ -187,6 +191,18 @@ No single publication can or should satisfy 100% of your reading needs. High-per
 │  - Discover interesting CLIs, repos & hacker debates   │
 └────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Related Engineering & Industry Guides
+
+Explore our detailed roundups and system design teardowns:
+* [Best Tech Newsletters for Software Engineers in 2026](/blogs/best-tech-newsletters-for-software-engineers/)
+* [Best AI Newsletters for Developers and ML Engineers](/blogs/best-ai-newsletters-for-developers/)
+* [How Busy Senior Engineers Stay Updated on Tech Without Doomscrolling](/blogs/how-engineers-stay-updated-without-doomscrolling/)
+* [Postgres for Everything: Why Teams Are Replacing Redis, Mongo & Kafka](/blogs/postgres-for-everything-replace-redis-mongo-kafka/)
+* [Kubernetes vs. Serverless Containers in 2026](/blogs/kubernetes-vs-serverless-containers/)
+* [**Browse all Engineering Guides & Architectural Deep Dives →**](/guides/)
 
 ---
 

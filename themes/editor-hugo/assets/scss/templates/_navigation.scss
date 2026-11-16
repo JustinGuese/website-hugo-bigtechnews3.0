@@ -184,7 +184,12 @@ nav.sidenav-menu {
       font-size: 15px;
       padding: 7px 18px;
       display: inline-block;
-      font-weight: 500;
+      font-weight: 600;
+      color: $dark;
+
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
 }

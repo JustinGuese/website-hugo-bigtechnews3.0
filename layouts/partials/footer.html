@@ -1,0 +1,53 @@
+<footer class="bg-primary-light py-5">
+  <div class="container">
+    <div class="row">
+      {{ with site.Params.social }}
+      <div class="col-12 text-center mb-5">
+        <ul class="social-links is-circled list-unstyled list-inline font-weight-500">
+          {{ range . }}
+          <li class="list-inline-item"><a href="{{.link}}" title="{{.title}}">
+            <i class="icon {{.icon}}"></i> {{.title}}
+          </a></li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+
+      <div class="col-12 text-center mb-4 footer-guides">
+        <p class="text-uppercase small font-weight-bold mb-2 text-muted">Featured Guides & Comparisons</p>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "guides/" | relLangURL }}">All 20+ Guides</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "compare/" | relLangURL }}">Newsletter Matrix</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/tldr-vs-brieftechnews/" | relLangURL }}">TLDR vs BTN</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/tech-brew-vs-brieftechnews/" | relLangURL }}">Tech Brew vs BTN</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/best-tech-newsletters-for-software-engineers/" | relLangURL }}">Best Newsletters</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/postgres-for-everything-replace-redis-mongo-kafka/" | relLangURL }}">Postgres Architecture</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/production-ai-agents-guardrails/" | relLangURL }}">AI Agents Guardrails</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/rag-vs-long-context-windows/" | relLangURL }}">RAG vs Long-Context</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/kubernetes-vs-serverless-containers/" | relLangURL }}">K8s vs Serverless</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/cloud-finops-architectural-fixes-cut-aws-bill/" | relLangURL }}">AWS FinOps</a></li>
+          <li class="list-inline-item my-1"><a class="rss-pill" href="{{ "blogs/modern-incident-postmortems-blameless-guide/" | relLangURL }}">Blameless Postmortems</a></li>
+        </ul>
+      </div>
+
+      {{ if not .IsHome }}
+      {{ if site.Params.subscription.enable }}
+      <div class="newsletter-block mx-auto mb-5">
+        <h5 class="h4 mb-2 text-center font-primary">{{ i18n `subscribe_title` }}</h5>
+        <p class="newsletter-block-body text-center">{{ i18n `subscribe_body` }}</p>
+        {{ partial "subscribe-form.html" (dict "id" "footer" "variant" "default") }}
+      </div>
+      {{ end }}
+      {{ end }}
+
+      <div class="col-12 text-center">
+        <p class="mb-0 font-weight-500">{{site.Params.copyright | markdownify}}</p>
+        <p class="mb-0 small mt-2">
+          <a href="{{ "privacy-policy" | relLangURL }}">{{ i18n `privacy` }}</a>
+          <span class="mx-2">&middot;</span>
+          <a href="{{ "terms-conditions" | relLangURL }}">{{ i18n `terms` }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

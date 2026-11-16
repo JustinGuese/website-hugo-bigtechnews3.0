@@ -25,7 +25,10 @@
       {{ end }}
       {{ end }}
       <li class="list-inline-item">
-        <a class="beat-chip category-chip" href="{{ "compare/" | relLangURL }}">Compare</a>
+        <a class="beat-chip category-chip beat-chip--guides" href="{{ "guides/" | relLangURL }}" data-beat="guides">Guides</a>
+      </li>
+      <li class="list-inline-item">
+        <a class="beat-chip category-chip beat-chip--compare" href="{{ "compare/" | relLangURL }}" data-beat="compare">Compare</a>
       </li>
     </ul>
   </nav>

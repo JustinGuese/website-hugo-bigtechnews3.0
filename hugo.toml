@@ -320,6 +320,76 @@ weight = 4
 
 [[Languages.en.menu.main]]
 weight = 5
+name = "Guides"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 1
+  url = "guides/"
+  name = "All Guides & Deep Dives"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 2
+  url = "blogs/postgres-for-everything-replace-redis-mongo-kafka/"
+  name = "Postgres for Everything"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 3
+  url = "blogs/production-ai-agents-guardrails/"
+  name = "Production AI Agents"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 4
+  url = "blogs/rag-vs-long-context-windows/"
+  name = "RAG vs. Long-Context"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 5
+  url = "blogs/kubernetes-vs-serverless-containers/"
+  name = "Kubernetes vs. Serverless"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 6
+  url = "blogs/cloud-finops-architectural-fixes-cut-aws-bill/"
+  name = "Cloud FinOps Guide"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 7
+  url = "blogs/modern-incident-postmortems-blameless-guide/"
+  name = "Incident Postmortems Guide"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 8
+  url = "blogs/best-tech-newsletters-for-software-engineers/"
+  name = "Best Tech Newsletters"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 9
+  url = "blogs/best-ai-newsletters-for-developers/"
+  name = "Best AI Newsletters"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 10
+  url = "blogs/tldr-vs-brieftechnews/"
+  name = "TLDR vs. BriefTechNews"
+
+  [[Languages.en.menu.main]]
+  parent = "Guides"
+  weight = 11
+  url = "blogs/tech-brew-vs-brieftechnews/"
+  name = "Tech Brew vs. BriefTechNews"
+
+[[Languages.en.menu.main]]
+weight = 6
 name = "Categories"
 
   [[Languages.en.menu.main]]
@@ -367,10 +437,10 @@ name = "Categories"
 [[Languages.en.menu.main]]
 name = "Contact"
 url = "contact/"
-weight = 6
+weight = 7
 
 [[Languages.en.menu.main]]
-weight = 7
+weight = 8
 name = "Legal"
 
   [[Languages.en.menu.main]]
@@ -420,7 +490,64 @@ url = "blogs/"
 weight = 2
 
 [[Languages.de.menu.main]]
+name = "Vergleich"
+url = "compare/"
 weight = 3
+
+[[Languages.de.menu.main]]
+weight = 4
+name = "Guides"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 1
+  url = "guides/"
+  name = "Alle Guides & Deep Dives"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 2
+  url = "blogs/postgres-for-everything-replace-redis-mongo-kafka/"
+  name = "Postgres for Everything"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 3
+  url = "blogs/production-ai-agents-guardrails/"
+  name = "Produktionsreife KI-Agenten"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 4
+  url = "blogs/rag-vs-long-context-windows/"
+  name = "RAG vs. Long-Context"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 5
+  url = "blogs/kubernetes-vs-serverless-containers/"
+  name = "Kubernetes vs. Serverless"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 6
+  url = "blogs/cloud-finops-architectural-fixes-cut-aws-bill/"
+  name = "Cloud FinOps Guide"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 7
+  url = "blogs/best-tech-newsletters-for-software-engineers/"
+  name = "Beste Tech-Newsletter"
+
+  [[Languages.de.menu.main]]
+  parent = "Guides"
+  weight = 8
+  url = "blogs/tldr-vs-brieftechnews/"
+  name = "TLDR vs. BriefTechNews"
+
+[[Languages.de.menu.main]]
+weight = 5
 name = "Kategorien"
 
   [[Languages.de.menu.main]]
@@ -466,12 +593,7 @@ name = "Kategorien"
   name = "Tech"
 
 [[Languages.de.menu.main]]
-name = "Vergleich"
-url = "compare/"
-weight = 4
-
-[[Languages.de.menu.main]]
-weight = 5
+weight = 6
 name = "Rechtliches"
 
   [[Languages.de.menu.main]]
