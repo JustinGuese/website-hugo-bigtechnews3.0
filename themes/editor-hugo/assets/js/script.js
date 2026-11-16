@@ -597,6 +597,172 @@
 	}
 	newsletterModal();
 
+	// Mobile app banner.
+	//
+	// Shown only on mobile devices (<=767px) when not previously dismissed.
+	// Detects the platform (iOS -> App Store, Android -> Google Play, other
+	// mobile -> both links), toggles html.has-app-banner and sets --app-banner-h.
+	function appBanner() {
+		var $banner = $('[data-app-banner]');
+		if (!$banner.length) {
+			return;
+		}
+
+		var dismissedUntil = parseInt(recall('btn-app-banner-dismissed-until') || '0', 10);
+		if (dismissedUntil && Date.now() < dismissedUntil) {
+			return;
+		}
+
+		var ua = (window.navigator && window.navigator.userAgent) || '';
+		var isIOS = /iPad|iPhone|iPod/.test(ua) || (window.navigator && window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+		var isAndroid = /Android/i.test(ua);
+		var isOtherMobile = !isIOS && !isAndroid && (/Mobi|Tablet|Opera Mini|webOS|BlackBerry|IEMobile/i.test(ua) || (window.matchMedia && window.matchMedia('(max-width: 767px) and (pointer: coarse)').matches));
+		var isMobile = isIOS || isAndroid || isOtherMobile;
+
+		if (!isMobile) {
+			return;
+		}
+
+		var iosUrl = $banner.attr('data-ios-url') || '';
+		var androidUrl = $banner.attr('data-android-url') || '';
+		var dismissDays = parseInt($banner.attr('data-dismiss-days') || '14', 10);
+		var iosLabel = $banner.attr('data-ios-label') || 'App Store';
+		var androidLabel = $banner.attr('data-android-label') || 'Google Play';
+
+		var $cta = $banner.find('[data-app-banner-cta]');
+		var $alt = $banner.find('[data-app-banner-alt]');
+
+		if (isIOS) {
+			if ($cta.length && iosUrl) {
+				$cta.attr('href', iosUrl);
+			}
+			if ($alt.length) {
+				$alt.attr('hidden', '').hide();
+			}
+		} else if (isAndroid) {
+			if ($cta.length && androidUrl) {
+				$cta.attr('href', androidUrl);
+			}
+			if ($alt.length) {
+				$alt.attr('hidden', '').hide();
+			}
+		} else {
+			// other mobile: provide both links
+			if ($cta.length && iosUrl) {
+				$cta.attr('href', iosUrl).text(iosLabel);
+			}
+			if ($alt.length && androidUrl) {
+				$alt.attr('href', androidUrl).text(androidLabel).removeAttr('hidden').show();
+			}
+		}
+
+		// Reveal the banner
+		$banner.removeAttr('hidden').prop('hidden', false);
+		$('html').addClass('has-app-banner');
+
+		function updateBannerHeight() {
+			if ($banner.is(':visible')) {
+				var h = $banner.outerHeight() || 0;
+				if (h > 0) {
+					document.documentElement.style.setProperty('--app-banner-h', h + 'px');
+				}
+			} else {
+				document.documentElement.style.setProperty('--app-banner-h', '0px');
+			}
+		}
+
+		updateBannerHeight();
+		if (window.requestAnimationFrame) {
+			window.requestAnimationFrame(updateBannerHeight);
+		}
+		$(window).on('resize orientationchange', updateBannerHeight);
+
+		$banner.on('click', '.app-banner-close', function (e) {
+			e.preventDefault();
+			$banner.attr('hidden', '').prop('hidden', true);
+			$('html').removeClass('has-app-banner');
+			document.documentElement.style.setProperty('--app-banner-h', '0px');
+			$(window).off('resize orientationchange', updateBannerHeight);
+			remember('btn-app-banner-dismissed-until', String(Date.now() + dismissDays * 86400000));
+		});
+	}
+	appBanner();
+
+	// Phone mockup interactions: auto-cycling screenshots (~3.5s) and pointer tilt.
+	// Both are completely disabled when prefers-reduced-motion is active.
+	function phone() {
+		var $phone = $('[data-phone]');
+		if (!$phone.length) {
+			return;
+		}
+
+		var prefersReducedMotion = false;
+		try {
+			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				prefersReducedMotion = true;
+			}
+		} catch (err) {}
+
+		if (prefersReducedMotion) {
+			return;
+		}
+
+		// 1. Auto-cycle stacked screens every ~3.5s
+		var $screens = $phone.find('.phone-screen');
+		if ($screens.length > 1) {
+			var activeIdx = 0;
+			$screens.each(function (idx) {
+				if ($(this).hasClass('is-active') || $(this).hasClass('active')) {
+					activeIdx = idx;
+				}
+			});
+			$screens.eq(activeIdx).addClass('is-active active');
+
+			setInterval(function () {
+				activeIdx = (activeIdx + 1) % $screens.length;
+				$screens.removeClass('is-active active');
+				$screens.eq(activeIdx).addClass('is-active active');
+			}, 3500);
+		}
+
+		// 2. Polish pointer tilt
+		var phoneEl = $phone[0];
+		var $tiltArea = $phone.closest('.hero-app-visual');
+		if (!$tiltArea.length) {
+			$tiltArea = $phone;
+		}
+
+		var ticking = false;
+		function onMouseMove(e) {
+			if (!ticking) {
+				ticking = true;
+				var raf = window.requestAnimationFrame || function (cb) { setTimeout(cb, 16); };
+				raf(function () {
+					var rect = phoneEl.getBoundingClientRect();
+					if (rect.width > 0 && rect.height > 0) {
+						var normX = (e.clientX - rect.left) / rect.width - 0.5;
+						var normY = (e.clientY - rect.top) / rect.height - 0.5;
+						// Restrained tilt angle: max ~8 degrees
+						var tiltX = (-normY * 12).toFixed(2);
+						var tiltY = (normX * 12).toFixed(2);
+						phoneEl.style.transform = 'perspective(900px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
+					}
+					ticking = false;
+				});
+			}
+		}
+
+		$tiltArea.on('mousemove', onMouseMove);
+		$tiltArea.on('mouseenter', function () {
+			phoneEl.style.transition = 'transform 0.1s ease-out';
+		});
+		$tiltArea.on('mouseleave', function () {
+			phoneEl.style.transition = 'transform 0.5s ease-out';
+			phoneEl.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+		});
+	}
+	phone();
+
 	//post slider
 	$('.post-slider').slick({
 		slidesToShow: 1,
