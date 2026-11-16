@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="col-12">
+  <section class="hero-app">
+    <div class="hero-app-copy">
+      <p class="hero-app-eyebrow">
+        <span class="hero-app-eyebrow-text">{{ i18n "app_eyebrow" }}</span>
+        {{- with index (sort (where site.RegularPages "Type" "in" site.Params.mainSections) "Date" "desc") 0 }}
+        <span class="hero-app-eyebrow-sep">&middot;</span>
+        <span class="hero-app-date">{{ printf (i18n "hero_last_issue") (.Date | time.Format "2 January 2006") }}</span>
+        {{- end }}
+      </p>
+      <h1 class="hero-app-title">{{ i18n "hero_h1" }}</h1>
+      <p class="hero-app-sub">{{ i18n "hero_sub" }}</p>
+      <div class="hero-app-cta">
+        {{ partial "app-badges.html" (dict "placement" "hero" "size" "lg") }}
+      </div>
+      <p class="hero-app-trust">{{ i18n "hero_trust" }}</p>
+    </div>
+    <div class="hero-app-visual">
+      {{ partial "app-phone.html" . }}
+    </div>
+  </section>
+
+  {{ partial "app-section.html" . }}
+
+
+  <p class="app-page-back"><a href="{{ "/" | relLangURL }}">&larr; {{ i18n "app_back_to_news" }}</a></p>
+</div>
+{{ end }}

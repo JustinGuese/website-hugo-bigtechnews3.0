@@ -1,35 +1,16 @@
 {{ define "main" }}
 <div class="col-12">
-  <section class="hero-app">
-    <div class="hero-app-copy">
-      <p class="hero-app-eyebrow">
-        <span class="hero-app-eyebrow-text">{{ i18n "app_eyebrow" }}</span>
-        {{- with index (sort (where site.RegularPages "Type" "in" site.Params.mainSections) "Date" "desc") 0 }}
-        <span class="hero-app-eyebrow-sep">&middot;</span>
-        <span class="hero-app-date">{{ printf (i18n "hero_last_issue") (.Date | time.Format "2 January 2006") }}</span>
-        {{- end }}
-      </p>
-      <h1 class="hero-app-title">{{ i18n "hero_h1" }}</h1>
-      <p class="hero-app-sub">{{ i18n "hero_sub" }}</p>
-      <div class="hero-app-cta">
-        {{ partial "app-badges.html" (dict "placement" "hero" "size" "lg") }}
-      </div>
-      <p class="hero-app-trust">{{ i18n "hero_trust" }}</p>
+  <aside class="app-strip" aria-label="{{ i18n "app_banner_title" }}">
+    <img class="app-strip-icon" src="{{ "images/app/app-icon.png" | relURL }}" alt="" width="48" height="48" loading="eager">
+    <div class="app-strip-text">
+      <strong>{{ i18n "strip_title" }}</strong>
+      <span>{{ i18n "strip_sub" }} <a href="{{ "app/" | relLangURL }}">{{ i18n "strip_more" }}</a></span>
     </div>
-    <div class="hero-app-visual">
-      {{ partial "app-phone.html" . }}
+    <div class="app-strip-actions">
+      {{ partial "app-badges.html" (dict "placement" "hero" "size" "md") }}
     </div>
-  </section>
+  </aside>
 
-  <section class="email-panel">
-    <div class="email-panel-copy">
-      <h2 class="email-panel-title">{{ i18n "email_panel_title" }}</h2>
-      <p class="email-panel-sub">{{ i18n "email_panel_sub" }}</p>
-    </div>
-    <div class="email-panel-form">
-      {{ partial "subscribe-form.html" (dict "id" "hero" "variant" "compact") }}
-    </div>
-  </section>
 
   {{ with site.Data.categories }}
   <nav class="beat-strip mb-4" aria-label="{{ i18n "categories" }}">
@@ -124,7 +105,17 @@
     </div>
   </div>
 
-  {{ partial "app-section.html" . }}
+  <section class="email-panel">
+    <div class="email-panel-copy">
+      <h2 class="email-panel-title">{{ i18n "email_panel_title" }}</h2>
+      <p class="email-panel-sub">{{ i18n "email_panel_sub" }}</p>
+    </div>
+    <div class="email-panel-form">
+      {{ partial "subscribe-form.html" (dict "id" "hero" "variant" "compact") }}
+    </div>
+  </section>
+
+  <p class="text-center app-more"><a class="app-more-link" href="{{ "app/" | relLangURL }}">{{ i18n "strip_more" }} &rarr;</a></p>
 
   <div class="site-footer-app">
     <div class="site-footer-app-badges mb-4">

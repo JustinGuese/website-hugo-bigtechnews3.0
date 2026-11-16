@@ -256,7 +256,7 @@
   translation: BriefTechNews App
 
 - id: app_banner_sub
-  translation: Swipe today's AI & tech news in ~5 minutes
+  translation: Free app · the web works too
 
 - id: app_banner_cta
   translation: Get App
@@ -290,3 +290,15 @@
 
 - id: email_panel_sub
   translation: Get the same five-minute engineering digest delivered to your inbox weekday mornings. Pick your beats, skip the rest.
+
+- id: strip_title
+  translation: Read it here on the web, or take it with you.
+
+- id: strip_sub
+  translation: Everything below works in your browser. The free iOS and Android app adds swipe-through briefings and an AI analyst.
+
+- id: strip_more
+  translation: All about the app
+
+- id: app_back_to_news
+  translation: Back to the news
