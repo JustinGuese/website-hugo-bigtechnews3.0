@@ -314,7 +314,12 @@ url = "blogs/"
 weight = 3
 
 [[Languages.en.menu.main]]
+name = "Compare"
+url = "compare/"
 weight = 4
+
+[[Languages.en.menu.main]]
+weight = 5
 name = "Categories"
 
   [[Languages.en.menu.main]]
@@ -362,10 +367,10 @@ name = "Categories"
 [[Languages.en.menu.main]]
 name = "Contact"
 url = "contact/"
-weight = 5
+weight = 6
 
 [[Languages.en.menu.main]]
-weight = 6
+weight = 7
 name = "Legal"
 
   [[Languages.en.menu.main]]
@@ -461,7 +466,12 @@ name = "Kategorien"
   name = "Tech"
 
 [[Languages.de.menu.main]]
+name = "Vergleich"
+url = "compare/"
 weight = 4
+
+[[Languages.de.menu.main]]
+weight = 5
 name = "Rechtliches"
 
   [[Languages.de.menu.main]]

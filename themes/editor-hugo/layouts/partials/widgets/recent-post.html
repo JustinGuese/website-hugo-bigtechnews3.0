@@ -14,8 +14,10 @@
           </span>
         </div>
         <a href="{{ .Permalink }}" class="recent-post-image">
-          {{ range first 1 .Params.Images }}
+          {{ with .Params.Images }}
+          {{ range first 1 . }}
           <img loading="lazy" class="img-fluid rounded-circle" src="{{ . | absURL }}">
+          {{ end }}
           {{ end }}
         </a>
       </div>
