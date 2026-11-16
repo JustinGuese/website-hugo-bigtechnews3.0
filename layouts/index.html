@@ -12,17 +12,23 @@
   </aside>
 
 
-  {{ with site.Data.categories }}
   <nav class="beat-strip mb-4" aria-label="{{ i18n "categories" }}">
     <ul class="list-inline mb-0">
+      <li class="list-inline-item">
+        <a class="beat-chip category-chip" href="{{ "blogs/" | relLangURL }}">All Blogs</a>
+      </li>
+      {{ with site.Data.categories }}
       {{ range . }}
       <li class="list-inline-item">
         <a class="beat-chip category-chip beat-chip--{{ .slug }}" href="{{ printf "categories/%s/" .slug | relLangURL }}" data-beat="{{ .slug }}">{{ .name }}</a>
       </li>
       {{ end }}
+      {{ end }}
+      <li class="list-inline-item">
+        <a class="beat-chip category-chip" href="{{ "compare/" | relLangURL }}">Compare</a>
+      </li>
     </ul>
   </nav>
-  {{ end }}
 
   <div class="row">
     {{ $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
