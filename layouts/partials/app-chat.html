@@ -1,0 +1,19 @@
+<section class="app-chat" aria-labelledby="app-chat-title">
+  <div class="app-chat-copy">
+    <p class="app-chat-eyebrow">{{ i18n "app_chat_eyebrow" }}</p>
+    <h2 class="app-chat-title" id="app-chat-title">{{ i18n "app_chat_title" }}</h2>
+    <p class="app-chat-sub">{{ i18n "app_chat_sub" }}</p>
+    <ul class="app-chat-points">
+      <li>{{ i18n "app_chat_p1" }}</li>
+      <li>{{ i18n "app_chat_p2" }}</li>
+      <li>{{ i18n "app_chat_p3" }}</li>
+    </ul>
+    {{ partial "app-badges.html" (dict "placement" "chat" "size" "md") }}
+  </div>
+  <div class="app-chat-demo" aria-hidden="true">
+    <div class="chat-bubble chat-bubble--q">{{ i18n "app_chat_q1" }}</div>
+    <div class="chat-bubble chat-bubble--a">{{ i18n "app_chat_a1" }}</div>
+    <div class="chat-bubble chat-bubble--q">{{ i18n "app_chat_q2" }}</div>
+    <div class="chat-bubble chat-bubble--a">{{ i18n "app_chat_a2" }}<small>{{ i18n "app_chat_src" }}</small></div>
+  </div>
+</section>

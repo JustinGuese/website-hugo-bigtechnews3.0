@@ -236,7 +236,7 @@
   translation: Die KI- & Tech-News des Tages swipen
 
 - id: hero_sub
-  translation: Das fünfminütige Engineering-Briefing auf Ihrem Smartphone. Kostenlos, ohne Account und mit einem KI-Analysten direkt an den Originalquellen.
+  translation: "Das fünfminütige Engineering-Briefing auf Ihrem Smartphone, dazu ein KI-Chatbot, der jede Story hier kennt. Fragen Sie „Was gibt’s Neues bei NVIDIA?“ Kostenlos, ohne Account."
 
 - id: hero_trust
   translation: Kostenlos · Kein Account nötig · ~5 Minuten · Quellentreue KI
@@ -254,13 +254,13 @@
   translation: JETZT BEI
 
 - id: app_banner_title
-  translation: BriefTechNews App
+  translation: Fragen Sie die KI zu jeder Story
 
 - id: app_banner_sub
-  translation: Gratis-App · Web geht auch
+  translation: "Gratis-App · z. B. „Was gibt’s Neues bei NVIDIA?“"
 
 - id: app_banner_cta
-  translation: App holen
+  translation: Ausprobieren
 
 - id: app_banner_close
   translation: Schließen
@@ -293,13 +293,46 @@
   translation: Erhalten Sie dasselbe fünfminütige Engineering-Briefing jeden Werktagmorgen per E-Mail. Wählen Sie Ihre Themen, überspringen Sie den Rest.
 
 - id: strip_title
-  translation: Hier im Web lesen oder unterwegs mitnehmen.
+  translation: Hier lesen oder die KI dazu befragen.
 
 - id: strip_sub
-  translation: Alles unten funktioniert im Browser. Die kostenlose iOS- und Android-App bringt Swipe-Briefings und einen KI-Analysten dazu.
+  translation: "Alles unten funktioniert im Browser. Die kostenlose App bringt einen KI-Chatbot, der jede Story hier kennt: Fragen Sie „Was gibt’s Neues bei NVIDIA?“ und erhalten Sie Antworten."
 
 - id: strip_more
   translation: Alles zur App
 
 - id: app_back_to_news
   translation: Zurück zu den News
+
+- id: app_chat_eyebrow
+  translation: Nur in der App · KI-Chat
+
+- id: app_chat_title
+  translation: Fragen Sie die News einfach.
+
+- id: app_chat_sub
+  translation: Der eingebaute KI-Chatbot kennt jede Story auf BriefTechNews. Fragen Sie, was passiert ist, warum es zählt und was sich seit letzter Woche geändert hat, mit Antworten direkt aus den Originalartikeln.
+
+- id: app_chat_p1
+  translation: "„Was gibt’s Neues bei NVIDIA?“ bündelt alle NVIDIA-Stories, die wir behandelt haben"
+
+- id: app_chat_p2
+  translation: Haken Sie bei jeder Firma, jedem Modell, Framework oder Ausfall nach
+
+- id: app_chat_p3
+  translation: Antworten verweisen auf die Quellartikel, so können Sie alles prüfen
+
+- id: app_chat_q1
+  translation: Was gibt’s Neues bei NVIDIA?
+
+- id: app_chat_a1
+  translation: Aktuelle Stories betreffen NVIDIA bei Inferenz-Hardware, Rechenzentrums-Lieferungen und Open-Source-Releases. Soll ich jede kurz zusammenfassen?
+
+- id: app_chat_q2
+  translation: Welche davon wirkt sich auf GPU-Preise aus?
+
+- id: app_chat_a2
+  translation: Die Liefer-Story. Die Quellen sind unten verlinkt.
+
+- id: app_chat_src
+  translation: Basiert auf BriefTechNews-Artikeln

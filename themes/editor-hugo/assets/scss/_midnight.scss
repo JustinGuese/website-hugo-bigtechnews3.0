@@ -1722,6 +1722,54 @@ footer,
       color: var(--ink);
     }
   }
+
+  // Tables: base theme paints light #f7f7f7 cells, which gave white-on-white
+  // on midnight. Dark surface, hairline rules, amber header, scrolls on mobile.
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.75rem 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: .95rem;
+    line-height: 1.5;
+    -webkit-overflow-scrolling: touch;
+
+    thead, tbody { background: transparent; }
+
+    th, td {
+      padding: .75rem 1rem;
+      vertical-align: top;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      min-width: 8rem;
+    }
+
+    th {
+      background: var(--surface-2);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    tbody tr:nth-child(even) td { background: oklch(0.17 0.025 260); }
+    tbody tr:hover td { background: var(--surface-2); }
+    tbody tr:last-child td { border-bottom: 0; }
+    td code { white-space: nowrap; }
+  }
 }
 
 // Prefers Reduced Motion Respect (Disables all animations & transforms)
@@ -1929,3 +1977,30 @@ footer.bg-primary-light {
   html.has-app-banner .app-strip { display: none; }
   .app-strip-actions { display: none; }
 }
+
+
+/* ---- AI chat upsell (app page + homepage strip) ---- */
+.app-chat {
+  margin: 3.5rem 0 1rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: center;
+  background: radial-gradient(120% 140% at 0% 0%, oklch(0.24 0.06 70 / .55), transparent 55%), var(--surface);
+  border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 20px;
+}
+.app-chat-eyebrow { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 .75rem; }
+.app-chat-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.08; color: var(--ink); margin: 0 0 1rem; }
+.app-chat-sub { color: var(--muted); font-size: 1.05rem; line-height: 1.55; margin: 0 0 1.5rem; max-width: 52ch; }
+.app-chat-points { list-style: none; margin: 0 0 1.75rem; padding: 0; color: var(--ink);
+  li { padding-left: 1.4rem; position: relative; margin-bottom: .5rem; &::before { content: "→"; position: absolute; left: 0; color: var(--accent); } } }
+.app-chat-demo { display: flex; flex-direction: column; gap: .75rem; }
+.chat-bubble {
+  max-width: 92%; padding: .8rem 1.05rem; border-radius: 16px; font-size: .95rem; line-height: 1.45;
+  opacity: 0; transform: translateY(8px); animation: chat-in .5s cubic-bezier(.2,.7,.2,1) forwards;
+  &--q { align-self: flex-end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; font-weight: 600; }
+  &--a { align-self: flex-start; background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  &:nth-child(1) { animation-delay: .15s; } &:nth-child(2) { animation-delay: .7s; }
+  &:nth-child(3) { animation-delay: 1.3s; } &:nth-child(4) { animation-delay: 1.85s; }
+  small { display: block; margin-top: .4rem; font-family: var(--font-mono); font-size: .7rem; color: var(--muted); }
+}
+@keyframes chat-in { to { opacity: 1; transform: none; } }
+@media (max-width: 860px) { .app-chat { grid-template-columns: 1fr; } }

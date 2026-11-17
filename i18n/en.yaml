@@ -235,7 +235,7 @@
   translation: Swipe today's AI & tech news
 
 - id: hero_sub
-  translation: The five-minute engineering digest on your phone. Free, no account needed, with an AI analyst grounded in real articles.
+  translation: "The five-minute engineering digest on your phone, plus an AI chatbot that knows every story here. Ask “What’s new with NVIDIA?” Free, no account needed."
 
 - id: hero_trust
   translation: Free · No account needed · ~5 minutes · Grounded AI
@@ -253,13 +253,13 @@
   translation: GET IT ON
 
 - id: app_banner_title
-  translation: BriefTechNews App
+  translation: Ask the AI about any story
 
 - id: app_banner_sub
-  translation: Free app · the web works too
+  translation: "Free app · try “What’s new with NVIDIA?”"
 
 - id: app_banner_cta
-  translation: Get App
+  translation: Try it
 
 - id: app_banner_close
   translation: Close
@@ -292,13 +292,46 @@
   translation: Get the same five-minute engineering digest delivered to your inbox weekday mornings. Pick your beats, skip the rest.
 
 - id: strip_title
-  translation: Read it here on the web, or take it with you.
+  translation: Read it here, or ask the AI about it.
 
 - id: strip_sub
-  translation: Everything below works in your browser. The free iOS and Android app adds swipe-through briefings and an AI analyst.
+  translation: "Everything below works in your browser. The free app adds an AI chatbot that knows every story here: ask “What’s new with NVIDIA?” and get answers."
 
 - id: strip_more
   translation: All about the app
 
 - id: app_back_to_news
   translation: Back to the news
+
+- id: app_chat_eyebrow
+  translation: Only in the app · AI chat
+
+- id: app_chat_title
+  translation: Ask the news anything.
+
+- id: app_chat_sub
+  translation: The built-in AI chatbot knows every story on BriefTechNews. Ask what happened, why it matters and what changed since last week, with answers grounded in the real articles.
+
+- id: app_chat_p1
+  translation: "“What’s new with NVIDIA?” pulls together every NVIDIA story we covered"
+
+- id: app_chat_p2
+  translation: Follow up on any company, model, framework or outage
+
+- id: app_chat_p3
+  translation: Answers cite the source articles, so you can verify them
+
+- id: app_chat_q1
+  translation: What’s new with NVIDIA?
+
+- id: app_chat_a1
+  translation: Recent stories touch NVIDIA on inference hardware, data-center supply and open-source releases. Want the short version of each?
+
+- id: app_chat_q2
+  translation: Which of those affects GPU pricing?
+
+- id: app_chat_a2
+  translation: The supply story. Sources are linked below.
+
+- id: app_chat_src
+  translation: Grounded in BriefTechNews articles
