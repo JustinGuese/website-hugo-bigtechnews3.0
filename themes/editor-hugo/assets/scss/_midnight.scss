@@ -2004,3 +2004,10 @@ footer.bg-primary-light {
 }
 @keyframes chat-in { to { opacity: 1; transform: none; } }
 @media (max-width: 860px) { .app-chat { grid-template-columns: 1fr; } }
+
+// Product Hunt badge
+.ph-badge { display: flex; justify-content: center; line-height: 0; }
+.ph-badge a { display: inline-block; border-radius: 8px; transition: transform .15s ease; }
+.ph-badge a:hover { transform: translateY(-2px); }
+.ph-badge img { width: 250px; height: 54px; max-width: 100%; }
+.ph-badge-home { margin: -.25rem 0 1.5rem; }

@@ -40,6 +40,10 @@
       {{ end }}
       {{ end }}
 
+      <div class="col-12 text-center mb-4">
+        {{ partial "producthunt-badge.html" (dict "class" "ph-badge-footer") }}
+      </div>
+
       <div class="col-12 text-center">
         <p class="mb-0 font-weight-500">{{site.Params.copyright | markdownify}}</p>
         <p class="mb-0 small mt-2">
